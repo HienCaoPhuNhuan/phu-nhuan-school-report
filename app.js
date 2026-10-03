@@ -1,4 +1,5 @@
-import { sections, format, renderReport } from './sections.js?v=20261003-3';
+import { format, renderReport } from './sections.js?v=20261003-5';
+import { paginateReport } from './pagination.js?v=20261003-5';
 
 const response = await fetch(new URL('./assets/photos/manifest.json', import.meta.url));
 if (!response.ok) throw new Error('Photo manifest could not be loaded');
@@ -6,9 +7,12 @@ document.querySelector('#main').innerHTML = renderReport(await response.json());
 function renderIcons() { window.lucide?.createIcons({ attrs: { 'stroke-width': 1.7 } }); }
 renderIcons();
 window.addEventListener('load', renderIcons, { once: true });
+await document.fonts.ready;
+const main = document.querySelector('#main');
+const originals = [...main.children].map(node => node.cloneNode(true));
+let nodes = paginateReport(main, originals);
 const systemMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 let reducedMotion = systemMotion.matches;
-const nodes = sections.map(([id]) => document.getElementById(id));
 const numberAnimations = new Map();
 const visibleReels = new Set();
 let reelInterval;
@@ -88,7 +92,7 @@ function updateSectionTransition() {
   nodes.forEach((node, i) => { if (node.getBoundingClientRect().top <= marker) nextIndex = i; });
   if (nextIndex === presentedIndex) return;
   const direction = nextIndex < presentedIndex ? 'backward' : 'forward';
-  if (presentedIndex >= 0) nodes[presentedIndex].classList.remove('section-arriving');
+  if (presentedIndex >= 0) nodes[presentedIndex]?.classList.remove('section-arriving');
   const next = nodes[nextIndex];
   next.dataset.direction = direction;
   next.classList.add('section-arriving');
@@ -99,7 +103,29 @@ window.addEventListener('scroll', () => {
   transitionScheduled = true;
   requestAnimationFrame(updateSectionTransition);
 }, { passive: true });
-window.addEventListener('resize', updateSectionTransition);
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    const current = nodes[sectionIndex()];
+    const parent = current.dataset.parentId;
+    const part = Number(current.dataset.part || 1);
+    revealObserver.disconnect();
+    reelObserver.disconnect();
+    visibleReels.clear();
+    numberAnimations.forEach(frame => cancelAnimationFrame(frame));
+    numberAnimations.clear();
+    nodes = paginateReport(main, originals);
+    document.querySelectorAll('.reveal').forEach(node => revealObserver.observe(node));
+    document.querySelectorAll('[data-reel]').forEach(node => reelObserver.observe(node));
+    if (reducedMotion) finishCounters();
+    const matches = nodes.filter(node => node.dataset.parentId === parent);
+    const target = matches[Math.min(part, matches.length) - 1] || nodes[0];
+    presentedIndex = -1;
+    goTo(nodes.indexOf(target), true);
+    updateSectionTransition();
+  }, 180);
+});
 updateSectionTransition();
 
 let navigationUntil = 0;
@@ -113,30 +139,24 @@ function goTo(index, instant = false) {
   const top = nodes[targetIndex].getBoundingClientRect().top + scrollY;
   window.scrollTo({ top, behavior: reducedMotion || instant ? 'instant' : 'smooth' });
   navigationUntil = performance.now() + (reducedMotion || instant ? 0 : 900);
-  history.replaceState(null, '', '#' + sections[targetIndex][0]);
+  history.replaceState(null, '', '#' + nodes[targetIndex].id);
 }
-// Treat a wheel/trackpad burst as one turn, while preserving tall sections.
+// Treat a wheel/trackpad burst as exactly one full-screen page turn.
 let lastWheelAt = 0;
 let wheelTurnTaken = false;
-let wheelScrolledWithin = false;
 let wheelDistance = 0;
 window.addEventListener('wheel', event => {
   if (event.ctrlKey || Math.abs(event.deltaX) > Math.abs(event.deltaY) || !event.deltaY) return;
   const now = performance.now();
   if (now - lastWheelAt > 180) {
     wheelTurnTaken = false;
-    wheelScrolledWithin = false;
     wheelDistance = 0;
   }
   lastWheelAt = now;
   if (wheelTurnTaken || now < navigationUntil) { event.preventDefault(); return; }
   const index = sectionIndex();
-  const rect = nodes[index].getBoundingClientRect();
   const direction = Math.sign(event.deltaY);
-  const canScrollWithin = direction > 0 ? rect.bottom > innerHeight + 2 : rect.top < -2;
-  if (canScrollWithin) { wheelScrolledWithin = true; return; }
   event.preventDefault();
-  if (wheelScrolledWithin) return;
   wheelDistance += event.deltaY * (event.deltaMode === 1 ? 24 : event.deltaMode === 2 ? innerHeight : 1);
   if (Math.abs(wheelDistance) < 24) return;
   wheelTurnTaken = true;
@@ -148,9 +168,9 @@ document.addEventListener('keydown', event => {
   if (direction) { event.preventDefault(); goTo(sectionIndex() + direction); }
   if (event.key === 'Home' || event.key === 'End') { event.preventDefault(); goTo(event.key === 'Home' ? 0 : nodes.length - 1); }
 });
-const initialIndex = sections.findIndex(([id]) => location.hash === '#' + id);
+const initialIndex = nodes.findIndex(node => location.hash === '#' + node.id);
 if (initialIndex >= 0) requestAnimationFrame(() => goTo(initialIndex, true));
 window.addEventListener('hashchange', () => {
-  const index = sections.findIndex(([id]) => location.hash === '#' + id);
+  const index = nodes.findIndex(node => location.hash === '#' + node.id);
   if (index >= 0) goTo(index);
 });

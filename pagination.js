@@ -1,0 +1,133 @@
+const grouped = new Set(['metric-grid', 'note-list', 'feature-list', 'organization-grid',
+  'perfect-scores', 'club-families', 'direction-list', 'program-grid', 'infrastructure',
+  'target-grid', 'partnership-grid', 'photo-wall', 'motto', 'score-comparison']);
+
+function groupClone(source, children) {
+  const clone = source.cloneNode(false);
+  clone.append(...children.map(child => child.cloneNode(true)));
+  clone.style.setProperty('--columns', children.length);
+  return clone;
+}
+
+function blocks(source, narrow) {
+  if (source.classList.contains('story-layout') || source.classList.contains('story-text')) {
+    return [...source.children].flatMap(child => blocks(child, narrow));
+  }
+  const group = [...source.classList].find(name => grouped.has(name));
+  if (!group) return [source.cloneNode(true)];
+  const maximum = source.classList.contains('money-grid') ? 1 :
+    ['club-families', 'direction-list', 'feature-list'].includes(group) ? 1 : narrow ? 1 : 3;
+  const children = [...source.children];
+  const result = [];
+  for (let i = 0; i < children.length; i += maximum) {
+    result.push(groupClone(source, children.slice(i, i + maximum)));
+  }
+  return result;
+}
+
+function splitBlock(block) {
+  if ([...block.classList].some(name => grouped.has(name)) && block.children.length > 1) {
+    return [...block.children].map(child => groupClone(block, [child]));
+  }
+  const club = block.querySelector('.club-family');
+  if (club && club.children.length > 1) {
+    return [...club.children].map(child => {
+      const item = club.cloneNode(false);
+      item.append(child.cloneNode(true));
+      return groupClone(block, [item]);
+    });
+  }
+  // A single long paragraph can continue on the next page without losing words.
+  const paragraph = block.matches('p') ? block : block.querySelector('p');
+  if (!paragraph) return null;
+  const textNode = paragraph.querySelector('span') || paragraph;
+  const words = textNode.textContent.trim().match(/\d[\d.]* đồng|\S+/g) || [];
+  if (words.length < 12) return null;
+  const middle = Math.ceil(words.length / 2);
+  return [words.slice(0, middle), words.slice(middle)].map(part => {
+    const clone = block.cloneNode(true);
+    const p = clone.matches('p') ? clone : clone.querySelector('p');
+    const target = p.querySelector('span') || p;
+    const text = part.join(' ');
+    const fragments = [];
+    let start = 0;
+    for (const match of text.matchAll(/\b\d[\d.]* đồng/g)) {
+      fragments.push(document.createTextNode(text.slice(start, match.index)));
+      const amount = document.createElement('span');
+      amount.className = 'money-amount';
+      amount.textContent = match[0];
+      fragments.push(amount);
+      start = match.index + match[0].length;
+    }
+    fragments.push(document.createTextNode(text.slice(start)));
+    target.replaceChildren(...fragments);
+    return clone;
+  });
+}
+
+export function paginateReport(main, originals) {
+  document.documentElement.style.setProperty('--page-height', window.innerHeight + 'px');
+  const narrow = innerWidth < 700;
+  main.replaceChildren();
+  for (const original of originals) {
+    if (!original.classList.contains('section')) {
+      const clone = original.cloneNode(true);
+      clone.dataset.parentId = original.id;
+      main.append(clone);
+      continue;
+    }
+    const originalWrap = original.querySelector('.wrap');
+    const heading = originalWrap.querySelector('.section-heading');
+    const queue = [...originalWrap.children].filter(node => node !== heading)
+      .flatMap(node => blocks(node, narrow));
+    const pages = [];
+    function createPage() {
+      const page = original.cloneNode(false);
+      page.id = pages.length ? original.id + '--' + (pages.length + 1) : original.id;
+      page.dataset.parentId = original.id;
+      const wrap = originalWrap.cloneNode(false);
+      const title = heading.cloneNode(true);
+      const h2 = title.querySelector('h2');
+      h2.id = page.id + '-title';
+      page.setAttribute('aria-labelledby', h2.id);
+      const part = document.createElement('span');
+      part.className = 'page-part';
+      title.querySelector('.eyebrow').append(part);
+      const body = document.createElement('div');
+      body.className = 'slide-body';
+      wrap.append(title, body);
+      page.append(wrap);
+      main.append(page);
+      pages.push(page);
+      return body;
+    }
+    let body = createPage();
+    while (queue.length) {
+      const block = queue.shift();
+      body.append(block);
+      const contentBottom = block.getBoundingClientRect().bottom;
+      const fits = contentBottom <= body.getBoundingClientRect().bottom - 4 &&
+        block.scrollWidth <= body.clientWidth + 1;
+      if (fits) continue;
+      block.remove();
+      if (body.children.length) {
+        body = createPage();
+        queue.unshift(block);
+        continue;
+      }
+      const pieces = splitBlock(block);
+      if (!pieces) throw new Error('Content cannot fit on one page: ' + original.id);
+      queue.unshift(...pieces);
+    }
+    pages.forEach((page, i) => {
+      const body = page.querySelector('.slide-body');
+      if (body.children.length === 1 && body.firstElementChild.matches('.photo-reel, .photo-wall')) {
+        page.classList.add('media-page');
+      }
+      page.querySelector('.page-part').textContent = pages.length > 1 ? (i + 1) + ' / ' + pages.length : '';
+      page.dataset.part = String(i + 1);
+      page.dataset.parts = String(pages.length);
+    });
+  }
+  return [...main.children];
+}

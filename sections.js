@@ -1,4 +1,4 @@
-import { report as r } from './content.js?v=20261003-3';
+import { report as r } from './content.js?v=20261003-5';
 
 export const sections = [
   ['mo-dau', 'Mở đầu'], ['tong-quan', 'Quy mô nhà trường'], ['doi-ngu', 'Đội ngũ & tổ chức'],
@@ -17,6 +17,7 @@ export const chapters = [
   ['cau-lac-bo', 'Trải nghiệm', 10], ['se-chia', 'Sẻ chia', 15], ['dinh-huong', 'Năm học mới', 18], ['chi-tieu', 'Mục tiêu & đồng hành', 26]
 ];
 export const escape = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const text = value => escape(value).replace(/\b\d[\d.]* đồng/g, amount => `<span class="money-amount">${amount}</span>`);
 export const format = (value, decimals = 0) => new Intl.NumberFormat('vi-VN', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }).format(value);
 export const icon = name => `<i data-lucide="${escape(name)}" aria-hidden="true"></i>`;
 export const count = item => `<span class="counter" data-value="${item.value}" data-decimals="${item.decimals || 0}">${format(item.value, item.decimals)}</span><span class="suffix">${escape(item.suffix || '')}</span>`;
@@ -30,11 +31,11 @@ export function renderReport(photos) {
     return `<figure class="photo-reel reveal ${className}" data-reel><div class="reel-viewport">${items.map((photo, i) => `<div class="reel-frame ${i === 0 ? 'active' : ''}" ${i ? 'aria-hidden="true"' : ''}>${image(photo, caption + ` · Ảnh ${i + 1}`)}</div>`).join('')}<div class="reel-indicators" aria-hidden="true">${items.map((_, i) => `<span class="${i === 0 ? 'active' : ''}"></span>`).join('')}</div></div><figcaption>${caption} <span>Ảnh tư liệu nhà trường</span></figcaption></figure>`;
   };
   const wall = (group, caption, amount = 3) => `<div class="photo-wall">${(photos[group] || []).slice(0, amount).map((photo, i) => `<figure class="reveal" style="--delay:${i * 100}ms">${image(photo, caption + ` · Ảnh ${i + 1}`)}</figure>`).join('')}</div>`;
-  const metrics = (items, className = '') => `<div class="metric-grid ${className}" style="--columns:${Math.min(items.length, 3)}">${items.map((item, i) => `<article class="metric reveal" style="--delay:${i * 100}ms">${item.icon ? `<span class="metric-icon">${icon(item.icon)}</span>` : ''}<strong>${count(item)}</strong><h3>${escape(item.label || item.title)}</h3>${item.detail || item.text ? `<p>${escape(item.detail || item.text)}</p>` : ''}</article>`).join('')}</div>`;
-  const notes = items => `<div class="note-list">${items.map((text, i) => `<p class="reveal" style="--delay:${i * 90}ms">${icon('check')}<span>${escape(text)}</span></p>`).join('')}</div>`;
+  const metrics = (items, className = '') => `<div class="metric-grid ${className}" style="--columns:${Math.min(items.length, 3)}">${items.map((item, i) => `<article class="metric reveal" style="--delay:${i * 100}ms">${item.icon ? `<span class="metric-icon">${icon(item.icon)}</span>` : ''}<strong>${count(item)}</strong><h3>${escape(item.label || item.title)}</h3>${item.detail || item.text ? `<p>${text(item.detail || item.text)}</p>` : ''}</article>`).join('')}</div>`;
+  const notes = items => `<div class="note-list">${items.map((value, i) => `<p class="reveal" style="--delay:${i * 90}ms">${icon('check')}<span>${text(value)}</span></p>`).join('')}</div>`;
   const features = items => `<div class="feature-list">${items.map(([symbol, title, text], i) => `<article class="feature-row reveal" style="--delay:${i * 100}ms"><span class="feature-icon">${icon(symbol)}</span><div><h3>${escape(title)}</h3><p>${escape(text)}</p></div></article>`).join('')}</div>`;
   const split = (text, photo) => `<div class="story-layout"><div class="story-text">${text}</div>${photo}</div>`;
-  const featured = item => `<div class="featured-metric reveal"><strong>${count(item)}</strong><h3>${escape(item.label)}</h3>${item.detail ? `<p>${escape(item.detail)}</p>` : ''}</div>`;
+  const featured = item => `<div class="featured-metric reveal"><strong>${count(item)}</strong><h3>${escape(item.label)}</h3>${item.detail ? `<p>${text(item.detail)}</p>` : ''}</div>`;
   const program = item => `<article class="program-feature reveal"><span class="feature-icon">${icon(item.icon)}</span><h3>${item.title}</h3><strong>${item.amount}</strong><p>${item.description}</p></article>`;
 
   return `

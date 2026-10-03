@@ -1,6 +1,6 @@
 # THPT Phú Nhuận School Report
 
-Website một trang phục vụ trình chiếu tại cuộc họp cha mẹ học sinh: tổng kết 2025–2026 và phương hướng 2026–2027. Bản mở rộng gồm 32 section và 94 ảnh tư liệu được tối ưu từ các nhóm hình ảnh do người dùng cung cấp.
+Website phục vụ trình chiếu tại cuộc họp cha mẹ học sinh: tổng kết 2025–2026 và phương hướng 2026–2027. Báo cáo gồm 32 chủ đề và 94 ảnh tư liệu được tối ưu từ các nhóm hình ảnh do người dùng cung cấp. Mỗi chủ đề được chia thành các trang con vừa đúng một màn hình, tùy kích thước trình chiếu.
 
 ## Chạy tại máy
 
@@ -17,7 +17,9 @@ Mở địa chỉ được in trong terminal, mặc định http://localhost:517
 - `content.js`: số liệu, chương trình, thành tích và chỉ tiêu. Số liệu giữ theo bản Word dự thảo, chưa xác minh; cập nhật tại đây trước khi sử dụng chính thức.
 - `sections.js`: nội dung trình bày và bố cục của 32 section.
 - `app.js`: điều hướng, hiệu ứng số liệu và ảnh tự chuyển.
-- `styles.css`: màu sắc, responsive và animation.
+- `styles.css`: màu sắc và animation.
+- `presentation.css`: bố cục trình chiếu toàn màn hình, cỡ chữ và đơn vị tiền tệ cùng hàng với số.
+- `pagination.js`: đo nội dung, chia trang con và chia lại khi thay đổi kích thước màn hình.
 - `assets/photos/manifest.json`: nhóm ảnh, kích thước và đường dẫn nguồn tương ứng trong thư mục tư liệu.
 - `assets/`: ảnh WebP đã tối ưu và thư viện icon Lucide cục bộ.
 
@@ -25,9 +27,9 @@ Các dòng bị lặp trong Word được gộp khi trình bày. Phạm vi phầ
 
 ## Trình chiếu
 
-Toàn bộ nội dung chữ được hiển thị sẵn, không dùng tab hoặc mục thu gọn. Chỉ cần cuộn trang để xem; ảnh tự chuyển mỗi 6,5 giây khi nằm trong vùng đang xem. Mỗi section là một chủ đề riêng. Cỡ chữ desktop: tiêu đề 54–66px, nội dung 24–28px; số liệu lớn hơn. Mobile dùng chữ 19–24px và bố cục một cột.
+Toàn bộ nội dung chữ được hiển thị sẵn, không dùng tab hoặc mục thu gọn. Chỉ cần cuộn trang để xem; ảnh tự chuyển mỗi 6,5 giây khi nằm trong vùng đang xem. Một trang là một section toàn màn hình; chủ đề dài được chia thành trang con với ký hiệu 1 / 2, 2 / 2 trong tiêu đề. Desktop dùng tiêu đề 50–64px, nội dung 24–26px; mobile dùng nội dung 21–22px. Màn hình thấp có bố cục gọn hơn và được chia thêm trang, không cần cuộn nội dung bên trong.
 
-Trang chỉ hiển thị nội dung: không header, menu, thanh điều hướng hoặc nút công cụ. Cuộn chuột/trackpad chuyển và bắt dính theo từng section, tránh một đợt cuộn nhảy qua nhiều mục. Với section dài hơn màn hình, cuộn hết nội dung rồi mới sang section tiếp theo. Cảm ứng dùng scroll snap gốc của trình duyệt. Phím mũi tên lên/xuống, Page Up/Page Down chuyển section; Home/End tới đầu/cuối. Có thể dùng F11 của trình duyệt để trình chiếu toàn màn hình. Thiết lập hệ thống `prefers-reduced-motion` tắt hiệu ứng và ảnh tự chuyển, hiển thị số liệu ngay. Trang không tự cuộn để người thuyết trình chủ động thời gian đọc.
+Trang chỉ hiển thị nội dung: không header, menu, thanh điều hướng hoặc nút công cụ. Một đợt cuộn chuột/trackpad chuyển đúng một trang; cảm ứng dùng scroll snap gốc của trình duyệt. Phím mũi tên lên/xuống, Page Up/Page Down chuyển trang; Home/End tới đầu/cuối. Có thể dùng F11 của trình duyệt để trình chiếu toàn màn hình. Thiết lập hệ thống `prefers-reduced-motion` tắt hiệu ứng và ảnh tự chuyển, hiển thị số liệu ngay. Trang không tự cuộn để người thuyết trình chủ động thời gian đọc. Các thành tích ghi rõ đơn vị giải hoặc huy chương; tiền tệ ghi đầy đủ, ví dụ 60.000.000 đồng, trên cùng một hàng.
 
 ## Build và triển khai
 

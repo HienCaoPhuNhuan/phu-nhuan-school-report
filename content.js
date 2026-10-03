@@ -45,16 +45,16 @@ export const report = {
   graduation: { university: 97.53, score: 22.93, previousScore: 22.85, highest: 28, lowest: 15.1, perfect: [['Toán', 6], ['Vật lí', 1], ['Lịch sử', 2], ['Tiếng Anh', 2]], note: 'Trúng tuyển đại học đợt 1 · Thống kê ngày 30/8/2026' },
   achievements: {
     academic: [
-      { value: 43, title: 'Học sinh giỏi Thành phố', text: 'Khối 12 · 24 giải Nhì, 19 giải Ba', icon: 'trophy' },
-      { value: 53, title: 'Olympic Thành phố', text: 'Khối 10, 11 · 1 giải Nhất, 19 giải Nhì, 33 giải Ba', icon: 'medal' },
-      { value: 7, title: 'Olympic 30/4', text: 'Khối chuyên · 1 HCV, 2 HCB, 4 HCĐ', icon: 'award' },
-      { value: 5, title: 'Khoa học kỹ thuật', text: 'Cấp Thành phố · 3 giải Nhì, 2 giải Ba', icon: 'microscope' },
-      { value: 7, title: 'Toán trên máy tính cầm tay', text: 'Cấp Thành phố · 1 giải Nhì, 6 giải Ba', icon: 'calculator' }
+      { value: 43, suffix: ' giải', title: 'Học sinh giỏi Thành phố', text: 'Khối 12 · 24 giải Nhì, 19 giải Ba', icon: 'trophy' },
+      { value: 53, suffix: ' giải', title: 'Olympic Thành phố', text: 'Khối 10, 11 · 1 giải Nhất, 19 giải Nhì, 33 giải Ba', icon: 'medal' },
+      { value: 7, suffix: ' huy chương', title: 'Olympic 30/4', text: 'Khối chuyên · 1 huy chương Vàng, 2 huy chương Bạc, 4 huy chương Đồng', icon: 'award' },
+      { value: 5, suffix: ' giải', title: 'Khoa học kỹ thuật', text: 'Cấp Thành phố · 3 giải Nhì, 2 giải Ba', icon: 'microscope' },
+      { value: 7, suffix: ' giải', title: 'Toán trên máy tính cầm tay', text: 'Cấp Thành phố · 1 giải Nhì, 6 giải Ba', icon: 'calculator' }
     ],
     sport: [
-      { value: 9, title: 'Thể thao học sinh Thành phố', text: '1 HCV · 2 HCB · 6 HCĐ', icon: 'medal' },
-      { value: 4, title: 'Thể thao học sinh toàn quốc', text: '3 HCV · 1 HCĐ · Điền kinh, Cầu lông', icon: 'trophy' },
-      { value: 7, title: 'Cúp Quốc gia môn Cờ vua', text: '4 HCV · 1 HCB · 2 HCĐ', icon: 'crown' }
+      { value: 9, suffix: ' huy chương', title: 'Thể thao học sinh Thành phố', text: '1 huy chương Vàng · 2 huy chương Bạc · 6 huy chương Đồng', icon: 'medal' },
+      { value: 4, suffix: ' huy chương', title: 'Thể thao học sinh toàn quốc', text: '3 huy chương Vàng · 1 huy chương Đồng · Điền kinh, Cầu lông', icon: 'trophy' },
+      { value: 7, suffix: ' huy chương', title: 'Cúp Quốc gia môn Cờ vua', text: '4 huy chương Vàng · 1 huy chương Bạc · 2 huy chương Đồng', icon: 'crown' }
     ],
     teachers: [
       { value: 136, title: 'Lao động tiên tiến', text: '136/136 · Tỷ lệ 100%', icon: 'users' },
@@ -75,15 +75,15 @@ export const report = {
     ['leaf', 'Trường học hạnh phúc', 'Hoạt động trải nghiệm, về nguồn, phong trào xanh – sạch – đẹp; ghi nhận học sinh tham gia câu lạc bộ.']
   ],
   charity: [
-    { value: 164951000, suffix: ' đ', label: 'Ủng hộ đồng bào bị thiên tai', detail: 'Qua 2 đợt quyên góp' },
-    { value: 60000000, suffix: ' đ', label: 'Công trình Nhà tình bạn', detail: 'Hỗ trợ học sinh Trường THPT Trần Văn Quan' },
-    { value: 15, suffix: ' suất', label: 'Học bổng Gương sáng học đường', detail: '1 triệu đồng / suất' },
-    { value: 22, suffix: ' học sinh', label: 'Quà Xuân tặng bạn', detail: 'Tổng giá trị 11 triệu đồng' }
+    { value: 164951000, suffix: ' đồng', label: 'Ủng hộ đồng bào bị thiên tai', detail: 'Qua 2 đợt quyên góp' },
+    { value: 60000000, suffix: ' đồng', label: 'Công trình Nhà tình bạn', detail: 'Hỗ trợ học sinh Trường THPT Trần Văn Quan' },
+    { value: 15, suffix: ' suất', label: 'Học bổng Gương sáng học đường', detail: '1.000.000 đồng / suất' },
+    { value: 22, suffix: ' học sinh', label: 'Quà Xuân tặng bạn', detail: 'Tổng giá trị 11.000.000 đồng' }
   ],
   charityMore: [
     'Tặng 1.000 tập trắng cho học sinh khó khăn tại phường Cầu Kiệu.',
-    'Tặng 1.000 tập trắng và 3 học bổng, mỗi suất 1 triệu đồng tại xã Bình Mỹ.',
-    'Thăm mẹ Việt Nam Anh hùng và gia đình chính sách: quà tặng trị giá 4 triệu đồng.',
+    'Tặng 1.000 tập trắng và 3 học bổng, mỗi suất 1.000.000 đồng tại xã Bình Mỹ.',
+    'Thăm mẹ Việt Nam Anh hùng và gia đình chính sách: quà tặng trị giá 4.000.000 đồng.',
     'Văn nghệ Cây mùa xuân 2026, quỹ Giúp bạn vượt khó – học tốt, hiến máu và các hoạt động cộng đồng.'
   ],
   nextOverview: [ { value: 2439, label: 'Học sinh' }, { value: 57, label: 'Lớp học' }, { value: 138, label: 'Cán bộ, giáo viên, nhân viên' } ],

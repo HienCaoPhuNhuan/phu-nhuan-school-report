@@ -16,4 +16,5 @@ jobs:
       - run: node --check app.js
       - run: node --check content.js
       - run: node --check sections.js
+      - run: node --check pagination.js
       - run: node scripts/build.mjs

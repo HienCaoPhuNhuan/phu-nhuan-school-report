@@ -1,0 +1,132 @@
+main > section, .section, .hero, .closing-section {
+  height: var(--page-height, 100dvh);
+  min-height: 0;
+  max-height: var(--page-height, 100dvh);
+  overflow: clip;
+}
+.section { padding: 36px 0; }
+.section > .wrap {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 24px;
+}
+.wrap { max-width: 1580px; width: calc(100% - 112px); }
+.section-heading { margin: 0; max-width: 100%; }
+.section-heading h2 { font-size: 50px; margin-top: 12px; line-height: 1.12; }
+.eyebrow { font-size: 17px; }
+.eyebrow .page-part { margin-left: auto; border: 0; padding: 0; min-width: 48px; text-align: right; white-space: nowrap; }
+.slide-body { min-height: 0; display: flex; flex-direction: column; gap: 24px; }
+.slide-body > * { flex-shrink: 0; margin: 0; }
+.metric-grid, .overview-grid { grid-template-columns: repeat(var(--columns), minmax(0, 1fr)); gap: 32px; }
+.metric { padding-top: 18px; }
+.metric strong, .overview-grid .metric strong { font-size: 82px; }
+.metric h3 { font-size: 28px; margin-top: 12px; }
+.metric p { font-size: 24px; line-height: 1.45; margin-top: 10px; }
+.suffix { font-size: 28px; margin-left: 10px; white-space: nowrap; }
+.money-grid .metric strong { font-size: 64px; display: flex; align-items: baseline; gap: 12px; white-space: nowrap; }
+.money-grid .metric .suffix { display: inline; font-size: 30px; margin: 0; }
+.metric-icon { margin-bottom: 8px; }
+.money-amount { white-space: nowrap; }
+.featured-metric strong { font-size: 96px; }
+.featured-metric h3 { font-size: 30px; }
+.featured-metric p { font-size: 24px; }
+.note-list, .feature-list { gap: 20px; }
+.note-list p, .feature-row p, .organization-grid p, .direction-list p, .program-feature p, .partnership-grid p { font-size: 26px; line-height: 1.45; }
+.feature-row h3, .direction-list h3, .program-feature h3, .partnership-grid h3 { font-size: 30px; }
+.organization-grid, .program-grid, .target-grid, .partnership-grid, .infrastructure, .perfect-scores, .club-families { grid-template-columns: repeat(var(--columns), minmax(0, 1fr)); gap: 26px; margin: 0; }
+.organization-grid { padding-top: 20px; }
+.photo-reel { width: 100%; }
+.reel-viewport, .wide-reel .reel-viewport { height: 220px; aspect-ratio: auto; }
+.photo-reel figcaption { font-size: 17px; padding-top: 8px; }
+.poster-reel .reel-viewport { height: 250px; aspect-ratio: auto; }
+.club-family:last-child { grid-column: auto; max-width: none; }
+.club-family > h3 { font-size: 28px; margin-bottom: 12px; }
+.club-family > p { font-size: 24px; line-height: 1.4; margin-top: 12px; }
+.photo-wall { height: 220px; grid-template-columns: repeat(var(--columns), minmax(0, 1fr)); margin: 0; }
+.photo-wall:has(figure:nth-child(4)) { grid-template-columns: repeat(var(--columns), minmax(0, 1fr)); }
+.photo-wall figure { height: 100%; aspect-ratio: auto; }
+.photo-wall figure:last-child:nth-child(odd) { grid-column: auto; max-width: none; }
+.media-page .slide-body > .photo-reel { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.media-page .reel-viewport { height: 0; flex: 1; min-height: 0; }
+.media-page .slide-body > .photo-wall { flex: 1; min-height: 0; height: auto; }
+.score-comparison { padding-top: 16px; }
+.perfect-scores { padding-top: 18px; }
+.perfect-scores strong { font-size: 62px; }
+.perfect-scores p, .footnote { font-size: 24px; line-height: 1.45; }
+.target-ring { width: 180px; height: 180px; }
+.target-ring strong { font-size: 54px; }
+.target-ring .suffix { font-size: 24px; margin: 0; }
+.target-item:last-child { grid-column: auto; }
+.target-item h3 { font-size: 26px; margin-top: 12px; }
+.motto { grid-template-columns: repeat(var(--columns), minmax(0, 1fr)); font-size: 28px; padding-block: 18px; }
+.hero-content, .closing-content { padding-block: 32px; }
+.hero h1 { font-size: 90px; }
+.closing-content h2 { font-size: 58px; }
+@media (min-height: 900px) and (min-width: 1000px) {
+  .section { padding-block: 52px; }
+  .section-heading h2 { font-size: 64px; }
+  .slide-body { gap: 32px; }
+  .reel-viewport, .wide-reel .reel-viewport, .photo-wall { height: 320px; }
+  .poster-reel .reel-viewport { height: 340px; }
+  .metric strong, .overview-grid .metric strong { font-size: 96px; }
+  .hero h1 { font-size: 108px; }
+}
+@media (max-width: 999px) {
+  .wrap { width: calc(100% - 64px); }
+  .section-heading h2 { font-size: 44px; }
+  .metric strong, .overview-grid .metric strong { font-size: 64px; }
+  .metric h3 { font-size: 25px; }
+  .note-list p, .feature-row p, .organization-grid p, .direction-list p, .program-feature p, .partnership-grid p { font-size: 24px; }
+}
+@media (max-width: 699px) {
+  .section { padding-block: 24px; }
+  .wrap { width: calc(100% - 40px); }
+  .section > .wrap { gap: 20px; }
+  .section-heading h2 { font-size: 34px; margin-top: 10px; }
+  .eyebrow { font-size: 12px; gap: 10px; }
+  .eyebrow > span { padding-right: 10px; }
+  .slide-body { gap: 20px; }
+  .metric strong, .overview-grid .metric strong { font-size: 72px; }
+  .metric h3, .overview-grid .metric h3 { font-size: 25px; }
+  .metric p, .overview-grid .metric p, .featured-metric p { font-size: 21px; }
+  .suffix { font-size: 24px; }
+  .money-grid .metric strong { font-size: 38px; gap: 8px; }
+  .money-grid .metric .suffix { font-size: 21px; }
+  .note-list p, .feature-row p, .organization-grid p, .direction-list p, .program-feature p, .partnership-grid p { font-size: 22px; }
+  .feature-row h3, .direction-list h3, .program-feature h3, .partnership-grid h3 { font-size: 27px; }
+  .reel-viewport, .wide-reel .reel-viewport, .photo-wall { height: 210px; }
+  .poster-reel .reel-viewport { height: 250px; }
+  .footnote { font-size: 21px; }
+  .hero h1 { font-size: 47px; }
+  .closing-content h2 { font-size: 38px; }
+  .closing-content > p:last-child { font-size: 22px; }
+}
+@media (max-width: 360px) {
+  .money-grid .metric strong { font-size: 32px; }
+  .money-grid .metric .suffix { font-size: 19px; }
+  .section-heading h2 { font-size: 30px; }
+  .hero h1 { font-size: 40px; }
+}
+@media (max-height: 550px) {
+  .section { padding-block: 16px; }
+  .section > .wrap { gap: 16px; }
+  .section-heading h2 { font-size: 30px; }
+  .section-heading h2 br { display: none; }
+  .slide-body { gap: 16px; }
+  .reel-viewport, .wide-reel .reel-viewport, .photo-wall, .poster-reel .reel-viewport { height: 120px; }
+  .metric strong, .overview-grid .metric strong, .featured-metric strong { font-size: 52px; }
+  .metric h3 { font-size: 23px; }
+  .metric p, .note-list p, .feature-row p, .organization-grid p, .direction-list p, .program-feature p, .partnership-grid p { font-size: 20px; }
+  .hero h1 { font-size: 44px; margin-top: 14px; }
+  .hero-subtitle { font-size: 22px; margin-top: 14px; }
+  .closing-content h2 { font-size: 34px; margin-top: 14px; }
+  .closing-content > p:last-child { font-size: 20px; margin-top: 16px; }
+}
+@media print {
+  main > section { height: auto; max-height: none; min-height: 0; overflow: visible; break-after: page; }
+  .section > .wrap { display: block; height: auto; }
+  .section-heading { margin-bottom: 24px; }
+  .slide-body { display: block; }
+  .slide-body > * { margin-bottom: 24px; }
+}
