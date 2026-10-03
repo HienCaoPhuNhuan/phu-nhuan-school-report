@@ -135,6 +135,13 @@ main > section, .section, .hero, .closing-section {
   .closing-content h2 { font-size: 34px; margin-top: 14px; }
   .closing-content > p:last-child { font-size: 20px; margin-top: 16px; }
 }
+.slide-text p {
+  text-align: justify;
+  text-align-last: left;
+  hyphens: none;
+}
+.note-list p > span { flex: 1; min-width: 0; }
+.keep-together { white-space: nowrap; overflow-wrap: normal; word-break: normal; }
 @media print {
   main > section { height: auto; max-height: none; min-height: 0; overflow: visible; break-after: page; }
   .section > .wrap { display: block; height: auto; }

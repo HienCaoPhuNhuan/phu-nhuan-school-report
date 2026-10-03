@@ -1,3 +1,5 @@
+import { protectPhrases, paragraphUnits } from './typography.js?v=20261003-8';
+
 const grouped = new Set(['metric-grid', 'note-list', 'feature-list', 'organization-grid',
   'perfect-scores', 'club-families', 'direction-list', 'program-grid', 'infrastructure',
   'target-grid', 'partnership-grid', 'photo-wall', 'motto', 'score-comparison']);
@@ -10,6 +12,7 @@ function curatePhotos(originals) {
   const used = new Set();
   return originals.map(original => {
     const source = original.cloneNode(true);
+    protectPhrases(source);
     source.querySelectorAll('.photo-wall').forEach(wall => wall.remove());
     let selected = false;
     source.querySelectorAll('.photo-reel').forEach(reel => {
@@ -75,14 +78,14 @@ function splitBlock(block) {
   // A single long paragraph can continue on the next page without losing words.
   const paragraph = block.matches('p') ? block : block.querySelector('p');
   if (!paragraph) return null;
-  const textNode = paragraph.querySelector('span') || paragraph;
-  const words = textNode.textContent.trim().match(/\d[\d.]* đồng|\S+/g) || [];
-  if (words.length < 12) return null;
+  const textNode = paragraph.closest('.note-list') ? paragraph.querySelector(':scope > span') : paragraph;
+  const words = paragraphUnits(textNode.textContent.trim());
+  if (words.length < 2) return null;
   const middle = Math.ceil(words.length / 2);
   return [words.slice(0, middle), words.slice(middle)].map(part => {
     const clone = block.cloneNode(true);
     const p = clone.matches('p') ? clone : clone.querySelector('p');
-    const target = p.querySelector('span') || p;
+    const target = p.closest('.note-list') ? p.querySelector(':scope > span') : p;
     const text = part.join(' ');
     const fragments = [];
     let start = 0;
@@ -96,6 +99,7 @@ function splitBlock(block) {
     }
     fragments.push(document.createTextNode(text.slice(start)));
     target.replaceChildren(...fragments);
+    protectPhrases(p);
     return clone;
   });
 }
