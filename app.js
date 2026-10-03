@@ -1,5 +1,6 @@
 import { format, renderReport } from './sections.js?v=20261003-5';
 import { paginateReport } from './pagination.js?v=20261003-8';
+import { createPhotoPresentation } from './photo-presentation.js?v=20261004-1';
 
 const response = await fetch(new URL('./assets/photos/manifest.json', import.meta.url));
 if (!response.ok) throw new Error('Photo manifest could not be loaded');
@@ -13,6 +14,7 @@ const originals = [...main.children].map(node => node.cloneNode(true));
 let nodes = paginateReport(main, originals);
 // Presentation motion stays enabled unless the viewer explicitly opts out.
 const reducedMotion = new URLSearchParams(location.search).get('motion') === 'reduced';
+const photoPresentation = createPhotoPresentation(reducedMotion);
 const numberAnimations = new Map();
 const visibleReels = new Set();
 let reelInterval;
@@ -27,6 +29,7 @@ function finishCounters() {
 function advanceReels() {
   if (reducedMotion || document.hidden) return;
   visibleReels.forEach(reel => {
+    if (reel.closest('.slide-visual, .photo-stage')) return;
     const frames = [...reel.querySelectorAll('.reel-frame')];
     if (frames.length < 2) return;
     const current = Math.max(0, frames.findIndex(frame => frame.classList.contains('active')));
@@ -89,13 +92,14 @@ function updateSectionTransition() {
   const marker = innerHeight * 0.4;
   let nextIndex = 0;
   nodes.forEach((node, i) => { if (node.getBoundingClientRect().top <= marker) nextIndex = i; });
-  if (nextIndex === presentedIndex) return;
+  if (nextIndex === presentedIndex) { photoPresentation.setSection(nodes[nextIndex]); return; }
   const direction = nextIndex < presentedIndex ? 'backward' : 'forward';
   if (presentedIndex >= 0) nodes[presentedIndex]?.classList.remove('section-arriving');
   const next = nodes[nextIndex];
   next.dataset.direction = direction;
   next.classList.add('section-arriving');
   presentedIndex = nextIndex;
+  photoPresentation.setSection(next);
 }
 window.addEventListener('scroll', () => {
   if (transitionScheduled) return;
@@ -109,6 +113,7 @@ window.addEventListener('resize', () => {
     const current = nodes[sectionIndex()];
     const parent = current.dataset.parentId;
     const part = Number(current.dataset.part || 1);
+    photoPresentation.stop();
     revealObserver.disconnect();
     reelObserver.disconnect();
     visibleReels.clear();
@@ -134,11 +139,13 @@ function sectionIndex() {
   return index;
 }
 function goTo(index, instant = false) {
+  photoPresentation.stop();
   const targetIndex = Math.max(0, Math.min(index, nodes.length - 1));
   const top = nodes[targetIndex].getBoundingClientRect().top + scrollY;
   window.scrollTo({ top, behavior: reducedMotion || instant ? 'instant' : 'smooth' });
   navigationUntil = performance.now() + (reducedMotion || instant ? 0 : 900);
   history.replaceState(null, '', '#' + nodes[targetIndex].id);
+  requestAnimationFrame(updateSectionTransition);
 }
 // Treat a wheel/trackpad burst as exactly one full-screen page turn.
 let lastWheelAt = 0;
