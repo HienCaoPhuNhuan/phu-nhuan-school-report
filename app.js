@@ -1,5 +1,5 @@
 import { format, renderReport } from './sections.js?v=20261003-5';
-import { paginateReport } from './pagination.js?v=20261004-2';
+import { paginateReport } from './pagination.js?v=20261004-3';
 import { createPhotoPresentation } from './photo-presentation.js?v=20261004-1';
 
 const response = await fetch(new URL('./assets/photos/manifest.json', import.meta.url));

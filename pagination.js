@@ -8,10 +8,23 @@ const illustratedTopics = new Set(['doi-ngu', 'ren-luyen', 'chuyen-mon', 'ky-nan
   'huong-nghiep', 'ngoai-khoa', 'hoc-bong', 'cong-dong', 'chuyen-doi-so',
   'danh-gia', 'chuong-trinh', 'co-so-vat-chat']);
 
+const enlargedTopics = new Set(['ren-luyen', 'chuyen-mon', 'clb-noi-bat', 'ky-nang',
+  'huong-nghiep', 'ngoai-khoa', 'hoc-bong', 'cong-dong', 'de-an', 'chuyen-doi-so',
+  'danh-gia', 'chuong-trinh', 'phat-trien', 'phat-trien-doi-ngu']);
+const highlightedTopics = new Map([
+  ['cau-lac-bo', 'Nhà trường cấp giấy chứng nhận'],
+  ['chi-tieu', 'Không có học sinh học lực Chưa đạt.'],
+  ['chi-tieu-thi-dua', 'Phấn đấu Lao động Tiên tiến,']
+]);
+
 function curatePhotos(originals) {
   const used = new Set();
   return originals.map(original => {
     const source = original.cloneNode(true);
+    const highlight = highlightedTopics.get(source.id);
+    if (highlight) source.querySelectorAll('p').forEach(p => {
+      if (p.textContent.trim().startsWith(highlight)) p.classList.add('report-highlight');
+    });
     protectPhrases(source);
     source.querySelectorAll('.photo-wall').forEach(wall => wall.remove());
     let selected = false;
@@ -126,11 +139,13 @@ export function paginateReport(main, originals) {
     const pages = [];
     function createPage() {
       const page = original.cloneNode(false);
+      if (enlargedTopics.has(original.id)) page.classList.add('projection-focus');
       page.id = pages.length ? original.id + '--' + (pages.length + 1) : original.id;
       page.dataset.parentId = original.id;
       const wrap = originalWrap.cloneNode(false);
       const title = heading.cloneNode(true);
       const h2 = title.querySelector('h2');
+      if (innerWidth >= 1000) h2.querySelectorAll('br').forEach(br => br.replaceWith(document.createTextNode(' ')));
       h2.id = page.id + '-title';
       page.setAttribute('aria-labelledby', h2.id);
       const part = document.createElement('span');
@@ -178,6 +193,19 @@ export function paginateReport(main, originals) {
       const text = page.querySelector('.slide-text');
       const heading = page.querySelector('.section-heading');
       const visual = page.querySelector('.slide-visual');
+      // Enlarge short pages using their measured content, not stretched gaps.
+      if (page.classList.contains('projection-focus') && innerWidth >= 1000 && innerHeight >= 600) {
+        const base = innerHeight >= 900 ? 44 : 40;
+        for (let size = base + 2; size <= 60; size += 2) {
+          page.style.setProperty('--projection-font', size + 'px');
+          const used = heading.offsetHeight + Math.max(text.offsetHeight, visual?.offsetHeight || 0) + 36;
+          const overflow = [...text.querySelectorAll('p,h3,strong')].some(n => n.scrollWidth > n.clientWidth + 1);
+          if (used > innerHeight * 0.86 || overflow) {
+            page.style.setProperty('--projection-font', (size - 2) + 'px');
+            break;
+          }
+        }
+      }
       const height = heading.offsetHeight + Math.max(text.offsetHeight, visual?.offsetHeight || 0) + 24;
       if (height < innerHeight * 0.75) {
         page.classList.add('compact-page');
