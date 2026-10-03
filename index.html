@@ -7,9 +7,9 @@
   <meta name="description" content="Tổng kết năm học 2025–2026 và phương hướng năm học 2026–2027 của Trường THPT Phú Nhuận.">
   <title>THPT Phú Nhuận | Báo cáo năm học 2025–2027</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20261003-2">
   <script src="assets/lucide.min.js" defer></script>
-  <script type="module" src="app.js"></script>
+  <script type="module" src="app.js?v=20261003-2"></script>
 </head>
 <body>
   <a class="skip-link" href="#tong-quan">Đến nội dung chính</a>
@@ -24,6 +24,12 @@
       <a href="#dinh-huong">Năm học 2026–2027</a>
       <a href="#dong-hanh">Cùng đồng hành</a>
     </nav>
+    <div class="presentation-controls">
+      <button id="previous-section" class="icon-button" title="Phần trước" aria-label="Phần trước"><i data-lucide="arrow-up"></i></button>
+      <span id="current-section-title">Mở đầu</span>
+      <span id="section-position" aria-live="polite">01 / 30</span>
+      <button id="next-section" class="icon-button" title="Phần tiếp theo" aria-label="Phần tiếp theo"><i data-lucide="arrow-down"></i></button>
+    </div>
     <div class="header-actions">
       <button id="motion-toggle" class="icon-button" aria-label="Giảm chuyển động" aria-pressed="false" title="Giảm chuyển động"><i data-lucide="pause"></i></button>
       <button id="fullscreen" class="icon-button" aria-label="Toàn màn hình" title="Toàn màn hình"><i data-lucide="maximize"></i></button>
@@ -33,12 +39,7 @@
   <nav id="section-menu" class="section-menu" aria-label="Mục lục" hidden></nav>
   <main id="main"></main>
   <nav class="section-rail" aria-label="Các phần báo cáo" id="section-rail"></nav>
-  <div class="presentation-controls">
-    <button id="previous-section" class="icon-button" title="Phần trước" aria-label="Phần trước"><i data-lucide="arrow-up"></i></button>
-    <span id="section-position" aria-live="polite">01 / 10</span>
-    <button id="next-section" class="icon-button" title="Phần tiếp theo" aria-label="Phần tiếp theo"><i data-lucide="arrow-down"></i></button>
-  </div>
   <div id="notice" class="notice" role="status" hidden></div>
-  <footer class="site-footer"><span>THPT PHÚ NHUẬN</span><span>Tổng kết 2025–2026 · Phương hướng 2026–2027</span><a href="https://thptphunhuan.hcm.edu.vn/" target="_blank" rel="noreferrer">Website nhà trường <i data-lucide="arrow-up-right"></i></a></footer>
+  <footer class="site-footer"><span>THPT PHÚ NHUẬN</span><span>Tổng kết 2025–2026 · Phương hướng 2026–2027<br>Nội dung theo báo cáo dự thảo · Hình ảnh tư liệu nhà trường</span><a href="https://thptphunhuan.hcm.edu.vn/" target="_blank" rel="noreferrer">Website nhà trường <i data-lucide="arrow-up-right"></i></a></footer>
 </body>
 </html>

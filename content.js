@@ -3,6 +3,19 @@ export const report = {
   school: 'Trường THPT Phú Nhuận',
   pastYear: '2025–2026',
   nextYear: '2026–2027',
+  qualifications: [
+    { value: 46, label: 'Thạc sĩ' },
+    { value: 3, label: 'Giáo viên đang học cao học' }
+  ],
+  guidance: [
+    { value: 4, label: 'Đợt tư vấn tuyển sinh tại trường' },
+    { value: 40, suffix: '+', label: 'Trường đại học, cao đẳng tham gia' }
+  ],
+  teacherTargets: [
+    { value: 138, suffix: '/138', label: 'Lao động Tiên tiến' },
+    { value: 25, label: 'Giáo viên giỏi cấp trường' },
+    { value: 40, label: 'Chiến sĩ thi đua cơ sở' }
+  ],
   overview: [
     { value: 2400, label: 'Học sinh', detail: '1.286 học sinh nữ', icon: 'users' },
     { value: 57, label: 'Lớp học', detail: '6 lớp chương trình tích hợp', icon: 'school' },

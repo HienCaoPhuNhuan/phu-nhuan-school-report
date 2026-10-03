@@ -1,0 +1,610 @@
+{
+  "school": [
+    {
+      "src": "assets/photos/photo-002.webp",
+      "source": "01 Nhà trường, thầy cô/0002.jpeg",
+      "width": 1600,
+      "height": 898
+    },
+    {
+      "src": "assets/photos/photo-009.webp",
+      "source": "01 Nhà trường, thầy cô/14-DSC06133.jpg",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "assets/photos/photo-000.webp",
+      "source": "01 Nhà trường, thầy cô/0000000004.JPG",
+      "width": 1600,
+      "height": 1065
+    }
+  ],
+  "teachers": [
+    {
+      "src": "assets/photos/photo-005.webp",
+      "source": "01 Nhà trường, thầy cô/11-DSC06112.jpg",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "assets/photos/photo-007.webp",
+      "source": "01 Nhà trường, thầy cô/13-DSC06076.jpg",
+      "width": 1600,
+      "height": 1066
+    },
+    {
+      "src": "assets/photos/photo-010.webp",
+      "source": "01 Nhà trường, thầy cô/4-DSC06085.jpg",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "assets/photos/photo-003.webp",
+      "source": "01 Nhà trường, thầy cô/10-DSC06108.jpg",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "assets/photos/photo-006.webp",
+      "source": "01 Nhà trường, thầy cô/12-DSC06116.jpg",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "assets/photos/photo-015.webp",
+      "source": "01 Nhà trường, thầy cô/9-DSC06102.jpg",
+      "width": 1600,
+      "height": 1066
+    }
+  ],
+  "learning": [
+    {
+      "src": "assets/photos/photo-176.webp",
+      "source": "07 Học tập/1-DSC09227.jpg",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "src": "assets/photos/photo-177.webp",
+      "source": "07 Học tập/2-DSC09207.jpg",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "src": "assets/photos/photo-187.webp",
+      "source": "07 Học tập/DSC05596.jpg",
+      "width": 1600,
+      "height": 1066
+    },
+    {
+      "src": "assets/photos/photo-197.webp",
+      "source": "07 Học tập/z7620605066713_a3e909e2b29d63a3610477e68e8e7a8b.jpg",
+      "width": 1600,
+      "height": 1067
+    }
+  ],
+  "academic": [
+    {
+      "src": "assets/photos/photo-034.webp",
+      "source": "03 Chuyên đề, thành tích/Toán.JPG",
+      "width": 1600,
+      "height": 1063
+    },
+    {
+      "src": "assets/photos/photo-038.webp",
+      "source": "03 Chuyên đề, thành tích/z7682874347155_23859326731cafbda7228e92c50257c4.jpg",
+      "width": 1600,
+      "height": 1066
+    },
+    {
+      "src": "assets/photos/photo-039.webp",
+      "source": "03 Chuyên đề, thành tích/z7682874349975_d4fe70de2b8fb1d8a9abe357f805cda4.jpg",
+      "width": 1600,
+      "height": 1066
+    },
+    {
+      "src": "assets/photos/photo-037.webp",
+      "source": "03 Chuyên đề, thành tích/z.jpg",
+      "width": 1600,
+      "height": 900
+    }
+  ],
+  "science": [
+    {
+      "src": "assets/photos/photo-019.webp",
+      "source": "03 Chuyên đề, thành tích/20260116_141636.jpg",
+      "width": 1600,
+      "height": 739
+    },
+    {
+      "src": "assets/photos/photo-035.webp",
+      "source": "03 Chuyên đề, thành tích/UIT bootcamp1.jpg",
+      "width": 1600,
+      "height": 1071
+    },
+    {
+      "src": "assets/photos/photo-184.webp",
+      "source": "07 Học tập/CEEC-100.jpg",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "assets/photos/photo-183.webp",
+      "source": "07 Học tập/Bo sung/DSC09239.jpg",
+      "width": 1600,
+      "height": 900
+    }
+  ],
+  "sport": [
+    {
+      "src": "assets/photos/photo-028.webp",
+      "source": "03 Chuyên đề, thành tích/Hội khỏe phù đổng.jpg",
+      "width": 1600,
+      "height": 1066
+    },
+    {
+      "src": "assets/photos/photo-171.webp",
+      "source": "06 Ngoại khóa, hoạt động nhà trường/_DSC5906.jpg",
+      "width": 1600,
+      "height": 1066
+    }
+  ],
+  "clubs": [
+    {
+      "src": "assets/photos/photo-041.webp",
+      "source": "04 Câu lạc bộ/3.webp",
+      "width": 640,
+      "height": 427
+    },
+    {
+      "src": "assets/photos/photo-065.webp",
+      "source": "04 Câu lạc bộ/PNC.JPG",
+      "width": 1600,
+      "height": 1200
+    },
+    {
+      "src": "assets/photos/photo-066.webp",
+      "source": "04 Câu lạc bộ/PND.JPG",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "assets/photos/photo-067.webp",
+      "source": "04 Câu lạc bộ/PNY.JPG",
+      "width": 1600,
+      "height": 1067
+    }
+  ],
+  "clubAcademic": [
+    {
+      "src": "assets/photos/photo-042.webp",
+      "source": "04 Câu lạc bộ/Giới thiệu CLB/1 Hoc thuat/1. CLB Nghiên cứu Khoa học PNR.png",
+      "width": 1206,
+      "height": 880
+    },
+    {
+      "src": "assets/photos/photo-043.webp",
+      "source": "04 Câu lạc bộ/Giới thiệu CLB/1 Hoc thuat/21. CLB Tin học.PNG",
+      "width": 1600,
+      "height": 1131
+    },
+    {
+      "src": "assets/photos/photo-044.webp",
+      "source": "04 Câu lạc bộ/Giới thiệu CLB/1 Hoc thuat/3. CLB Vật lý.jpg",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "src": "assets/photos/photo-045.webp",
+      "source": "04 Câu lạc bộ/Giới thiệu CLB/1 Hoc thuat/5. CLB Hóa học.jpg",
+      "width": 896,
+      "height": 1196
+    },
+    {
+      "src": "assets/photos/photo-046.webp",
+      "source": "04 Câu lạc bộ/Giới thiệu CLB/1 Hoc thuat/7. CLB Tiếng Anh.jpg",
+      "width": 1200,
+      "height": 1200
+    }
+  ],
+  "clubArts": [
+    {
+      "src": "assets/photos/photo-056.webp",
+      "source": "04 Câu lạc bộ/Giới thiệu CLB/2 Nang khieu/22. CLB Âm Nhạc PNY.jpg",
+      "width": 848,
+      "height": 1200
+    },
+    {
+      "src": "assets/photos/photo-057.webp",
+      "source": "04 Câu lạc bộ/Giới thiệu CLB/2 Nang khieu/23. CLB Nhảy PND.png",
+      "width": 394,
+      "height": 394
+    },
+    {
+      "src": "assets/photos/photo-054.webp",
+      "source": "04 Câu lạc bộ/Giới thiệu CLB/2 Nang khieu/19. CLB Kịch ROD.JPG",
+      "width": 1600,
+      "height": 800
+    },
+    {
+      "src": "assets/photos/photo-055.webp",
+      "source": "04 Câu lạc bộ/Giới thiệu CLB/2 Nang khieu/2. CLB Vẽ.jpg",
+      "width": 1280,
+      "height": 908
+    },
+    {
+      "src": "assets/photos/photo-053.webp",
+      "source": "04 Câu lạc bộ/Giới thiệu CLB/2 Nang khieu/18. CLB Nhiếp ảnh PNP.png",
+      "width": 960,
+      "height": 1200
+    }
+  ],
+  "clubSocial": [
+    {
+      "src": "assets/photos/photo-061.webp",
+      "source": "04 Câu lạc bộ/Giới thiệu CLB/3 Trai nghiem/17. ĐỘI CÔNG TÁC XÃ HỘI GẤU TRẮNG.png",
+      "width": 849,
+      "height": 1200
+    },
+    {
+      "src": "assets/photos/photo-062.webp",
+      "source": "04 Câu lạc bộ/Giới thiệu CLB/3 Trai nghiem/20. CLB Tâm lý.jpg",
+      "width": 1200,
+      "height": 1200
+    },
+    {
+      "src": "assets/photos/photo-064.webp",
+      "source": "04 Câu lạc bộ/Giới thiệu CLB/3 Trai nghiem/8. CLB Báo chí Truyền thông PNM.png",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "src": "assets/photos/photo-063.webp",
+      "source": "04 Câu lạc bộ/Giới thiệu CLB/3 Trai nghiem/4. CLB Bút chì.jpg",
+      "width": 669,
+      "height": 1200
+    }
+  ],
+  "skills": [
+    {
+      "src": "assets/photos/photo-027.webp",
+      "source": "03 Chuyên đề, thành tích/Giáo dục NVQS.jpg",
+      "width": 1600,
+      "height": 1060
+    },
+    {
+      "src": "assets/photos/photo-030.webp",
+      "source": "03 Chuyên đề, thành tích/Khi tôi là đại sứ du lịch.JPG",
+      "width": 1600,
+      "height": 1063
+    },
+    {
+      "src": "assets/photos/photo-168.webp",
+      "source": "06 Ngoại khóa, hoạt động nhà trường/IMG_20260127_110015.jpg",
+      "width": 1600,
+      "height": 1069
+    },
+    {
+      "src": "assets/photos/photo-166.webp",
+      "source": "06 Ngoại khóa, hoạt động nhà trường/IMG_0263.jpg",
+      "width": 1600,
+      "height": 1067
+    }
+  ],
+  "university": [
+    {
+      "src": "assets/photos/photo-068.webp",
+      "source": "05 Tham quan đại học, cây mùa xuân/1. dai hoc/1.png",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "assets/photos/photo-071.webp",
+      "source": "05 Tham quan đại học, cây mùa xuân/1. dai hoc/FTU.jpg",
+      "width": 1600,
+      "height": 1066
+    },
+    {
+      "src": "assets/photos/photo-074.webp",
+      "source": "05 Tham quan đại học, cây mùa xuân/1. dai hoc/TDTU.jpg",
+      "width": 1600,
+      "height": 844
+    },
+    {
+      "src": "assets/photos/photo-076.webp",
+      "source": "05 Tham quan đại học, cây mùa xuân/1. dai hoc/Unitour_018.JPG",
+      "width": 1600,
+      "height": 1066
+    },
+    {
+      "src": "assets/photos/photo-080.webp",
+      "source": "05 Tham quan đại học, cây mùa xuân/1. dai hoc/VGU04198.jpg",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "src": "assets/photos/photo-081.webp",
+      "source": "05 Tham quan đại học, cây mùa xuân/1. dai hoc/_01.jpg",
+      "width": 1600,
+      "height": 1067
+    }
+  ],
+  "activities": [
+    {
+      "src": "assets/photos/photo-132.webp",
+      "source": "06 Ngoại khóa, hoạt động nhà trường/Copy of DSC01983.jpg",
+      "width": 1600,
+      "height": 832
+    },
+    {
+      "src": "assets/photos/photo-146.webp",
+      "source": "06 Ngoại khóa, hoạt động nhà trường/Copy of DSCF7927.jpg",
+      "width": 1600,
+      "height": 901
+    },
+    {
+      "src": "assets/photos/photo-155.webp",
+      "source": "06 Ngoại khóa, hoạt động nhà trường/DJI_20260321094729_0008_D.jpg",
+      "width": 1600,
+      "height": 902
+    },
+    {
+      "src": "assets/photos/photo-157.webp",
+      "source": "06 Ngoại khóa, hoạt động nhà trường/DSC03602.JPG",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "assets/photos/photo-167.webp",
+      "source": "06 Ngoại khóa, hoạt động nhà trường/IMG_1104.jpg",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "assets/photos/photo-158.webp",
+      "source": "06 Ngoại khóa, hoạt động nhà trường/DSC03750.JPG",
+      "width": 1600,
+      "height": 1067
+    }
+  ],
+  "charity": [
+    {
+      "src": "assets/photos/photo-095.webp",
+      "source": "05 Tham quan đại học, cây mùa xuân/_TIN5102.JPG",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "assets/photos/photo-092.webp",
+      "source": "05 Tham quan đại học, cây mùa xuân/9.JPG",
+      "width": 1600,
+      "height": 1044
+    },
+    {
+      "src": "assets/photos/photo-084.webp",
+      "source": "05 Tham quan đại học, cây mùa xuân/10.JPG",
+      "width": 1600,
+      "height": 1044
+    }
+  ],
+  "scholarship": [
+    {
+      "src": "assets/photos/photo-085.webp",
+      "source": "05 Tham quan đại học, cây mùa xuân/2.jpg",
+      "width": 1600,
+      "height": 898
+    },
+    {
+      "src": "assets/photos/photo-086.webp",
+      "source": "05 Tham quan đại học, cây mùa xuân/3.jpg",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "assets/photos/photo-087.webp",
+      "source": "05 Tham quan đại học, cây mùa xuân/4.jpg",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "assets/photos/photo-088.webp",
+      "source": "05 Tham quan đại học, cây mùa xuân/5.JPG",
+      "width": 1600,
+      "height": 1067
+    }
+  ],
+  "spring": [
+    {
+      "src": "assets/photos/photo-172.webp",
+      "source": "06 Ngoại khóa, hoạt động nhà trường/_DSC7998.jpg",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "src": "assets/photos/photo-173.webp",
+      "source": "06 Ngoại khóa, hoạt động nhà trường/_DSC8063.jpg",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "src": "assets/photos/photo-174.webp",
+      "source": "06 Ngoại khóa, hoạt động nhà trường/_DSC8188.jpg",
+      "width": 1600,
+      "height": 900
+    }
+  ],
+  "digital": [
+    {
+      "src": "assets/photos/photo-179.webp",
+      "source": "07 Học tập/3-DSC09146.jpg",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "src": "assets/photos/photo-180.webp",
+      "source": "07 Học tập/4-DSC09143.jpg",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "src": "assets/photos/photo-189.webp",
+      "source": "07 Học tập/Google.jpg",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "assets/photos/photo-190.webp",
+      "source": "07 Học tập/Google1.JPG",
+      "width": 1600,
+      "height": 898
+    }
+  ],
+  "ai": [
+    {
+      "src": "assets/photos/photo-018.webp",
+      "source": "03 Chuyên đề, thành tích/20251127_094746.jpg",
+      "width": 1600,
+      "height": 739
+    },
+    {
+      "src": "assets/photos/photo-025.webp",
+      "source": "03 Chuyên đề, thành tích/DSCF0142.jpg",
+      "width": 1600,
+      "height": 1066
+    },
+    {
+      "src": "assets/photos/photo-192.webp",
+      "source": "07 Học tập/Tin.jpg",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "assets/photos/photo-194.webp",
+      "source": "07 Học tập/UIT bootcamp.jpg",
+      "width": 1600,
+      "height": 1066
+    }
+  ],
+  "english": [
+    {
+      "src": "assets/photos/photo-020.webp",
+      "source": "03 Chuyên đề, thành tích/Anh.JPG",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "assets/photos/photo-029.webp",
+      "source": "03 Chuyên đề, thành tích/IMG_8788.jpg",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "assets/photos/photo-033.webp",
+      "source": "03 Chuyên đề, thành tích/Sắc màu văn học.jpg",
+      "width": 1600,
+      "height": 1067
+    }
+  ],
+  "experience": [
+    {
+      "src": "assets/photos/photo-078.webp",
+      "source": "05 Tham quan đại học, cây mùa xuân/1. dai hoc/Unitour_033.JPG",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "assets/photos/photo-079.webp",
+      "source": "05 Tham quan đại học, cây mùa xuân/1. dai hoc/Unitour_056.JPG",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "assets/photos/photo-185.webp",
+      "source": "07 Học tập/CEECxTHPTPN-85.jpg",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "assets/photos/photo-196.webp",
+      "source": "07 Học tập/_DSC4673.jpg",
+      "width": 1600,
+      "height": 1066
+    }
+  ],
+  "students": [
+    {
+      "src": "assets/photos/photo-215.webp",
+      "source": "08 Học sinh/NTT/DSC_5497.jpg",
+      "width": 1600,
+      "height": 1068
+    },
+    {
+      "src": "assets/photos/photo-216.webp",
+      "source": "08 Học sinh/NTT/DSC_5508.jpg",
+      "width": 1600,
+      "height": 1068
+    },
+    {
+      "src": "assets/photos/photo-229.webp",
+      "source": "08 Học sinh/NVB/DSC_7393.jpg",
+      "width": 1600,
+      "height": 1065
+    },
+    {
+      "src": "assets/photos/photo-250.webp",
+      "source": "08 Học sinh/NVT/DSC00963.jpg",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "src": "assets/photos/photo-263.webp",
+      "source": "08 Học sinh/THL/DSCF0115.jpg",
+      "width": 1600,
+      "height": 1067
+    },
+    {
+      "src": "assets/photos/photo-280.webp",
+      "source": "08 Học sinh/ĐL/DSC01660.jpg",
+      "width": 1600,
+      "height": 1066
+    },
+    {
+      "src": "assets/photos/photo-284.webp",
+      "source": "08 Học sinh/ĐL/DSC01686.jpg",
+      "width": 1600,
+      "height": 1067
+    }
+  ],
+  "campus": [
+    {
+      "src": "assets/photos/campus-pn4.webp",
+      "source": "02 Cơ sở vật chất/pn4.MP4 (khung hình tại giây 3)",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "src": "assets/photos/campus-pn5.webp",
+      "source": "02 Cơ sở vật chất/pn5.MP4 (khung hình tại giây 3)",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "src": "assets/photos/campus-pn2.webp",
+      "source": "02 Cơ sở vật chất/pn2.MP4 (khung hình tại giây 3)",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "src": "assets/photos/campus-pn7.webp",
+      "source": "02 Cơ sở vật chất/pn7.MP4 (khung hình tại giây 3)",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "src": "assets/photos/campus-pn6.webp",
+      "source": "02 Cơ sở vật chất/pn6.MP4 (khung hình tại giây 3)",
+      "width": 1280,
+      "height": 720
+    }
+  ]
+}

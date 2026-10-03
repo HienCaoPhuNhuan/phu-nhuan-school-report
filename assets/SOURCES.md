@@ -1,5 +1,15 @@
 # Nguồn hình ảnh
 
+## Bản cập nhật tư liệu người dùng
+
+Toàn bộ ảnh hiện được dùng trong giao diện lấy từ thư mục `Hình ảnh` do người dùng cung cấp. 94 ảnh đã được tối ưu thành WebP; đường dẫn nguồn chính xác, nhóm ảnh và kích thước nằm trong `photos/manifest.json`.
+
+Các nhóm gồm nhà trường và thầy cô, cơ sở vật chất, chuyên đề và thành tích, câu lạc bộ, tham quan đại học và cây mùa xuân, ngoại khóa, học tập và học sinh. Nhóm cơ sở vật chất dùng khung hình tại giây 3 của video pn2, pn4, pn5, pn6, pn7. Các ảnh là tư liệu minh họa, không xác nhận riêng thành tích hay năm học của từng số liệu. Không thay đổi ảnh hoặc video gốc.
+
+## Tư liệu của bản đầu tiên
+
+Các file dưới đây được lưu lại trong repo, không còn dùng trong giao diện hiện tại.
+
 - `campus.jpg`: sân trường THPT Phú Nhuận, ảnh tư liệu từ Hoa Học Trò / Tiền Phong: https://hoahoctro.tienphong.vn/hay-cung-chung-to-dot-nhap-ngoi-truong-lang-man-thpt-phu-nhuan-tphcm-post1177062.tpo
 - `spring.jpg`: hoạt động gói bánh chưng 2026, website nhà trường: https://thptphunhuan.hcm.edu.vn/ ; ảnh https://filethpt.hcm.shieldix.app/uploadimages/news/2026/thptphunhuan/2026_2/10/tam-banh-nghia-tinh_10220261218.jpg?w=1200
 - `reading.png`: Bookfest 4.0, website nhà trường: https://thptphunhuan.hcm.edu.vn/ ; ảnh https://filethpt.hcm.shieldix.app/uploadimages/news/2026/thptphunhuan/2026_4/14/chuyen-de-van_14420261225.png?w=1000
