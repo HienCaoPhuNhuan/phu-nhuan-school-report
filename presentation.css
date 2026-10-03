@@ -194,7 +194,6 @@ main > section, .section, .hero, .closing-section {
   color: var(--ink);
   border-left: 6px solid var(--coral);
   padding: 16px 0 16px 24px;
-  text-align: left;
   line-height: 1.4;
 }
 .report-highlight > svg { display: none; }
