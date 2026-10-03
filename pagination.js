@@ -177,8 +177,9 @@ export function paginateReport(main, originals) {
     pages.forEach((page, i) => {
       const text = page.querySelector('.slide-text');
       const heading = page.querySelector('.section-heading');
-      const height = heading.offsetHeight + text.offsetHeight + 24;
-      if (!page.classList.contains('with-photo') && height < innerHeight * 0.75) {
+      const visual = page.querySelector('.slide-visual');
+      const height = heading.offsetHeight + Math.max(text.offsetHeight, visual?.offsetHeight || 0) + 24;
+      if (height < innerHeight * 0.75) {
         page.classList.add('compact-page');
       }
       page.querySelector('.page-part').textContent = pages.length > 1 ? (i + 1) + ' / ' + pages.length : '';

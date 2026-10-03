@@ -178,6 +178,16 @@ main > section, .section, .hero, .closing-section {
   .with-photo .slide-body { grid-template-columns: minmax(0, 1fr) 144px; gap: 24px; }
   .slide-visual { height: 128px; }
 }
+@media (min-width: 1000px) and (min-height: 551px) {
+  .section .slide-text p { font-size: 32px; line-height: 1.4; }
+  .section .slide-text h3 { font-size: 34px; line-height: 1.25; }
+  .program-feature strong { font-size: 34px; line-height: 1.3; }
+  .compact-page > .wrap { gap: 36px; }
+}
+@media (min-width: 1000px) and (min-height: 900px) {
+  .section .slide-text p { font-size: 36px; }
+  .section .slide-text h3, .program-feature strong { font-size: 38px; }
+}
 @media print {
   .photo-stage { display: none; }
   .photos-playing .slide-text { opacity: 1; }
