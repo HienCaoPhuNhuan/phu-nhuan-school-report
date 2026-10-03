@@ -1,0 +1,13 @@
+{
+  "name": "phu-nhuan-school-report",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Báo cáo năm học THPT Phú Nhuận dành cho cuộc họp cha mẹ học sinh",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/serve.mjs --dist"
+  },
+  "engines": { "node": ">=20" }
+}
