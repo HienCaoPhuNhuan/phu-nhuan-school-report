@@ -11,8 +11,8 @@ await document.fonts.ready;
 const main = document.querySelector('#main');
 const originals = [...main.children].map(node => node.cloneNode(true));
 let nodes = paginateReport(main, originals);
-const systemMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-let reducedMotion = systemMotion.matches;
+// Presentation motion stays enabled unless the viewer explicitly opts out.
+const reducedMotion = new URLSearchParams(location.search).get('motion') === 'reduced';
 const numberAnimations = new Map();
 const visibleReels = new Set();
 let reelInterval;
@@ -47,7 +47,6 @@ function applyMotion() {
   if (!reducedMotion) reelInterval = setInterval(advanceReels, 6500);
 }
 applyMotion();
-systemMotion.addEventListener('change', event => { reducedMotion = event.matches; applyMotion(); });
 function animateCounter(node) {
   if (node.dataset.counted) return;
   node.dataset.counted = 'true';

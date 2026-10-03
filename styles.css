@@ -232,6 +232,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--coral); outline
 @keyframes photo-in { from { opacity: .3; clip-path: inset(0 8% 0 0); transform: translateX(20px); } to { opacity: 1; clip-path: inset(0); transform: none; } }
 @keyframes photo-drift { from { transform: scale(1); } to { transform: scale(1.025); } }
 @keyframes arrow-drift { 0%, 100% { transform: translateY(-4px); } 50% { transform: translateY(4px); } }
+.reduced-motion { scroll-behavior: auto !important; }
 .reduced-motion *, .reduced-motion *::before, .reduced-motion *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 .reduced-motion .hero-image { transform: none !important; }
 .reduced-motion .ring-fill { stroke-dashoffset: calc(100 - var(--target)); }
@@ -427,11 +428,6 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--coral); outline
   .target-ring strong { font-size: 39px; }
   .money-grid .metric strong { font-size: 46px; }
   .closing-content h2 { font-size: 34px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after { animation: none !important; transition: none !important; }
-  .ring-fill { stroke-dashoffset: calc(100 - var(--target)); }
 }
 @media print {
   html { scroll-snap-type: none; }
