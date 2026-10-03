@@ -79,6 +79,29 @@ const reelObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.15 });
 document.querySelectorAll('[data-reel]').forEach(node => reelObserver.observe(node));
 
+let presentedIndex = -1;
+let transitionScheduled = false;
+function updateSectionTransition() {
+  transitionScheduled = false;
+  const marker = innerHeight * 0.4;
+  let nextIndex = 0;
+  nodes.forEach((node, i) => { if (node.getBoundingClientRect().top <= marker) nextIndex = i; });
+  if (nextIndex === presentedIndex) return;
+  const direction = nextIndex < presentedIndex ? 'backward' : 'forward';
+  if (presentedIndex >= 0) nodes[presentedIndex].classList.remove('section-arriving');
+  const next = nodes[nextIndex];
+  next.dataset.direction = direction;
+  next.classList.add('section-arriving');
+  presentedIndex = nextIndex;
+}
+window.addEventListener('scroll', () => {
+  if (transitionScheduled) return;
+  transitionScheduled = true;
+  requestAnimationFrame(updateSectionTransition);
+}, { passive: true });
+window.addEventListener('resize', updateSectionTransition);
+updateSectionTransition();
+
 let navigationUntil = 0;
 function sectionIndex() {
   let index = 0;

@@ -211,6 +211,22 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--coral); outline
 .reveal.visible { animation: rise-in .9s both; animation-delay: var(--delay, 0ms); }
 .reveal.visible.metric { animation-name: metric-in; }
 .reveal.visible.photo-reel { animation-name: photo-in; }
+/* Animate the content, not the section bounds used by scroll snapping. */
+.section-arriving > .wrap { animation: section-forward 1.1s cubic-bezier(.2, .7, .2, 1) both; }
+.section-arriving[data-direction="backward"] > .wrap { animation-name: section-backward; }
+.section-arriving > .hero-image, .section-arriving > .closing-image { animation: section-image-settle 1.4s ease-out both; }
+@keyframes section-forward {
+  from { opacity: .3; transform: translateY(48px) scale(.985); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes section-backward {
+  from { opacity: .3; transform: translateY(-48px) scale(.985); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes section-image-settle {
+  from { transform: scale(1.09); }
+  to { transform: scale(1.04); }
+}
 @keyframes rise-in { from { opacity: .35; transform: translateY(26px); } to { opacity: 1; transform: none; } }
 @keyframes metric-in { from { opacity: .3; transform: translateY(30px) scale(.96); } to { opacity: 1; transform: none; } }
 @keyframes photo-in { from { opacity: .3; clip-path: inset(0 8% 0 0); transform: translateX(20px); } to { opacity: 1; clip-path: inset(0); transform: none; } }
@@ -424,7 +440,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--coral); outline
   .section { min-height: 0; padding-block: 30px; break-inside: avoid; }
   .hero { min-height: 420px; height: auto; }
   .hero h1 { font-size: 60px; }
-  .reveal { animation: none !important; }
+  .reveal, .section-arriving > .wrap, .section-arriving > .hero-image, .section-arriving > .closing-image { animation: none !important; }
   .reel-frame:not(:first-child) { display: none; }
   .reel-frame:first-child { opacity: 1; visibility: visible; }
   .ring-fill { stroke-dashoffset: calc(100 - var(--target)); }
