@@ -2,6 +2,41 @@ const grouped = new Set(['metric-grid', 'note-list', 'feature-list', 'organizati
   'perfect-scores', 'club-families', 'direction-list', 'program-grid', 'infrastructure',
   'target-grid', 'partnership-grid', 'photo-wall', 'motto', 'score-comparison']);
 
+const illustratedTopics = new Set(['doi-ngu', 'ren-luyen', 'chuyen-mon', 'ky-nang',
+  'huong-nghiep', 'ngoai-khoa', 'hoc-bong', 'cong-dong', 'chuyen-doi-so',
+  'danh-gia', 'chuong-trinh', 'co-so-vat-chat']);
+
+function curatePhotos(originals) {
+  const used = new Set();
+  return originals.map(original => {
+    const source = original.cloneNode(true);
+    source.querySelectorAll('.photo-wall').forEach(wall => wall.remove());
+    let selected = false;
+    source.querySelectorAll('.photo-reel').forEach(reel => {
+      const poster = Boolean(reel.closest('.club-family'));
+      if (!poster && (!illustratedTopics.has(source.id) || selected)) { reel.remove(); return; }
+      if (!poster) selected = true;
+      reel.querySelectorAll('.reel-frame').forEach(frame => {
+        const src = frame.querySelector('img').getAttribute('src');
+        if (used.has(src)) frame.remove();
+        else used.add(src);
+      });
+      const frames = [...reel.querySelectorAll('.reel-frame')];
+      if (!frames.length) { reel.remove(); return; }
+      frames.forEach((frame, i) => {
+        frame.classList.toggle('active', i === 0);
+        frame.setAttribute('aria-hidden', String(i !== 0));
+      });
+      reel.querySelectorAll('.reel-indicators span').forEach((dot, i) => {
+        if (i >= frames.length) dot.remove();
+        else dot.classList.toggle('active', i === 0);
+      });
+    });
+    source.querySelectorAll('.hero-image img, .closing-image img').forEach(image => used.add(image.getAttribute('src')));
+    return source;
+  });
+}
+
 function groupClone(source, children) {
   const clone = source.cloneNode(false);
   clone.append(...children.map(child => child.cloneNode(true)));
@@ -15,8 +50,8 @@ function blocks(source, narrow) {
   }
   const group = [...source.classList].find(name => grouped.has(name));
   if (!group) return [source.cloneNode(true)];
-  const maximum = source.classList.contains('money-grid') ? 1 :
-    ['club-families', 'direction-list', 'feature-list'].includes(group) ? 1 : narrow ? 1 : 3;
+  const maximum = narrow ? 1 : source.classList.contains('overview-grid') || group === 'perfect-scores' ? 4 :
+    ['organization-grid', 'partnership-grid'].includes(group) || source.classList.contains('money-grid') ? 2 : 3;
   const children = [...source.children];
   const result = [];
   for (let i = 0; i < children.length; i += maximum) {
@@ -69,7 +104,7 @@ export function paginateReport(main, originals) {
   document.documentElement.style.setProperty('--page-height', window.innerHeight + 'px');
   const narrow = innerWidth < 700;
   main.replaceChildren();
-  for (const original of originals) {
+  for (const original of curatePhotos(originals)) {
     if (!original.classList.contains('section')) {
       const clone = original.cloneNode(true);
       clone.dataset.parentId = original.id;
@@ -80,6 +115,10 @@ export function paginateReport(main, originals) {
     const heading = originalWrap.querySelector('.section-heading');
     const queue = [...originalWrap.children].filter(node => node !== heading)
       .flatMap(node => blocks(node, narrow));
+    const photoIndex = queue.findIndex(node => node.classList.contains('photo-reel'));
+    const candidate = photoIndex >= 0 ? queue.splice(photoIndex, 1)[0] : null;
+    const wordCount = queue.map(node => node.textContent).join(' ').trim().split(/\s+/).length;
+    const photo = wordCount < 100 || original.id === 'doi-ngu' ? candidate : null;
     const pages = [];
     function createPage() {
       const page = original.cloneNode(false);
@@ -95,19 +134,31 @@ export function paginateReport(main, originals) {
       title.querySelector('.eyebrow').append(part);
       const body = document.createElement('div');
       body.className = 'slide-body';
+      const text = document.createElement('div');
+      text.className = 'slide-text';
+      body.append(text);
+      if (photo && !pages.length && !narrow && innerHeight >= 550) {
+        page.classList.add('with-photo');
+        const visual = document.createElement('div');
+        visual.className = 'slide-visual';
+        visual.append(photo);
+        body.append(visual);
+      }
       wrap.append(title, body);
       page.append(wrap);
       main.append(page);
       pages.push(page);
-      return body;
+      return text;
     }
     let body = createPage();
     while (queue.length) {
       const block = queue.shift();
       body.append(block);
       const contentBottom = block.getBoundingClientRect().bottom;
-      const fits = contentBottom <= body.getBoundingClientRect().bottom - 4 &&
-        block.scrollWidth <= body.clientWidth + 1;
+      const available = body.parentElement.getBoundingClientRect();
+      const fits = contentBottom <= available.bottom - 4 &&
+        block.scrollWidth <= body.clientWidth + 1 &&
+        [...block.querySelectorAll('strong,h3,p')].every(node => node.scrollWidth <= node.clientWidth + 1);
       if (fits) continue;
       block.remove();
       if (body.children.length) {
@@ -120,9 +171,11 @@ export function paginateReport(main, originals) {
       queue.unshift(...pieces);
     }
     pages.forEach((page, i) => {
-      const body = page.querySelector('.slide-body');
-      if (body.children.length === 1 && body.firstElementChild.matches('.photo-reel, .photo-wall')) {
-        page.classList.add('media-page');
+      const text = page.querySelector('.slide-text');
+      const heading = page.querySelector('.section-heading');
+      const height = heading.offsetHeight + text.offsetHeight + 24;
+      if (!page.classList.contains('with-photo') && height < innerHeight * 0.75) {
+        page.classList.add('compact-page');
       }
       page.querySelector('.page-part').textContent = pages.length > 1 ? (i + 1) + ' / ' + pages.length : '';
       page.dataset.part = String(i + 1);

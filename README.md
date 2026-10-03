@@ -1,6 +1,6 @@
 # THPT Phú Nhuận School Report
 
-Website phục vụ trình chiếu tại cuộc họp cha mẹ học sinh: tổng kết 2025–2026 và phương hướng 2026–2027. Báo cáo gồm 32 chủ đề và 94 ảnh tư liệu được tối ưu từ các nhóm hình ảnh do người dùng cung cấp. Mỗi chủ đề được chia thành các trang con vừa đúng một màn hình, tùy kích thước trình chiếu.
+Website phục vụ trình chiếu tại cuộc họp cha mẹ học sinh: tổng kết 2025–2026 và phương hướng 2026–2027. Báo cáo gồm 32 chủ đề; ảnh tư liệu được chọn theo nội dung, không lặp giữa các mục. Mỗi chủ đề được chia thành các trang con vừa đúng một màn hình, tùy kích thước trình chiếu.
 
 ## Chạy tại máy
 
@@ -20,6 +20,8 @@ Mở địa chỉ được in trong terminal, mặc định http://localhost:517
 - `styles.css`: màu sắc và animation.
 - `presentation.css`: bố cục trình chiếu toàn màn hình, cỡ chữ và đơn vị tiền tệ cùng hàng với số.
 - `pagination.js`: đo nội dung, chia trang con và chia lại khi thay đổi kích thước màn hình.
+
+Các mục phù hợp dùng bố cục hai cột chữ – ảnh trên desktop; ảnh chỉ xuất hiện ở trang đầu của chủ đề. Trang số liệu hoặc nhiều chữ không thêm ảnh. Trên màn hình hẹp, ưu tiên nội dung báo cáo, giữ ảnh mở đầu/kết thúc và poster CLB; không sinh trang riêng chỉ để chứa ảnh. Nội dung ngắn được căn giữa theo chiều dọc, không kéo giãn khoảng cách giữa các ý.
 - `assets/photos/manifest.json`: nhóm ảnh, kích thước và đường dẫn nguồn tương ứng trong thư mục tư liệu.
 - `assets/`: ảnh WebP đã tối ưu và thư viện icon Lucide cục bộ.
 

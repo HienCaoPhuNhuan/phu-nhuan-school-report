@@ -1,5 +1,5 @@
 import { format, renderReport } from './sections.js?v=20261003-5';
-import { paginateReport } from './pagination.js?v=20261003-5';
+import { paginateReport } from './pagination.js?v=20261003-6';
 
 const response = await fetch(new URL('./assets/photos/manifest.json', import.meta.url));
 if (!response.ok) throw new Error('Photo manifest could not be loaded');
