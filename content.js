@@ -18,16 +18,16 @@ export const report = {
   ],
   overview: [
     { value: 2400, label: 'Học sinh', detail: '1.286 học sinh nữ', icon: 'users' },
-    { value: 57, label: 'Lớp học', detail: '6 lớp chương trình tích hợp', icon: 'school' },
+    { value: 57, label: 'Lớp học', detail: 'Chương trình tích hợp: 2 lớp 10, 2 lớp 11, 2 lớp 12', icon: 'school' },
     { value: 116, label: 'Giáo viên', detail: '46 thạc sĩ · 3 đang học cao học', icon: 'book-open' },
     { value: 22, label: 'Nhân viên', detail: 'Đồng hành cùng hoạt động nhà trường', icon: 'heart-handshake' }
   ],
   organization: [
     ['Ban giám hiệu', '1 Hiệu trưởng · 2 Phó hiệu trưởng'],
     ['Tổ chuyên môn', '11 tổ chuyên môn · 1 tổ Văn phòng'],
-    ['Chi bộ', '34 đảng viên'],
-    ['Công đoàn', '130 công đoàn viên'],
-    ['Đoàn thanh niên', 'Gần 2.000 đoàn viên · 57 chi đoàn'],
+    ['Chi bộ', '34 đảng viên; cấp ủy gồm 1 Bí thư, 1 Phó bí thư và 1 cấp ủy viên. Hầu hết đảng viên giữ chức vụ tổ trưởng chuyên môn.'],
+    ['Công đoàn', '130 công đoàn viên; Ban Chấp hành gồm 1 Chủ tịch, 1 Phó chủ tịch và 5 ủy viên.'],
+    ['Đoàn thanh niên', 'Gần 2.000 đoàn viên, hơn 80% học sinh; 57 chi đoàn. Ban Chấp hành có 15 thành viên: 1 Bí thư, 2 Phó bí thư, 2 ủy viên Ban Thường vụ và 10 ủy viên Ban Chấp hành.'],
     ['Ban đại diện CMHS', '33 thành viên · 1 Trưởng ban · 11 Phó trưởng ban']
   ],
   results: [
@@ -35,6 +35,12 @@ export const report = {
     { value: 98.16, decimals: 2, suffix: '%', label: 'Học tập Tốt, Khá', color: 'coral' },
     { value: 100, suffix: '%', label: 'Lên lớp thẳng', color: 'green' },
     { value: 15.54, decimals: 2, suffix: '%', label: 'Học sinh xuất sắc', color: 'gold' }
+  ],
+  professionalResults: [
+    'Đổi mới phương pháp dạy học và kiểm tra đánh giá theo định hướng phát triển năng lực học sinh.',
+    'Tư vấn dạy học tự chọn để củng cố kiến thức, rèn luyện kỹ năng; chú trọng giáo dục theo từng nhóm đối tượng.',
+    'Các môn học ứng dụng chuyển đổi số, CNTT; dạy học theo dự án, nghiên cứu khoa học, STEM và tích hợp liên môn.',
+    'Thao giảng, giáo án điện tử và học liệu số được các trường trong Cụm Chuyên môn đánh giá cao; tổ chức hoạt động vui để học ở các bộ môn, đội, nhóm, CLB.'
   ],
   graduation: { university: 97.53, score: 22.93, previousScore: 22.85, highest: 28, lowest: 15.1, perfect: [['Toán', 6], ['Vật lí', 1], ['Lịch sử', 2], ['Tiếng Anh', 2]], note: 'Trúng tuyển đại học đợt 1 · Thống kê ngày 30/8/2026' },
   achievements: {
@@ -86,8 +92,14 @@ export const report = {
     ['02', 'Chuyển biến mạnh mẽ', 'Chuyển đổi số, giáo dục thông minh, nâng cao năng lực số và từng bước đưa tiếng Anh thành ngôn ngữ thứ hai.'],
     ['03', 'Kết quả thực chất', 'Đổi mới kiểm tra đánh giá, STEM gắn với thực tiễn, hướng nghiệp và xây dựng trường học hạnh phúc, trường học xanh.']
   ],
+  projects: [
+    'Chương trình Chuyển đổi số của Thành phố Hồ Chí Minh; đề án xây dựng Thành phố Hồ Chí Minh trở thành đô thị thông minh.',
+    'Đề án dạy học ngoại ngữ trong hệ thống giáo dục quốc dân; đưa Tiếng Anh thành ngôn ngữ thứ hai trong trường học.',
+    'Nâng cao năng lực ứng dụng Tin học cho học sinh theo chuẩn quốc tế giai đoạn 2021–2030; chuyển đổi số ngành giáo dục giai đoạn 2022–2025, định hướng đến 2030.',
+    'Đề án Giáo dục thông minh và học tập suốt đời tại Thành phố Hồ Chí Minh giai đoạn 2021–2030.'
+  ],
   solutions: [
-    ['monitor', 'Dạy & học trên nền tảng số', 'LMS K12online.vn; dành 50% thời gian dạy học để giao nhiệm vụ và hướng dẫn tự học trực tuyến. Học bạ số và CSDL ngành cho 100% học sinh khối 10, 11.'],
+    ['monitor', 'Dạy & học trên nền tảng số', 'LMS K12online.vn; dành 50% thời gian dạy học để giao nhiệm vụ và hướng dẫn tự học trực tuyến. Học bạ số và CSDL ngành cho 100% học sinh khối 10, 11 theo nguyên tắc đúng – đủ – sạch – sống.'],
     ['brain-circuit', 'AI an toàn, có trách nhiệm', 'Triển khai Experience AI và Khung năng lực số cho học sinh; hướng dẫn sử dụng trí tuệ nhân tạo an toàn, có trách nhiệm.'],
     ['clipboard-check', 'Đánh giá vì sự tiến bộ', 'Bám sát năng lực, hạn chế ghi nhớ máy móc; không dùng kết quả thi thử, khảo sát để xếp hạng hoặc tạo áp lực thành tích.'],
     ['flask-conical', 'Học từ trải nghiệm thực tế', 'STEM/STEAM và nghiên cứu khoa học gắn thực tiễn. Mỗi tổ bộ môn xây dựng ít nhất 1 tiết trải nghiệm/khối/năm; hướng nghiệp từ khối 10 đến 12.']

@@ -1,6 +1,6 @@
 # THPT Phú Nhuận School Report
 
-Website một trang phục vụ trình chiếu tại cuộc họp cha mẹ học sinh: tổng kết 2025–2026 và phương hướng 2026–2027. Bản mở rộng gồm 30 section và 94 ảnh tư liệu được tối ưu từ các nhóm hình ảnh do người dùng cung cấp.
+Website một trang phục vụ trình chiếu tại cuộc họp cha mẹ học sinh: tổng kết 2025–2026 và phương hướng 2026–2027. Bản mở rộng gồm 32 section và 94 ảnh tư liệu được tối ưu từ các nhóm hình ảnh do người dùng cung cấp.
 
 ## Chạy tại máy
 
@@ -15,7 +15,7 @@ Mở địa chỉ được in trong terminal, mặc định http://localhost:517
 ## Sửa nội dung
 
 - `content.js`: số liệu, chương trình, thành tích và chỉ tiêu. Số liệu giữ theo bản Word dự thảo, chưa xác minh; cập nhật tại đây trước khi sử dụng chính thức.
-- `sections.js`: nội dung trình bày và bố cục của 30 section.
+- `sections.js`: nội dung trình bày và bố cục của 32 section.
 - `app.js`: điều hướng, hiệu ứng số liệu và ảnh tự chuyển.
 - `styles.css`: màu sắc, responsive và animation.
 - `assets/photos/manifest.json`: nhóm ảnh, kích thước và đường dẫn nguồn tương ứng trong thư mục tư liệu.
@@ -27,7 +27,7 @@ Các dòng bị lặp trong Word được gộp khi trình bày. Phạm vi phầ
 
 Toàn bộ nội dung chữ được hiển thị sẵn, không dùng tab hoặc mục thu gọn. Chỉ cần cuộn trang để xem; ảnh tự chuyển mỗi 6,5 giây khi nằm trong vùng đang xem. Mỗi section là một chủ đề riêng. Cỡ chữ desktop: tiêu đề 54–66px, nội dung 24–28px; số liệu lớn hơn. Mobile dùng chữ 19–24px và bố cục một cột.
 
-Nút toàn màn hình và điều hướng trước/sau luôn hiển thị. Phím mũi tên lên/xuống, Page Up/Page Down chuyển section; Home/End tới đầu/cuối. Mục lục có đầy đủ 30 section; thanh chấm desktop chia thành 7 chương. Nút giảm chuyển động và thiết lập hệ thống `prefers-reduced-motion` tắt hiệu ứng và ảnh tự chuyển, hiển thị số liệu ngay. Thiết lập giảm chuyển động được lưu trên thiết bị. Trang không tự cuộn để người thuyết trình chủ động thời gian đọc.
+Trang chỉ hiển thị nội dung: không header, menu, thanh điều hướng hoặc nút công cụ. Cuộn chuột/trackpad chuyển và bắt dính theo từng section, tránh một đợt cuộn nhảy qua nhiều mục. Với section dài hơn màn hình, cuộn hết nội dung rồi mới sang section tiếp theo. Cảm ứng dùng scroll snap gốc của trình duyệt. Phím mũi tên lên/xuống, Page Up/Page Down chuyển section; Home/End tới đầu/cuối. Có thể dùng F11 của trình duyệt để trình chiếu toàn màn hình. Thiết lập hệ thống `prefers-reduced-motion` tắt hiệu ứng và ảnh tự chuyển, hiển thị số liệu ngay. Trang không tự cuộn để người thuyết trình chủ động thời gian đọc.
 
 ## Build và triển khai
 

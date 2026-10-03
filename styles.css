@@ -10,7 +10,7 @@
   --gold: #f2c454;
   --muted: #395c4d;
   --line: #9fb6a7;
-  --header-height: 88px;
+  --header-height: 0px;
   font-family: Arial, "Helvetica Neue", sans-serif;
   font-size: 26px;
   color: var(--ink);
@@ -19,7 +19,8 @@
   letter-spacing: 0;
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: var(--header-height); }
+html { scroll-behavior: smooth; scroll-padding-top: var(--header-height); scroll-snap-type: y mandatory; }
+main > section { scroll-snap-align: start; scroll-snap-stop: always; }
 body { margin: 0; }
 button { font: inherit; cursor: pointer; }
 a { color: inherit; text-decoration: none; }
@@ -73,7 +74,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--coral); outline
 .section-menu a { display: flex; gap: 20px; padding: 12px 10px; font-size: 18px; }
 .section-menu a:hover { background: var(--mint); }
 .section-menu a span { color: var(--coral); font-weight: bold; }
-.hero { position: relative; height: calc(100svh - 130px); min-height: 640px; max-height: 1100px; display: flex; align-items: center; overflow: hidden; color: var(--white); background: var(--forest); }
+.hero { position: relative; height: calc(100svh - var(--header-height)); min-height: 640px; display: flex; align-items: center; overflow: hidden; color: var(--white); background: var(--forest); }
 .hero-image, .closing-image { position: absolute; inset: 0; transform: scale(1.04); }
 .hero-image img, .closing-image img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg, #082d23ed, #082d238c 55%, #082d232b); }
@@ -187,6 +188,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--coral); outline
 .partnership-grid h3 { font-size: 33px; margin-block: 17px; }
 .partnership-grid p { font-size: 27px; color: var(--muted); }
 .closing-section { position: relative; min-height: 760px; display: flex; align-items: center; overflow: hidden; color: var(--white); }
+.closing-section { min-height: 100svh; }
 .closing-shade { position: absolute; inset: 0; background: #103d30dd; }
 .closing-content { position: relative; padding-block: 90px; }
 .closing-content h2 { font-size: 62px; line-height: 1.25; margin-top: 28px; }
@@ -257,7 +259,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--coral); outline
   .desktop-nav { display: none; }
 }
 @media (max-width: 950px) {
-  :root { --header-height: 76px; }
+  :root { --header-height: 0px; }
   .desktop-nav { display: none; }
   .hero h1 { font-size: 66px; }
   .hero-subtitle { font-size: 28px; }
@@ -292,7 +294,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--coral); outline
   #current-section-title { display: none; }
 }
 @media (max-width: 600px) {
-  :root { --header-height: 122px; font-size: 19px; }
+  :root { --header-height: 0px; font-size: 19px; }
   .site-header { padding-inline: 15px; gap: 0 8px; flex-wrap: wrap; align-content: center; }
   .brand { font-size: 12px; gap: 9px; flex-grow: 1; height: 68px; }
   .brand small { font-size: 8px; margin-top: 4px; }
@@ -302,12 +304,12 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--coral); outline
   .header-actions .icon-button { width: 33px; height: 38px; }
   .header-actions svg { width: 19px; height: 19px; }
   .wrap { width: calc(100% - 40px); }
-  .section { padding: 48px 0 60px; min-height: 0; }
+  .section { padding: 48px 0 60px; min-height: calc(100svh - var(--header-height)); }
   .eyebrow { font-size: 12px; gap: 12px; }
   .eyebrow > span { padding-right: 12px; }
   .section-heading { margin-bottom: 30px; }
   .section-heading h2 { font-size: 37px; line-height: 1.17; margin-top: 18px; }
-  .hero { min-height: 575px; height: calc(100svh - 110px); }
+  .hero { min-height: 575px; height: calc(100svh - var(--header-height)); }
   .hero h1 { font-size: 47px; line-height: 1.1; margin-top: 28px; }
   .hero .eyebrow { font-size: 12px; max-width: 290px; }
   .hero-subtitle { font-size: 22px; margin-top: 25px; }
@@ -384,7 +386,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--coral); outline
   .partnership-grid article > span { font-size: 18px; }
   .partnership-grid h3 { font-size: 29px; }
   .partnership-grid p { font-size: 21px; }
-  .closing-section { min-height: 650px; }
+  .closing-section { min-height: 100svh; }
   .closing-content { padding-block: 65px; }
   .closing-content h2 { font-size: 39px; }
   .closing-content > p:last-child { font-size: 22px; }
@@ -416,6 +418,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--coral); outline
   .ring-fill { stroke-dashoffset: calc(100 - var(--target)); }
 }
 @media print {
+  html { scroll-snap-type: none; }
   .site-header, .section-rail, .presentation-controls, .reading-progress, .site-footer { display: none; }
   .wrap { width: 100%; }
   .section { min-height: 0; padding-block: 30px; break-inside: avoid; }
