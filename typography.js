@@ -31,7 +31,7 @@ const literal = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ 
 const terms = phrases.sort((a, b) => b.length - a.length).map(literal).join('|');
 const quantity = '\\d[\\d.,]*(?:[–-]\\d[\\d.,]*)?';
 const units = `(?:lớp\\s+(?:10|11|12)|khối\\s+(?:10|11|12)|tiết\\s*/\\s*tuần|${terms}|đồng|lớp|tiết|giải|điểm|bài)`;
-const protectedPattern = new RegExp(`(?<![\\p{L}\\p{N}])(?:${quantity}\\s+${units}|${terms})(?![\\p{L}\\p{N}])`, 'giu');
+const protectedPattern = new RegExp(`(?<![\\p{L}\\p{N}])(?:${quantity}\\s+${units}|${quantity}%|\\d{4}[–-]\\d{4}|${terms})(?![\\p{L}\\p{N}])`, 'giu');
 
 export function phraseSegments(text) {
   const segments = [];
@@ -82,18 +82,19 @@ function measureLines(p) {
       range.setStart(walker.currentNode, match.index);
       range.setEnd(walker.currentNode, match.index + match[0].length);
       const rect = range.getBoundingClientRect();
-      if (rect.width) words.push(rect);
+      if (rect.width) words.push({ rect, meaningful: /[\p{L}\p{N}]/u.test(match[0]) });
     }
   }
   const font = parseFloat(getComputedStyle(p).fontSize);
   const lines = [];
   let wideGap = false;
-  words.forEach(rect => {
+  words.forEach(({ rect, meaningful }) => {
     let line = lines.find(item => Math.abs(item.top - rect.top) < 3);
-    if (!line) { line = { top: rect.top, words: [] }; lines.push(line); }
+    if (!line) { line = { top: rect.top, words: [], meaningful: 0 }; lines.push(line); }
     const previous = line.words.at(-1);
     if (previous && rect.left - previous.right > font * 0.55) wideGap = true;
     line.words.push(rect);
+    if (meaningful) line.meaningful++;
   });
   return { lines, wideGap };
 }
@@ -105,7 +106,7 @@ export function refineParagraphs(root) {
     p.classList.remove('relaxed-align', 'balanced-ending');
     const { lines, wideGap } = measureLines(p);
     if (wideGap) p.classList.add('relaxed-align');
-    if (lines.length > 1 && lines.at(-1).words.length === 1) {
+    if (lines.length > 1 && lines.at(-1).meaningful === 1) {
       p.classList.add('balanced-ending');
       // Balancing a short final line must not introduce stretched earlier lines.
       if (measureLines(p).wideGap) p.classList.add('relaxed-align');

@@ -1,4 +1,4 @@
-import { protectPhrases, paragraphUnits, refineParagraphs } from './typography.js?v=20261004-6';
+import { protectPhrases, paragraphUnits, refineParagraphs } from './typography.js?v=20261004-7';
 
 const grouped = new Set(['metric-grid', 'note-list', 'feature-list', 'organization-grid',
   'perfect-scores', 'club-families', 'direction-list', 'program-grid', 'infrastructure',
