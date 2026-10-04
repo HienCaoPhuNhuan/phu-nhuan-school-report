@@ -142,12 +142,15 @@ main > section, .section, .hero, .closing-section {
   hyphens: none;
   text-wrap: pretty;
 }
-.slide-text p.relaxed-align { text-align: left; }
-.slide-text p.balanced-ending { text-wrap: balance; }
+.slide-text p { text-justify: inter-word; }
 [data-parent-id="to-chuc"] .organization-grid { column-gap: 80px; }
+@media (min-width: 1000px) {
+  [data-parent-id="to-chuc"] .organization-grid { grid-template-columns: minmax(0, 1fr); }
+  .section .slide-text .club-family > p, .section .slide-text .perfect-scores p { font-size: 24px; }
+}
 .perfect-scores strong .suffix { font-size: 28px; margin-left: 10px; }
 .note-list p > span { flex: 1; min-width: 0; }
-.keep-together { white-space: nowrap; overflow-wrap: normal; word-break: normal; }
+.keep-together { display: inline-block; white-space: nowrap; overflow-wrap: normal; word-break: normal; }
 .slide-text { transition: opacity 650ms ease; }
 .photos-playing .slide-text { opacity: 0; }
 .photo-stage {
@@ -211,15 +214,15 @@ main > section, .section, .hero, .closing-section {
   .projection-focus .program-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .projection-focus .program-feature {
     display: grid;
-    grid-template-columns: 48px 240px 240px minmax(0, 1fr);
-    gap: 24px;
+    grid-template-columns: 40px 220px 200px minmax(0, 1fr);
+    gap: 16px;
     align-items: start;
     padding-top: 24px;
   }
-  .projection-focus .program-feature h3 { font-size: 42px; margin: 0; }
-  .projection-focus .program-feature strong { font-size: 40px; margin: 0; }
+  .projection-focus .program-feature h3 { font-size: 36px; margin: 0; }
+  .projection-focus .program-feature strong { font-size: 36px; margin: 0; }
   .projection-focus .program-feature p { margin: 0; }
-  .projection-focus .program-feature .feature-icon { width: 48px; }
+  .projection-focus .program-feature .feature-icon { width: 40px; }
   .projection-focus .note-list, .projection-focus .feature-list { gap: 28px; }
   .projection-focus .featured-metric strong { font-size: 120px; }
   .section .slide-text p.report-highlight { font-size: 40px; padding-block: 22px; }
@@ -228,6 +231,63 @@ main > section, .section, .hero, .closing-section {
   .projection-focus { --projection-font: 44px; }
   .section .slide-text p.report-highlight { font-size: 46px; }
 }
+[data-parent-id="dinh-huong"] .motto {
+  grid-template-columns: minmax(0, 1fr);
+  border: 0;
+  gap: 24px;
+  padding: 0;
+  font-size: 30px;
+  line-height: 1.2;
+  color: #fff;
+}
+[data-parent-id="dinh-huong"] .motto > span {
+  position: relative;
+  padding-bottom: 16px;
+  white-space: nowrap;
+  border-bottom: 1px solid #729481;
+  animation: motto-color 9s ease-in-out infinite;
+  animation-play-state: paused;
+}
+[data-parent-id="dinh-huong"] .motto > span::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 5px;
+  background: #f2d480;
+  transform-origin: left;
+  animation: motto-highlight 9s ease-in-out infinite;
+  animation-play-state: paused;
+}
+[data-parent-id="dinh-huong"] .motto > span:nth-child(2),
+[data-parent-id="dinh-huong"] .motto > span:nth-child(2)::after { animation-delay: -6s; }
+[data-parent-id="dinh-huong"] .motto > span:nth-child(3),
+[data-parent-id="dinh-huong"] .motto > span:nth-child(3)::after { animation-delay: -3s; }
+[data-parent-id="dinh-huong"].section-arriving .motto > span,
+[data-parent-id="dinh-huong"].section-arriving .motto > span::after { animation-play-state: running; }
+@keyframes motto-color {
+  0%, 32%, 100% { color: #fff; }
+  8%, 24% { color: #f2d480; }
+}
+@keyframes motto-highlight {
+  0%, 32%, 100% { transform: scaleX(0.08); opacity: 0.45; }
+  8%, 24% { transform: scaleX(1); opacity: 1; }
+}
+@media (min-width: 700px) {
+  [data-parent-id="dinh-huong"] .motto { font-size: 58px; }
+}
+@media (min-width: 1000px) and (min-height: 551px) {
+  [data-parent-id="dinh-huong"] .motto { font-size: 72px; gap: 28px; }
+}
+@media (min-width: 1000px) and (min-height: 900px) {
+  [data-parent-id="dinh-huong"] .motto { font-size: 90px; gap: 36px; }
+}
+@media (max-width: 360px), (max-height: 550px) {
+  [data-parent-id="dinh-huong"] .motto { font-size: 26px; gap: 16px; }
+}
+.reduced-motion [data-parent-id="dinh-huong"] .motto > span { color: #f2d480; }
+
 @media print {
   .photo-stage { display: none; }
   .photos-playing .slide-text { opacity: 1; }

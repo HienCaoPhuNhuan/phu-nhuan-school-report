@@ -25,7 +25,14 @@ const phrases = [
   'tình bạn', 'nông thôn', 'phương châm', 'lý luận', 'thực tiễn', 'trách nhiệm',
   'công dân', 'tinh thần', 'bản lĩnh', 'chính trị', 'phẩm chất', 'tận tâm',
   'yêu nghề', 'mến trẻ', 'gương mẫu', 'sư phạm', 'năng lượng', 'tích cực',
-  'đồng cảm', 'khởi nghiệp', 'nguồn lực', 'tài chính', 'tự học', 'môi trường'
+  'đồng cảm', 'khởi nghiệp', 'nguồn lực', 'tài chính', 'tự học', 'môi trường',
+  'Hồ Chí Minh', 'vượt khó', 'nhân văn', 'đáp nghĩa', 'Hội trại',
+  'phong trào', 'thanh niên', 'thanh thiếu nhi', 'Giấy khen', 'Bằng khen',
+  'Thành Đoàn', 'Đức Nhuận', 'học tốt', 'đóng góp', 'ý kiến', 'chặt chẽ',
+  'điều hành', 'đồng hành', 'mẫu mực', 'toàn diện', 'hợp lý', 'kịp thời',
+  'sâu sát', 'hiệu quả', 'hiện đại', 'tự chọn', 'hội nhập', 'chương trình',
+  'phòng chống', 'bạo lực', 'thuốc lá', 'giao thông', 'cá nhân', 'quản lý',
+  'đổi mới', 'tư duy', 'chuyển biến', 'mạnh mẽ', 'kết quả', 'thực chất'
 ];
 const literal = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '\\s+');
 const terms = phrases.sort((a, b) => b.length - a.length).map(literal).join('|');
@@ -87,16 +94,48 @@ function measureLines(p) {
   }
   const font = parseFloat(getComputedStyle(p).fontSize);
   const lines = [];
-  let wideGap = false;
   words.forEach(({ rect, meaningful }) => {
     let line = lines.find(item => Math.abs(item.top - rect.top) < 3);
     if (!line) { line = { top: rect.top, words: [], meaningful: 0 }; lines.push(line); }
-    const previous = line.words.at(-1);
-    if (previous && rect.left - previous.right > font * 0.55) wideGap = true;
     line.words.push(rect);
     if (meaningful) line.meaningful++;
   });
-  return { lines, wideGap };
+  const gaps = lines.slice(0, -1).flatMap(line => line.words.slice(1).map((word, i) =>
+    (word.left - line.words[i].right) / font));
+  const largestGap = Math.max(0, ...gaps);
+  return { lines, largestGap };
+}
+
+function clearTail(p) {
+  p.querySelectorAll('.paragraph-tail').forEach(tail => tail.replaceWith(...tail.childNodes));
+  p.querySelectorAll('.keep-together').forEach(span => { if (!span.textContent.trim()) span.remove(); });
+  p.normalize();
+}
+
+function keepLastWords(p) {
+  const walker = document.createTreeWalker(p, NodeFilter.SHOW_TEXT);
+  const words = [];
+  let end;
+  while (walker.nextNode()) {
+    const node = walker.currentNode;
+    if (node.parentElement.closest('svg')) continue;
+    end = node;
+    for (const match of node.textContent.matchAll(/\S+/g)) {
+      if (/[\p{L}\p{N}]/u.test(match[0])) words.push({ node, offset: match.index });
+    }
+  }
+  if (words.length < 2) return;
+  const start = words.at(-2);
+  const phrase = start.node.parentElement.closest('.keep-together, .money-amount');
+  const range = document.createRange();
+  if (phrase) range.setStartBefore(phrase);
+  else range.setStart(start.node, start.offset);
+  range.setEnd(end, end.textContent.length);
+  const tail = document.createElement('span');
+  tail.className = 'keep-together paragraph-tail';
+  tail.append(range.extractContents());
+  range.insertNode(tail);
+  p.querySelectorAll('.keep-together').forEach(span => { if (!span.textContent.trim()) span.remove(); });
 }
 
 export function refineParagraphs(root) {
@@ -104,12 +143,53 @@ export function refineParagraphs(root) {
   for (const p of paragraphs) {
     if (p.matches('.eyebrow')) continue;
     p.classList.remove('relaxed-align', 'balanced-ending');
-    const { lines, wideGap } = measureLines(p);
-    if (wideGap) p.classList.add('relaxed-align');
-    if (lines.length > 1 && lines.at(-1).meaningful === 1) {
-      p.classList.add('balanced-ending');
-      // Balancing a short final line must not introduce stretched earlier lines.
-      if (measureLines(p).wideGap) p.classList.add('relaxed-align');
+    p.style.removeProperty('font-size');
+    clearTail(p);
+    if (!p.dataset.separatorLines && p.closest('.metric, .featured-metric, .organization-grid')) {
+      const walker = document.createTreeWalker(p, NodeFilter.SHOW_TEXT);
+      const separators = [];
+      while (walker.nextNode()) {
+        const node = walker.currentNode;
+        if (node.textContent.includes(' · ')) separators.push(node);
+      }
+      for (const node of separators) {
+        const parts = node.textContent.split(' · ');
+        node.replaceWith(...parts.flatMap((part, i) => i < parts.length - 1
+          ? [document.createTextNode(part + ' · '), document.createElement('br')]
+          : [document.createTextNode(part)]));
+      }
+      if (p.closest('.organization-grid')) {
+        const walker = document.createTreeWalker(p, NodeFilter.SHOW_TEXT);
+        const clauses = [];
+        while (walker.nextNode()) if (walker.currentNode.textContent.includes('; ')) clauses.push(walker.currentNode);
+        for (const node of clauses) {
+          const parts = node.textContent.split('; ');
+          node.replaceWith(...parts.flatMap((part, i) => i < parts.length - 1
+            ? [document.createTextNode(part + '; '), document.createElement('br')]
+            : [document.createTextNode(part)]));
+        }
+      }
+      p.dataset.separatorLines = 'true';
     }
+    const base = parseFloat(getComputedStyle(p).fontSize);
+    let best = { size: base, gap: Infinity };
+    // Small, content-measured adjustments keep justification readable and large.
+    const factors = [1, 1.02, 1.04, 1.06, 1.08, 1.1, 1.12, 1.14, 0.98, 0.96, 0.94, 0.92, 0.9, 0.88, 0.86];
+    for (const factor of factors) {
+      clearTail(p);
+      const size = Math.max(18, Math.min(60, base * factor));
+      p.style.fontSize = size + 'px';
+      let measured = measureLines(p);
+      if (measured.lines.length > 1 && measured.lines.at(-1).meaningful === 1) {
+        keepLastWords(p);
+        measured = measureLines(p);
+      }
+      if (measured.largestGap < best.gap) best = { size, gap: measured.largestGap };
+      if (measured.largestGap <= 0.6) break;
+    }
+    clearTail(p);
+    p.style.fontSize = best.size + 'px';
+    const { lines } = measureLines(p);
+    if (lines.length > 1 && lines.at(-1).meaningful === 1) keepLastWords(p);
   }
 }
