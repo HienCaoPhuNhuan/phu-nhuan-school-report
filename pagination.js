@@ -1,4 +1,4 @@
-import { protectPhrases, paragraphUnits } from './typography.js?v=20261003-8';
+import { protectPhrases, paragraphUnits, refineParagraphs } from './typography.js?v=20261004-5';
 
 const grouped = new Set(['metric-grid', 'note-list', 'feature-list', 'organization-grid',
   'perfect-scores', 'club-families', 'direction-list', 'program-grid', 'infrastructure',
@@ -173,6 +173,7 @@ export function paginateReport(main, originals) {
     while (queue.length) {
       const block = queue.shift();
       body.append(block);
+      refineParagraphs(block);
       const contentBottom = block.getBoundingClientRect().bottom;
       const available = body.parentElement.getBoundingClientRect();
       const fits = contentBottom <= available.bottom - 4 &&
@@ -198,6 +199,7 @@ export function paginateReport(main, originals) {
         const base = innerHeight >= 900 ? 44 : 40;
         for (let size = base + 2; size <= 60; size += 2) {
           page.style.setProperty('--projection-font', size + 'px');
+          refineParagraphs(text);
           const used = heading.offsetHeight + Math.max(text.offsetHeight, visual?.offsetHeight || 0) + 36;
           const overflow = [...text.querySelectorAll('p,h3,strong')].some(n => n.scrollWidth > n.clientWidth + 1);
           if (used > innerHeight * 0.86 || overflow) {
@@ -206,6 +208,7 @@ export function paginateReport(main, originals) {
           }
         }
       }
+      refineParagraphs(text);
       const height = heading.offsetHeight + Math.max(text.offsetHeight, visual?.offsetHeight || 0) + 24;
       if (height < innerHeight * 0.75) {
         page.classList.add('compact-page');

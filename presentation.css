@@ -140,7 +140,12 @@ main > section, .section, .hero, .closing-section {
   text-align: justify;
   text-align-last: left;
   hyphens: none;
+  text-wrap: pretty;
 }
+.slide-text p.relaxed-align { text-align: left; }
+.slide-text p.balanced-ending { text-wrap: balance; }
+[data-parent-id="doi-ngu"] .organization-grid { column-gap: 80px; }
+.perfect-scores strong .suffix { font-size: 28px; margin-left: 10px; }
 .note-list p > span { flex: 1; min-width: 0; }
 .keep-together { white-space: nowrap; overflow-wrap: normal; word-break: normal; }
 .slide-text { transition: opacity 650ms ease; }

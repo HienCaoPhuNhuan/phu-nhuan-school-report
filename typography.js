@@ -14,12 +14,16 @@ const phrases = [
   'nghệ thuật', 'âm nhạc', 'mỹ thuật', 'ngoại ngữ', 'tin học', 'tích hợp', 'liên môn',
   'kiểm tra', 'đánh giá', 'thực hành', 'trải nghiệm', 'phát triển', 'cơ sở', 'vật chất',
   'học đường', 'chủ nhiệm', 'hạnh phúc', 'an toàn', 'Cờ vua', 'Cờ tướng', 'Cầu lông',
-  'Bóng bàn', 'Điền kinh'
+  'Bóng bàn', 'Điền kinh', 'hoạt động', 'sở thích', 'công tác', 'Tiếng Anh',
+  'giai đoạn', 'áp lực', 'khối 10', 'khối 11', 'khối 12', 'đuối nước',
+  'kỷ cương', 'chất lượng', 'quốc tế', 'chứng chỉ', 'nước ngoài', 'kiến thức',
+  'Thành phố', 'toàn quốc', 'Quốc gia', 'Vật lí', 'Lịch sử', 'Lao động',
+  'Tiên tiến', 'Xuất sắc', 'khối chuyên', 'Phú Nhuận', 'kinh nghiệm'
 ];
 const literal = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '\\s+');
 const terms = phrases.sort((a, b) => b.length - a.length).map(literal).join('|');
 const quantity = '\\d[\\d.,]*(?:[–-]\\d[\\d.,]*)?';
-const units = `(?:lớp\\s+(?:10|11|12)|khối\\s+(?:10|11|12)|tiết\\s*/\\s*tuần|${terms}|đồng|lớp|tiết|giải)`;
+const units = `(?:lớp\\s+(?:10|11|12)|khối\\s+(?:10|11|12)|tiết\\s*/\\s*tuần|${terms}|đồng|lớp|tiết|giải|điểm|bài)`;
 const protectedPattern = new RegExp(`(?<![\\p{L}\\p{N}])(?:${quantity}\\s+${units}|${terms})(?![\\p{L}\\p{N}])`, 'giu');
 
 export function phraseSegments(text) {
@@ -39,7 +43,7 @@ export function paragraphUnits(text) {
 }
 
 export function protectPhrases(root) {
-  const paragraphs = root.matches?.('p') ? [root] : [...root.querySelectorAll('p')];
+  const paragraphs = root.matches?.('p,h3') ? [root] : [...root.querySelectorAll('p,h3')];
   for (const paragraph of paragraphs) {
     if (paragraph.matches('.eyebrow') || paragraph.closest('figcaption')) continue;
     const walker = document.createTreeWalker(paragraph, NodeFilter.SHOW_TEXT);
@@ -57,6 +61,47 @@ export function protectPhrases(root) {
         span.textContent = segment.text;
         return span;
       }));
+    }
+  }
+}
+
+function measureLines(p) {
+  const words = [];
+  const walker = document.createTreeWalker(p, NodeFilter.SHOW_TEXT);
+  while (walker.nextNode()) {
+    if (walker.currentNode.parentElement.closest('svg')) continue;
+    for (const match of walker.currentNode.textContent.matchAll(/\S+/g)) {
+      const range = document.createRange();
+      range.setStart(walker.currentNode, match.index);
+      range.setEnd(walker.currentNode, match.index + match[0].length);
+      const rect = range.getBoundingClientRect();
+      if (rect.width) words.push(rect);
+    }
+  }
+  const font = parseFloat(getComputedStyle(p).fontSize);
+  const lines = [];
+  let wideGap = false;
+  words.forEach(rect => {
+    let line = lines.find(item => Math.abs(item.top - rect.top) < 3);
+    if (!line) { line = { top: rect.top, words: [] }; lines.push(line); }
+    const previous = line.words.at(-1);
+    if (previous && rect.left - previous.right > font * 0.55) wideGap = true;
+    line.words.push(rect);
+  });
+  return { lines, wideGap };
+}
+
+export function refineParagraphs(root) {
+  const paragraphs = root.matches?.('p') ? [root] : [...root.querySelectorAll('p')];
+  for (const p of paragraphs) {
+    if (p.matches('.eyebrow')) continue;
+    p.classList.remove('relaxed-align', 'balanced-ending');
+    const { lines, wideGap } = measureLines(p);
+    if (wideGap) p.classList.add('relaxed-align');
+    if (lines.length > 1 && lines.at(-1).words.length === 1) {
+      p.classList.add('balanced-ending');
+      // Balancing a short final line must not introduce stretched earlier lines.
+      if (measureLines(p).wideGap) p.classList.add('relaxed-align');
     }
   }
 }
