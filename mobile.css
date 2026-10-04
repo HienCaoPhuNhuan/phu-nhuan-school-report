@@ -1,0 +1,40 @@
+.mobile-presentation { overscroll-behavior-y: none; }
+.mobile-presentation body { touch-action: pan-x pinch-zoom; }
+.mobile-presentation .with-photo .slide-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) 88px;
+  gap: 16px;
+}
+.mobile-presentation .slide-visual { width: 132px; height: 88px; justify-self: end; }
+.mobile-presentation .slide-visual figcaption { display: none; }
+.mobile-presentation .slide-visual .reel-viewport { border-radius: 4px; }
+.mobile-presentation .compact-page.with-photo .slide-body { grid-template-rows: auto 88px; }
+.mobile-presentation .photo-stage {
+  padding: 8px max(16px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  flex-direction: column;
+  gap: 16px;
+}
+.mobile-presentation .photo-stage .photo-reel { flex: 1; height: 0; }
+.mobile-presentation .gallery-heading { flex: none; }
+.mobile-presentation .gallery-heading .eyebrow { font-size: 12px; }
+.mobile-presentation .gallery-heading h2 { font-size: 30px; line-height: 1.12; margin-top: 8px; }
+.mobile-presentation .photo-stage figcaption { font-size: 18px; line-height: 1.4; }
+.mobile-presentation .photo-stage .reel-indicators { gap: 4px; max-width: 90%; }
+.mobile-presentation .photo-stage .reel-indicators span { min-width: 4px; }
+@media (orientation: landscape) {
+  .mobile-presentation .section { padding-block: 16px; }
+  .mobile-presentation .section > .wrap { gap: 16px; }
+  .mobile-presentation .section-heading h2 { font-size: 30px; line-height: 1.12; }
+  .mobile-presentation .section-heading h2 br { display: none; }
+  .mobile-presentation .with-photo .slide-body {
+    grid-template-columns: minmax(0, 1fr) 116px;
+    grid-template-rows: minmax(0, 1fr);
+    gap: 24px;
+  }
+  .mobile-presentation .compact-page.with-photo .slide-body { grid-template-rows: auto; }
+  .mobile-presentation .slide-visual { width: 116px; height: 88px; }
+}
+@media print {
+  .mobile-presentation .with-photo .slide-body { display: block; }
+}

@@ -33,6 +33,17 @@ Toàn bộ nội dung chữ được hiển thị sẵn, không dùng tab hoặc
 
 Trang chỉ hiển thị nội dung: không header, menu, thanh điều hướng hoặc nút công cụ. Một đợt cuộn chuột/trackpad chuyển đúng một trang; cảm ứng dùng scroll snap gốc của trình duyệt. Phím mũi tên lên/xuống, Page Up/Page Down chuyển trang; Home/End tới đầu/cuối. Có thể dùng F11 của trình duyệt để trình chiếu toàn màn hình. Animation, transition và ảnh tự chuyển luôn bật mặc định, không tự tắt theo thiết lập giảm chuyển động của hệ điều hành. Người xem muốn tắt chuyển động có thể chủ động dùng URL `?motion=reduced`. Trang không tự cuộn để người thuyết trình chủ động thời gian đọc. Các thành tích ghi rõ đơn vị giải hoặc huy chương; tiền tệ ghi đầy đủ, ví dụ 60.000.000 đồng, trên cùng một hàng.
 
+## Nhánh Mobile Version
+
+Nhánh `mobile-version` bổ sung bố cục điện thoại, chưa thay đổi website GitHub Pages từ nhánh `main`. Khi tích hợp nhánh này, cùng một URL sẽ tự chọn mobile trên màn hình hẹp hoặc điện thoại cảm ứng đang xoay ngang; máy tính giữ bố cục trình chiếu hiện tại.
+
+- Mỗi lần vuốt dọc chuyển đúng một trang, không có cuộn nội dung bên trong. Chủ đề dài tiếp tục được chia thành trang con.
+- Thumbnail nhỏ ở vùng riêng, không che chữ. Sau 10–20 giây đọc, ảnh phóng lớn che nội dung, giữ tiêu đề; mỗi ảnh 5 giây, rồi thu về.
+- Xoay điện thoại sẽ chia lại trang, giữ chủ đề đang xem và dừng lớp ảnh đang mở. Vuốt ngang hoặc cử chỉ thu/phóng hai ngón không bị dùng để chuyển trang.
+- `mobile.css` chứa các điều chỉnh riêng cho mobile. Số liệu, từ ghép, đơn vị và ảnh sử dụng chung với bản trình chiếu.
+
+Chạy `node scripts/check-mobile.mjs` để kiểm tra nhận diện thiết bị, và `npm run dev` để xem thử tại máy.
+
 ## Build và triển khai
 
 ```sh

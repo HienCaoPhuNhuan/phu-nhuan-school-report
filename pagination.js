@@ -117,9 +117,15 @@ function splitBlock(block) {
   });
 }
 
+export function isMobileLayout() {
+  return innerWidth < 700 || (innerWidth < 1000 && matchMedia('(pointer: coarse)').matches);
+}
+
 export function paginateReport(main, originals) {
   document.documentElement.style.setProperty('--page-height', window.innerHeight + 'px');
-  const narrow = innerWidth < 700;
+  const narrow = isMobileLayout();
+  document.documentElement.classList.toggle('mobile-presentation', narrow);
+  document.documentElement.dataset.presentation = narrow ? 'mobile' : 'desktop';
   main.replaceChildren();
   for (const original of curatePhotos(originals)) {
     if (!original.classList.contains('section')) {
@@ -156,7 +162,7 @@ export function paginateReport(main, originals) {
       const text = document.createElement('div');
       text.className = 'slide-text';
       body.append(text);
-      if (photo && !pages.length && !narrow && innerHeight >= 550) {
+      if (photo && !pages.length && (innerHeight >= 550 || narrow)) {
         page.classList.add('with-photo');
         const visual = document.createElement('div');
         visual.className = 'slide-visual';
@@ -176,7 +182,9 @@ export function paginateReport(main, originals) {
       refineParagraphs(block);
       const contentBottom = block.getBoundingClientRect().bottom;
       const available = body.parentElement.getBoundingClientRect();
-      const fits = contentBottom <= available.bottom - 4 &&
+      const thumbnail = narrow && innerHeight > innerWidth ? body.parentElement.querySelector('.slide-visual') : null;
+      const bottom = thumbnail ? thumbnail.getBoundingClientRect().top - 16 : available.bottom;
+      const fits = contentBottom <= bottom - 4 &&
         block.scrollWidth <= body.clientWidth + 1 &&
         [...block.querySelectorAll('strong,h3,p')].every(node => node.scrollWidth <= node.clientWidth + 1);
       if (fits) continue;
@@ -209,7 +217,8 @@ export function paginateReport(main, originals) {
         }
       }
       refineParagraphs(text);
-      const height = heading.offsetHeight + Math.max(text.offsetHeight, visual?.offsetHeight || 0) + 24;
+      const bodyHeight = narrow && innerHeight > innerWidth && visual ? text.offsetHeight + visual.offsetHeight + 16 : Math.max(text.offsetHeight, visual?.offsetHeight || 0);
+      const height = heading.offsetHeight + bodyHeight + 24;
       if (height < innerHeight * 0.75) {
         page.classList.add('compact-page');
       }

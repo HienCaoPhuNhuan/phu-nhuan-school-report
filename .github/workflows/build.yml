@@ -1,7 +1,7 @@
 name: Build static website
 on:
   push:
-    branches: [main]
+    branches: [main, mobile-version]
   pull_request:
 permissions:
   contents: read
@@ -21,4 +21,5 @@ jobs:
       - run: node --check photo-presentation.js
       - run: node scripts/check-typography.mjs
       - run: node scripts/check-motion.mjs
+      - run: node scripts/check-mobile.mjs
       - run: node scripts/build.mjs

@@ -47,8 +47,15 @@ export function createPhotoPresentation(reducedMotion) {
     const title = section.querySelector('.section-heading').getBoundingClientRect();
     stage = document.createElement('div');
     stage.className = 'photo-stage';
-    stage.style.top = Math.max(16, title.bottom + 16) + 'px';
+    const mobile = document.documentElement.classList.contains('mobile-presentation');
+    stage.style.top = mobile ? '0px' : Math.max(16, title.bottom + 16) + 'px';
     stage.style.backgroundColor = getComputedStyle(section).backgroundColor;
+    if (mobile) {
+      const heading = section.querySelector('.section-heading').cloneNode(true);
+      heading.className = 'section-heading gallery-heading';
+      heading.querySelectorAll('[id]').forEach(node => node.removeAttribute('id'));
+      stage.append(heading);
+    }
     stage.append(reel);
     document.body.append(stage);
     section.classList.add('photos-playing');

@@ -1,6 +1,6 @@
 import { format, renderReport } from './sections.js?v=20261004-5';
-import { paginateReport } from './pagination.js?v=20261004-5';
-import { createPhotoPresentation } from './photo-presentation.js?v=20261004-1';
+import { paginateReport } from './pagination.js?v=20261004-mobile-1';
+import { createPhotoPresentation } from './photo-presentation.js?v=20261004-mobile-1';
 
 const response = await fetch(new URL('./assets/photos/manifest.json', import.meta.url));
 if (!response.ok) throw new Error('Photo manifest could not be loaded');
@@ -174,6 +174,30 @@ document.addEventListener('keydown', event => {
   if (direction) { event.preventDefault(); goTo(sectionIndex() + direction); }
   if (event.key === 'Home' || event.key === 'End') { event.preventDefault(); goTo(event.key === 'Home' ? 0 : nodes.length - 1); }
 });
+let swipe;
+document.addEventListener('touchstart', event => {
+  if (!document.documentElement.classList.contains('mobile-presentation') || event.touches.length !== 1) { swipe = null; return; }
+  const touch = event.touches[0];
+  swipe = { x: touch.clientX, y: touch.clientY, axis: null };
+}, { passive: true });
+document.addEventListener('touchmove', event => {
+  if (!swipe || event.touches.length !== 1) { swipe = null; return; }
+  const touch = event.touches[0];
+  const dx = touch.clientX - swipe.x;
+  const dy = touch.clientY - swipe.y;
+  if (!swipe.axis && Math.max(Math.abs(dx), Math.abs(dy)) >= 8) swipe.axis = Math.abs(dy) > Math.abs(dx) ? 'vertical' : 'horizontal';
+  if (swipe.axis === 'vertical') event.preventDefault();
+}, { passive: false });
+document.addEventListener('touchend', event => {
+  if (!swipe) return;
+  const gesture = swipe;
+  swipe = null;
+  const delta = event.changedTouches[0].clientY - gesture.y;
+  if (gesture.axis !== 'vertical' || Math.abs(delta) < 44 || performance.now() < navigationUntil) return;
+  event.preventDefault();
+  goTo(sectionIndex() + (delta < 0 ? 1 : -1));
+}, { passive: false });
+document.addEventListener('touchcancel', () => { swipe = null; }, { passive: true });
 const initialIndex = nodes.findIndex(node => location.hash === '#' + node.id);
 if (initialIndex >= 0) requestAnimationFrame(() => goTo(initialIndex, true));
 window.addEventListener('hashchange', () => {
