@@ -1,4 +1,4 @@
-import { protectPhrases, paragraphUnits, refineParagraphs } from './typography.js?v=20261004-5';
+import { protectPhrases, paragraphUnits, refineParagraphs } from './typography.js?v=20261004-6';
 
 const grouped = new Set(['metric-grid', 'note-list', 'feature-list', 'organization-grid',
   'perfect-scores', 'club-families', 'direction-list', 'program-grid', 'infrastructure',
@@ -6,15 +6,18 @@ const grouped = new Set(['metric-grid', 'note-list', 'feature-list', 'organizati
 
 const illustratedTopics = new Set(['doi-ngu', 'ren-luyen', 'chuyen-mon', 'ky-nang',
   'huong-nghiep', 'ngoai-khoa', 'hoc-bong', 'cong-dong', 'chuyen-doi-so',
-  'danh-gia', 'chuong-trinh', 'co-so-vat-chat']);
+  'trai-nghiem', 'nha-tinh-ban', 'chuong-trinh', 'co-so-vat-chat']);
 
 const enlargedTopics = new Set(['ren-luyen', 'chuyen-mon', 'clb-noi-bat', 'ky-nang',
   'huong-nghiep', 'ngoai-khoa', 'hoc-bong', 'cong-dong', 'de-an', 'chuyen-doi-so',
-  'danh-gia', 'chuong-trinh', 'phat-trien', 'phat-trien-doi-ngu']);
+  'danh-gia', 'chuong-trinh', 'phat-trien', 'phat-trien-doi-ngu', 'to-chuc',
+  'tri-an', 'nha-tinh-ban', 'nong-thon-moi', 'doan-thanh-nien',
+  'dinh-huong-phat-trien', 'moi-truong-giao-duc', 'muc-tieu-hoc-sinh',
+  'muc-tieu-doi-ngu', 'dong-hanh', 'trai-nghiem', 'nguon-luc', 'chi-tieu-tap-the']);
 const highlightedTopics = new Map([
   ['cau-lac-bo', 'Nhà trường cấp giấy chứng nhận'],
   ['chi-tieu', 'Không có học sinh học lực Chưa đạt.'],
-  ['chi-tieu-thi-dua', 'Phấn đấu Lao động Tiên tiến,']
+  ['chi-tieu-tap-the', 'Phấn đấu Lao động Tiên tiến,']
 ]);
 
 function curatePhotos(originals) {

@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const sourceRoot = path.resolve(root, '../Hình ảnh');
-const output = path.resolve(root, '../Ảnh theo section');
+const output = path.resolve(root, process.argv[2] || '../Ảnh theo section');
 const mapping = JSON.parse(await readFile(path.join(root, 'qa/section-photo-map.json'), 'utf8'));
 const manifest = JSON.parse(await readFile(path.join(root, 'assets/photos/manifest.json'), 'utf8'));
 const photos = new Map(Object.values(manifest).flat().map(photo => [photo.src, photo]));
@@ -45,5 +45,5 @@ for (const section of mapping) {
 const csv = rows.map(row => row.map(cell => '"' + cell.replace(/"/g, '""') + '"').join(',')).join('\r\n');
 await writeFile(path.join(output, 'Danh sách ảnh theo section.csv'), '\ufeff' + csv, 'utf8');
 await writeFile(path.join(output, 'THONG-TIN.txt'),
-  `ẢNH THEO SECTION\n\n${mapping.length} folder tương ứng các mục 00–31 trên website, gồm ${total} ảnh.\nDựa trên website trình chiếu Full HD, không phải tất cả ảnh có trong folder gốc.\nFolder không có ảnh được ghi rõ trong THONG-TIN.txt.\nDanh sách CSV ghi tên ảnh kiểm tra, đường dẫn ảnh gốc và ảnh website để đối chiếu.\nCác bản sao chỉ phục vụ kiểm tra, không tự cập nhật website khi thay đổi.\n`, 'utf8');
+  `ẢNH THEO SECTION\n\n${mapping.length} folder tương ứng các mục 00–${mapping.length - 1} trên website, gồm ${total} ảnh.\nDựa trên website trình chiếu Full HD, không phải tất cả ảnh có trong folder gốc.\nFolder không có ảnh được ghi rõ trong THONG-TIN.txt.\nDanh sách CSV ghi tên ảnh kiểm tra, đường dẫn ảnh gốc và ảnh website để đối chiếu.\nCác bản sao chỉ phục vụ kiểm tra, không tự cập nhật website khi thay đổi.\n`, 'utf8');
 console.log(JSON.stringify({ output, sections: mapping.length, copiedAndVerified: total }));

@@ -1,6 +1,6 @@
 # THPT Phú Nhuận School Report
 
-Website phục vụ trình chiếu tại cuộc họp cha mẹ học sinh: tổng kết 2025–2026 và phương hướng 2026–2027. Báo cáo gồm 32 chủ đề; ảnh tư liệu được chọn theo nội dung, không lặp giữa các mục. Mỗi chủ đề được chia thành các trang con vừa đúng một màn hình, tùy kích thước trình chiếu.
+Website phục vụ trình chiếu tại cuộc họp cha mẹ học sinh: tổng kết 2025–2026 và phương hướng 2026–2027. Báo cáo gồm 48 chủ đề theo đúng thứ tự các mục trong Word; ảnh tư liệu được chọn theo nội dung, không lặp giữa các mục. Mỗi chủ đề được chia thành các trang con vừa đúng một màn hình, tùy kích thước trình chiếu. Bản đối chiếu từng mục nằm tại [docs/source-outline.md](docs/source-outline.md).
 
 ## Chạy tại máy
 
@@ -15,7 +15,7 @@ Mở địa chỉ được in trong terminal, mặc định http://localhost:517
 ## Sửa nội dung
 
 - `content.js`: số liệu, chương trình, thành tích và chỉ tiêu. Số liệu giữ theo bản Word dự thảo, chưa xác minh; cập nhật tại đây trước khi sử dụng chính thức.
-- `sections.js`: nội dung trình bày và bố cục của 32 section.
+- `sections.js`: đề cương theo Word, nội dung trình bày và bố cục của 48 section.
 - `app.js`: điều hướng, hiệu ứng số liệu và ảnh tự chuyển.
 - `styles.css`: màu sắc và animation.
 - `presentation.css`: bố cục trình chiếu toàn màn hình, cỡ chữ và đơn vị tiền tệ cùng hàng với số.

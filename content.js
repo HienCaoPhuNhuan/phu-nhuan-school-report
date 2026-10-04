@@ -47,7 +47,7 @@ export const report = {
     academic: [
       { value: 43, suffix: ' giải', title: 'Học sinh giỏi Thành phố', text: 'Khối 12 · 24 giải Nhì, 19 giải Ba', icon: 'trophy' },
       { value: 53, suffix: ' giải', title: 'Olympic Thành phố', text: 'Khối 10, 11 · 1 giải Nhất, 19 giải Nhì, 33 giải Ba', icon: 'medal' },
-      { value: 7, suffix: ' huy chương', title: 'Olympic 30/4', text: 'Khối chuyên · 1 huy chương Vàng, 2 huy chương Bạc, 4 huy chương Đồng', icon: 'award' },
+      { value: 7, suffix: ' huy chương', title: 'Olympic 30/4 lần thứ XXX', text: 'Khối chuyên · 1 huy chương Vàng, 2 huy chương Bạc, 4 huy chương Đồng', icon: 'award' },
       { value: 5, suffix: ' giải', title: 'Khoa học kỹ thuật', text: 'Cấp Thành phố · 3 giải Nhì, 2 giải Ba', icon: 'microscope' },
       { value: 7, suffix: ' giải', title: 'Toán trên máy tính cầm tay', text: 'Cấp Thành phố · 1 giải Nhì, 6 giải Ba', icon: 'calculator' }
     ],
@@ -63,10 +63,19 @@ export const report = {
     ]
   },
   honors: 'Tập thể Lao động Xuất sắc; giấy khen thành tích tiêu biểu trong thực hiện nhiệm vụ giáo dục phổ thông theo Quyết định 3812/QĐ-SGDĐT ngày 07/8/2026. Chi bộ hoàn thành tốt nhiệm vụ; Đoàn TNCS hoàn thành xuất sắc nhiệm vụ.',
+  youthHonors: [
+    'Bằng khen Thành Đoàn: thành tích xuất sắc trong công tác Đoàn và phong trào thanh niên trường học, năm học 2025–2026.',
+    'Giấy khen Đoàn phường Đức Nhuận: thành tích xuất sắc trong công tác Đoàn và thanh thiếu nhi giai đoạn 2022–2025.',
+    'Giấy khen UBND phường Đức Nhuận: thành tích xuất sắc trong học tập và làm theo tư tưởng, đạo đức, phong cách Hồ Chí Minh, năm 2026.',
+    'Giấy khen Đoàn phường Đức Nhuận: Tập thể điển hình tiêu biểu Làm theo lời Bác, năm 2026.',
+    'Bằng khen Thành Đoàn: thành tích xuất sắc trong Tháng Thanh niên, năm 2026.',
+    'Giấy khen Đoàn phường Đức Nhuận: thành tích xuất sắc trong Chiến dịch Xuân tình nguyện lần thứ 17, năm 2026.',
+    'Bằng khen Thành Đoàn: thành tích xuất sắc trong chiến dịch tình nguyện hè, năm 2026.'
+  ],
   clubs: { count: 24, students: 1500, items: [
-    ['music', 'Âm nhạc PNY', 'Giải Khuyến khích Tiếng hát Chú Ve con Hè 2026'],
-    ['sparkles', 'Nhảy PND', 'Giải Nhì Vũ điệu thanh xuân; giải Nhì Flashmob Hội trại 9/1'],
-    ['cpu', 'Tin học', 'Giải Tiềm năng Hội thi Trí tuệ nhân tạo TP.HCM 2026']
+    ['music', 'Âm nhạc PNY', 'Giải Khuyến khích Tiếng hát Chú Ve con Hè 2026 do Sở GDĐT TP.HCM tổ chức.'],
+    ['sparkles', 'Nhảy PND', 'Giải Nhì Vũ điệu thanh xuân do Thành Đoàn tổ chức; giải Nhì Flashmob Hội trại truyền thống 9/1 năm 2026.'],
+    ['cpu', 'Tin học', '1 giải Tiềm năng Hội thi Trí tuệ nhân tạo TP.HCM 2026 do Sở Thông tin và Truyền thông TP.HCM tổ chức.']
   ] },
   education: [
     ['shield-check', 'Nề nếp & văn hóa ứng xử', 'Theo dõi chuyên cần, tác phong; thi đua lớp hằng tuần và phối hợp với gia đình để giáo dục học sinh.'],

@@ -18,7 +18,14 @@ const phrases = [
   'giai đoạn', 'áp lực', 'khối 10', 'khối 11', 'khối 12', 'đuối nước',
   'kỷ cương', 'chất lượng', 'quốc tế', 'chứng chỉ', 'nước ngoài', 'kiến thức',
   'Thành phố', 'toàn quốc', 'Quốc gia', 'Vật lí', 'Lịch sử', 'Lao động',
-  'Tiên tiến', 'Xuất sắc', 'khối chuyên', 'Phú Nhuận', 'kinh nghiệm'
+  'Tiên tiến', 'Xuất sắc', 'khối chuyên', 'Phú Nhuận', 'kinh nghiệm',
+  'đội ngũ', 'tổ chức', 'quy mô', 'nhân sự', 'đạo đức', 'tác phong', 'trang phục',
+  'chuyên cần', 'kỷ luật', 'văn hóa', 'ứng xử', 'tư vấn', 'tuyển sinh', 'tâm lý',
+  'truyền thống', 'đoàn thể', 'thiên tai', 'quyên góp', 'tri ân', 'chính sách',
+  'tình bạn', 'nông thôn', 'phương châm', 'lý luận', 'thực tiễn', 'trách nhiệm',
+  'công dân', 'tinh thần', 'bản lĩnh', 'chính trị', 'phẩm chất', 'tận tâm',
+  'yêu nghề', 'mến trẻ', 'gương mẫu', 'sư phạm', 'năng lượng', 'tích cực',
+  'đồng cảm', 'khởi nghiệp', 'nguồn lực', 'tài chính', 'tự học', 'môi trường'
 ];
 const literal = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '\\s+');
 const terms = phrases.sort((a, b) => b.length - a.length).map(literal).join('|');

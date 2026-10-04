@@ -21,4 +21,5 @@ jobs:
       - run: node --check photo-presentation.js
       - run: node scripts/check-typography.mjs
       - run: node scripts/check-motion.mjs
+      - run: node scripts/check-source-order.mjs
       - run: node scripts/build.mjs
