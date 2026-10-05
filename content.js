@@ -45,11 +45,11 @@ export const report = {
   graduation: { university: 97.53, score: 22.93, previousScore: 22.85, highest: 28, lowest: 15.1, perfect: [['Toán', 6], ['Vật lí', 1], ['Lịch sử', 2], ['Tiếng Anh', 2]], note: 'Trúng tuyển đại học đợt 1 · Thống kê ngày 30/8/2026' },
   achievements: {
     academic: [
-      { value: 43, suffix: ' giải', title: 'Thi HS giỏi cấp Thành phố (khối 12)', text: 'Khối 12 · 24 giải Nhì, 19 giải Ba', icon: 'trophy' },
-      { value: 53, suffix: ' giải', title: 'Kỳ thi Olympic TP khối 10,11', text: 'Khối 10, 11 · 1 giải Nhất, 19 giải Nhì, 33 giải Ba', icon: 'medal' },
-      { value: 7, suffix: ' huy chương', title: 'Kỳ thi Olympic 30/4 lần thứ XXX (khối chuyên)', text: 'Khối chuyên · 1 huy chương Vàng, 2 huy chương Bạc, 4 huy chương Đồng', icon: 'award' },
-      { value: 5, suffix: ' giải', title: 'Cuộc thi Khoa học Kỹ thuật dành cho Học sinh THPT cấp Thành phố', text: 'Cấp Thành phố · 3 giải Nhì, 2 giải Ba', icon: 'microscope' },
-      { value: 7, suffix: ' giải', title: 'Giải nhanh toán nhanh trên máy tính cầm tay cấp TP', text: 'Cấp Thành phố · 1 giải Nhì, 6 giải Ba', icon: 'calculator' }
+      { value: 43, suffix: ' giải', title: 'Thi HS giỏi cấp Thành phố (khối 12)', text: '24 giải Nhì, 19 giải Ba', icon: 'trophy' },
+      { value: 53, suffix: ' giải', title: 'Kỳ thi Olympic TP khối 10,11', text: '1 giải Nhất, 19 giải Nhì, 33 giải Ba', icon: 'medal' },
+      { value: 7, suffix: ' huy chương', title: 'Kỳ thi Olympic 30/4 lần thứ XXX (khối chuyên)', text: '1 huy chương Vàng, 2 huy chương Bạc, 4 huy chương Đồng', icon: 'award' },
+      { value: 5, suffix: ' giải', title: 'Cuộc thi Khoa học Kỹ thuật dành cho Học sinh THPT cấp Thành phố', text: '3 giải Nhì, 2 giải Ba', icon: 'microscope' },
+      { value: 7, suffix: ' giải', title: 'Giải nhanh toán nhanh trên máy tính cầm tay cấp TP', text: '1 giải Nhì, 6 giải Ba', icon: 'calculator' }
     ],
     sport: [
       { value: 9, suffix: ' huy chương', title: 'Giải Thể thao học sinh cấp Thành phố', text: '1 huy chương Vàng · 2 huy chương Bạc · 6 huy chương Đồng', icon: 'medal' },

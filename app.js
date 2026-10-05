@@ -1,4 +1,4 @@
-import { format, renderReport } from './sections.js?v=20261006-1';
+import { format, renderReport } from './sections.js?v=20261006-2';
 import { paginateReport } from './pagination.js?v=20261006-1';
 import { createPhotoPresentation } from './photo-presentation.js?v=20261006-1';
 import { installSectionMedia } from './section-media.js?v=20261006-1';

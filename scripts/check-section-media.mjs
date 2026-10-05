@@ -22,4 +22,11 @@ assert.deepEqual(report.achievements.academic.map(item => item.title), [
   'Cuộc thi Khoa học Kỹ thuật dành cho Học sinh THPT cấp Thành phố',
   'Giải nhanh toán nhanh trên máy tính cầm tay cấp TP'
 ]);
-console.log('Section media files, three videos and exact Word competition names verified.');
+assert.deepEqual(report.achievements.academic.map(item => item.text), [
+  '24 giải Nhì, 19 giải Ba',
+  '1 giải Nhất, 19 giải Nhì, 33 giải Ba',
+  '1 huy chương Vàng, 2 huy chương Bạc, 4 huy chương Đồng',
+  '3 giải Nhì, 2 giải Ba',
+  '1 giải Nhì, 6 giải Ba'
+]);
+console.log('Section media files, three videos, exact Word competition names and award-only descriptions verified.');
