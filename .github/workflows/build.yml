@@ -19,7 +19,9 @@ jobs:
       - run: node --check pagination.js
       - run: node --check typography.js
       - run: node --check photo-presentation.js
+      - run: node --check section-media.js
       - run: node scripts/check-typography.mjs
       - run: node scripts/check-motion.mjs
       - run: node scripts/check-source-order.mjs
+      - run: node scripts/check-section-media.mjs
       - run: node scripts/build.mjs

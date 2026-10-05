@@ -5,6 +5,7 @@ export function createPhotoPresentation(reducedMotion) {
   let reel;
   let home;
   let animation;
+  let playbackEvents;
   let generation = 0;
   const duration = 1000;
 
@@ -17,6 +18,8 @@ export function createPhotoPresentation(reducedMotion) {
     clearTimeout(timer);
     animation?.cancel();
     animation = null;
+    playbackEvents?.abort();
+    reel?.querySelectorAll('video').forEach(video => { video.pause(); video.currentTime = 0; });
     if (reel && home) home.append(reel);
     stage?.remove();
     stage = null;
@@ -32,28 +35,34 @@ export function createPhotoPresentation(reducedMotion) {
       frame.setAttribute('aria-hidden', String(i !== index));
     });
     reel.querySelectorAll('.reel-indicators span').forEach((dot, i) => dot.classList.toggle('active', i === index));
+    frames.forEach((frame, i) => {
+      const video = frame.querySelector('video');
+      if (video && i !== index) video.pause();
+    });
+    const upcoming = frames[index + 1]?.querySelector('video');
+    if (upcoming && upcoming.preload !== 'auto') { upcoming.preload = 'auto'; upcoming.load(); }
   }
   async function expand() {
     const token = generation;
-    reel = section?.querySelector('.slide-visual [data-reel]');
+    reel = section?.querySelector('.slide-visual [data-reel], .section-media[data-reel]');
     if (!reel || document.hidden) return;
     home = reel.parentElement;
     const images = [...reel.querySelectorAll('img')];
     images.forEach(image => { image.loading = 'eager'; });
-    await Promise.all(images.map(image => image.decode().catch(() => {})));
-    if (token !== generation) return;
-    if (!images.some(image => image.naturalWidth)) { reset(); return; }
     const thumbnail = reel.getBoundingClientRect();
-    const title = section.querySelector('.section-heading').getBoundingClientRect();
+    const title = section.querySelector('.section-heading, .hero-content, .closing-content').getBoundingClientRect();
     stage = document.createElement('div');
     stage.className = 'photo-stage';
-    stage.style.top = Math.max(16, title.bottom + 16) + 'px';
+    const fullscreen = reel.dataset.fullscreen === 'true' || !section.classList.contains('section');
+    stage.classList.toggle('video-stage', reel.dataset.fullscreen === 'true');
+    stage.style.top = fullscreen ? '0px' : Math.max(16, title.bottom + 16) + 'px';
     stage.style.backgroundColor = getComputedStyle(section).backgroundColor;
     stage.append(reel);
     document.body.append(stage);
     section.classList.add('photos-playing');
     section.dataset.photoPhase = 'expanding';
     reel.classList.add('in-view');
+    playbackEvents = new AbortController();
     showFrame(0);
     const expanded = reel.getBoundingClientRect();
     const small = `translate(${thumbnail.left - expanded.left}px, ${thumbnail.top - expanded.top}px) scale(${thumbnail.width / expanded.width}, ${thumbnail.height / expanded.height})`;
@@ -63,13 +72,23 @@ export function createPhotoPresentation(reducedMotion) {
     section.dataset.photoPhase = 'viewing';
     let index = 0;
     const frames = [...reel.querySelectorAll('.reel-frame')];
+    function playCurrent() {
+      if (token !== generation) return;
+      const video = frames[index].querySelector('video');
+      if (!video) { schedule(next, 5000); return; }
+      video.muted = true;
+      video.currentTime = 0;
+      video.addEventListener('ended', next, { once: true, signal: playbackEvents.signal });
+      video.addEventListener('error', next, { once: true, signal: playbackEvents.signal });
+      video.play().catch(() => { if (token === generation) video.controls = true; });
+    }
     function next() {
       if (token !== generation) return;
       index++;
-      if (index < frames.length) { showFrame(index); schedule(next, 5000); }
+      if (index < frames.length) { showFrame(index); playCurrent(); }
       else collapse();
     }
-    schedule(next, 5000);
+    playCurrent();
   }
   async function collapse() {
     const token = generation;
@@ -85,10 +104,13 @@ export function createPhotoPresentation(reducedMotion) {
     startReading();
   }
   function startReading() {
-    if (reducedMotion || document.hidden || !section?.querySelector('.slide-visual [data-reel]')) return;
-    const words = section.querySelector('.slide-text').textContent.trim().split(/\s+/).length;
+    if (reducedMotion || document.hidden || !section?.querySelector('.slide-visual [data-reel], .section-media[data-reel]')) return;
+    const first = section.querySelector('[data-reel] .reel-frame');
+    first?.querySelectorAll('img').forEach(image => { image.loading = 'eager'; });
+    const video = first?.querySelector('video');
+    if (video) { video.preload = 'auto'; video.load(); }
     section.dataset.photoPhase = 'reading';
-    schedule(expand, Math.max(10000, Math.min(20000, words / 3 * 1000)));
+    schedule(expand, 5000);
   }
   function setSection(next) {
     if (next === section) return;

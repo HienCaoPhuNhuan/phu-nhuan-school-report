@@ -1,4 +1,4 @@
-import { report as r } from './content.js?v=20261004-6';
+import { report as r } from './content.js?v=20261005-1';
 
 // This outline follows the source Word report, including its subsection order.
 export const sections = [
@@ -64,11 +64,11 @@ export function renderReport(photos) {
   add('qua-xuan', 'coral', 'PHẦN 1 · B.4. THẮP SÁNG ƯỚC MƠ TUỔI TRẺ VIỆT NAM', 'Quà Xuân <em>tặng bạn</em>', featured(r.charity[3]));
   add('ket-qua', 'white', 'PHẦN 1 · TỔNG HỢP KẾT QUẢ · VỀ PHÍA HỌC SINH', 'Kết quả <em>rèn luyện và học tập</em>', `${metrics([r.results[0], r.results[1], r.results[3]])}${notes(['Không có học sinh học lực Chưa đạt.'])}${metrics([r.results[2]])}`);
   add('tot-nghiep', 'forest', 'PHẦN 1 · VỀ PHÍA HỌC SINH · THPT 2026', 'Tốt nghiệp <em>và đại học</em>', `<p class="footnote reveal">Học sinh khối 12 đậu tốt nghiệp THPT 2026.</p><div class="score-comparison reveal"><div><strong>${format(r.graduation.score, 2)}</strong><span>Điểm TB 3 môn cao nhất</span></div><div><strong>${format(r.graduation.previousScore, 2)}</strong><span>Năm 2025</span></div></div><p class="footnote reveal">Điểm 3 môn cao nhất: ${format(r.graduation.highest, 2)} điểm · Thấp nhất: ${format(r.graduation.lowest, 1)} điểm</p><div class="perfect-scores">${r.graduation.perfect.map(([name, value]) => `<article class="reveal"><strong>${value}<span class="suffix">bài</span></strong><p>điểm 10 môn ${name}</p></article>`).join('')}</div>${featured({ value: r.graduation.university, decimals: 2, suffix: '%', label: 'Trúng tuyển đại học', detail: 'Đợt 1 · Thống kê ngày 30/8/2026' })}`);
-  add('toan-may-tinh', 'paper', 'PHẦN 1 · KẾT QUẢ DẠY VÀ HỌC', 'Toán trên <em>máy tính cầm tay</em>', academic(4));
-  add('thanh-tich', 'mint', 'PHẦN 1 · KẾT QUẢ DẠY VÀ HỌC', 'Học sinh giỏi <em>Thành phố</em>', academic(0));
-  add('khoa-hoc', 'white', 'PHẦN 1 · KẾT QUẢ DẠY VÀ HỌC', 'Khoa học <em>kỹ thuật</em>', academic(3));
-  add('olympic-30-4', 'coral', 'PHẦN 1 · KẾT QUẢ DẠY VÀ HỌC', 'Olympic <em>30/4</em>', academic(2));
-  add('olympic-thanh-pho', 'paper', 'PHẦN 1 · KẾT QUẢ DẠY VÀ HỌC', 'Olympic <em>Thành phố</em>', academic(1));
+  add('toan-may-tinh', 'paper award-section', 'PHẦN 1 · KẾT QUẢ DẠY VÀ HỌC', 'Thành tích <em>dự thi</em>', academic(4));
+  add('thanh-tich', 'mint award-section', 'PHẦN 1 · KẾT QUẢ DẠY VÀ HỌC', 'Thành tích <em>dự thi</em>', academic(0));
+  add('khoa-hoc', 'white award-section', 'PHẦN 1 · KẾT QUẢ DẠY VÀ HỌC', 'Thành tích <em>dự thi</em>', academic(3));
+  add('olympic-30-4', 'coral award-section', 'PHẦN 1 · KẾT QUẢ DẠY VÀ HỌC', 'Thành tích <em>dự thi</em>', academic(2));
+  add('olympic-thanh-pho', 'paper award-section', 'PHẦN 1 · KẾT QUẢ DẠY VÀ HỌC', 'Thành tích <em>dự thi</em>', academic(1));
   add('the-thao', 'coral', 'PHẦN 1 · THÀNH TÍCH THỂ DỤC THỂ THAO', 'Thành tích <em>thể thao</em>', `${metrics(r.achievements.sport)}${notes(['Cấp Thành phố: Cờ vua, Cờ tướng, Taekwondo, Karatedo, Bơi, Cầu lông, Bóng bàn và Điền kinh.', 'Toàn quốc: Điền kinh đạt 1 huy chương Vàng, 1 huy chương Đồng; Cầu lông đạt 2 huy chương Vàng.'])}`);
   add('clb-noi-bat', 'white', 'PHẦN 1 · THÀNH TÍCH CÂU LẠC BỘ', 'Dấu ấn <em>câu lạc bộ</em>', `${metrics([{ value: r.clubs.count, label: 'CLB · Đội · Nhóm' }, { value: r.clubs.students, suffix: '+', label: 'Học sinh tham gia' }])}${features(r.clubs.items)}${notes(['Các câu lạc bộ làm phong phú hoạt động nhà trường, tạo sân chơi và lựa chọn về năng khiếu, sở thích và đam mê.'])}`);
   add('doan-thanh-nien', 'mint', 'PHẦN 1 · THÀNH TÍCH ĐOÀN THANH NIÊN', 'Ghi nhận <em>Đoàn Thanh niên</em>', notes(r.youthHonors));

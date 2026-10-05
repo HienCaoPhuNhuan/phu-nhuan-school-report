@@ -45,16 +45,16 @@ export const report = {
   graduation: { university: 97.53, score: 22.93, previousScore: 22.85, highest: 28, lowest: 15.1, perfect: [['Toán', 6], ['Vật lí', 1], ['Lịch sử', 2], ['Tiếng Anh', 2]], note: 'Trúng tuyển đại học đợt 1 · Thống kê ngày 30/8/2026' },
   achievements: {
     academic: [
-      { value: 43, suffix: ' giải', title: 'Học sinh giỏi Thành phố', text: 'Khối 12 · 24 giải Nhì, 19 giải Ba', icon: 'trophy' },
-      { value: 53, suffix: ' giải', title: 'Olympic Thành phố', text: 'Khối 10, 11 · 1 giải Nhất, 19 giải Nhì, 33 giải Ba', icon: 'medal' },
-      { value: 7, suffix: ' huy chương', title: 'Olympic 30/4 lần thứ XXX', text: 'Khối chuyên · 1 huy chương Vàng, 2 huy chương Bạc, 4 huy chương Đồng', icon: 'award' },
-      { value: 5, suffix: ' giải', title: 'Khoa học kỹ thuật', text: 'Cấp Thành phố · 3 giải Nhì, 2 giải Ba', icon: 'microscope' },
-      { value: 7, suffix: ' giải', title: 'Toán trên máy tính cầm tay', text: 'Cấp Thành phố · 1 giải Nhì, 6 giải Ba', icon: 'calculator' }
+      { value: 43, suffix: ' giải', title: 'Thi HS giỏi cấp Thành phố (khối 12)', text: 'Khối 12 · 24 giải Nhì, 19 giải Ba', icon: 'trophy' },
+      { value: 53, suffix: ' giải', title: 'Kỳ thi Olympic TP khối 10,11', text: 'Khối 10, 11 · 1 giải Nhất, 19 giải Nhì, 33 giải Ba', icon: 'medal' },
+      { value: 7, suffix: ' huy chương', title: 'Kỳ thi Olympic 30/4 lần thứ XXX (khối chuyên)', text: 'Khối chuyên · 1 huy chương Vàng, 2 huy chương Bạc, 4 huy chương Đồng', icon: 'award' },
+      { value: 5, suffix: ' giải', title: 'Cuộc thi Khoa học Kỹ thuật dành cho Học sinh THPT cấp Thành phố', text: 'Cấp Thành phố · 3 giải Nhì, 2 giải Ba', icon: 'microscope' },
+      { value: 7, suffix: ' giải', title: 'Giải nhanh toán nhanh trên máy tính cầm tay cấp TP', text: 'Cấp Thành phố · 1 giải Nhì, 6 giải Ba', icon: 'calculator' }
     ],
     sport: [
-      { value: 9, suffix: ' huy chương', title: 'Thể thao học sinh Thành phố', text: '1 huy chương Vàng · 2 huy chương Bạc · 6 huy chương Đồng', icon: 'medal' },
-      { value: 4, suffix: ' huy chương', title: 'Thể thao học sinh toàn quốc', text: '3 huy chương Vàng · 1 huy chương Đồng · Điền kinh, Cầu lông', icon: 'trophy' },
-      { value: 7, suffix: ' huy chương', title: 'Cúp Quốc gia môn Cờ vua', text: '4 huy chương Vàng · 1 huy chương Bạc · 2 huy chương Đồng', icon: 'crown' }
+      { value: 9, suffix: ' huy chương', title: 'Giải Thể thao học sinh cấp Thành phố', text: '1 huy chương Vàng · 2 huy chương Bạc · 6 huy chương Đồng', icon: 'medal' },
+      { value: 4, suffix: ' huy chương', title: 'Giải Thể thao học sinh Toàn quốc', text: '3 huy chương Vàng · 1 huy chương Đồng · Điền kinh, Cầu lông', icon: 'trophy' },
+      { value: 7, suffix: ' huy chương', title: 'Giải Cúp Quốc gia', text: '4 huy chương Vàng · 1 huy chương Bạc · 2 huy chương Đồng · Cờ vua', icon: 'crown' }
     ],
     teachers: [
       { value: 136, title: 'Lao động tiên tiến', text: '136/136 · Tỷ lệ 100%', icon: 'users' },
@@ -73,9 +73,9 @@ export const report = {
     'Bằng khen Thành Đoàn: thành tích xuất sắc trong chiến dịch tình nguyện hè, năm 2026.'
   ],
   clubs: { count: 24, students: 1500, items: [
-    ['music', 'Âm nhạc PNY', 'Giải Khuyến khích Tiếng hát Chú Ve con Hè 2026 do Sở GDĐT TP.HCM tổ chức.'],
-    ['sparkles', 'Nhảy PND', 'Giải Nhì Vũ điệu thanh xuân do Thành Đoàn tổ chức; giải Nhì Flashmob Hội trại truyền thống 9/1 năm 2026.'],
-    ['cpu', 'Tin học', '1 giải Tiềm năng Hội thi Trí tuệ nhân tạo TP.HCM 2026 do Sở Thông tin và Truyền thông TP.HCM tổ chức.']
+    ['music', 'Âm nhạc PNY', 'Giải Khuyến khích Hội thi Tiếng hát Chú Ve con Hè 2026 do Sở GDĐT TP. HCM tổ chức.'],
+    ['sparkles', 'Nhảy PND', 'Giải Nhì hội thi “Vũ điệu thanh xuân” do Thành Đoàn tổ chức; giải Nhì trong hội thi Flashmob trong Hội trại truyền thống 9/1 năm 2026.'],
+    ['cpu', 'Tin học', '1 giải tiềm năng trong Hội thi “Trí tuệ nhân tạo TP. HCM năm 2026” do Sở Thông tin và Truyền thông TP HCM tổ chức.']
   ] },
   education: [
     ['shield-check', 'Nề nếp & văn hóa ứng xử', 'Theo dõi chuyên cần, tác phong; thi đua lớp hằng tuần và phối hợp với gia đình để giáo dục học sinh.'],

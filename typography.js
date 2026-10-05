@@ -32,7 +32,8 @@ const phrases = [
   'điều hành', 'đồng hành', 'mẫu mực', 'toàn diện', 'hợp lý', 'kịp thời',
   'sâu sát', 'hiệu quả', 'hiện đại', 'tự chọn', 'hội nhập', 'chương trình',
   'phòng chống', 'bạo lực', 'thuốc lá', 'giao thông', 'cá nhân', 'quản lý',
-  'đổi mới', 'tư duy', 'chuyển biến', 'mạnh mẽ', 'kết quả', 'thực chất'
+  'đổi mới', 'tư duy', 'chuyển biến', 'mạnh mẽ', 'kết quả', 'thực chất',
+  'Kỹ thuật', 'cầm tay', 'Chú Ve con', 'máy tính'
 ];
 const literal = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '\\s+');
 const terms = phrases.sort((a, b) => b.length - a.length).map(literal).join('|');

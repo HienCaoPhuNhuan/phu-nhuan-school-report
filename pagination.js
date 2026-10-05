@@ -29,15 +29,21 @@ function curatePhotos(originals) {
       if (p.textContent.trim().startsWith(highlight)) p.classList.add('report-highlight');
     });
     protectPhrases(source);
+    source.querySelectorAll('.metric strong, .featured-metric strong').forEach(stat => {
+      if (/giải|huy chương/.test(stat.textContent)) stat.classList.add('award-stat');
+    });
+    source.querySelectorAll('.keep-together').forEach(stat => {
+      if (/\d+\s+(giải|huy chương)/.test(stat.textContent)) stat.classList.add('award-stat');
+    });
     source.querySelectorAll('.photo-wall').forEach(wall => wall.remove());
     let selected = false;
     source.querySelectorAll('.photo-reel').forEach(reel => {
       const poster = Boolean(reel.closest('.club-family'));
-      if (!poster && (!illustratedTopics.has(source.id) || selected)) { reel.remove(); return; }
+      if (!poster && !reel.dataset.curated && (!illustratedTopics.has(source.id) || selected)) { reel.remove(); return; }
       if (!poster) selected = true;
       reel.querySelectorAll('.reel-frame').forEach(frame => {
-        const src = frame.querySelector('img').getAttribute('src');
-        if (used.has(src)) frame.remove();
+        const src = frame.querySelector('img, video').getAttribute('src');
+        if (used.has(src) && !reel.dataset.curated) frame.remove();
         else used.add(src);
       });
       const frames = [...reel.querySelectorAll('.reel-frame')];
@@ -138,7 +144,7 @@ export function paginateReport(main, originals) {
     const photoIndex = queue.findIndex(node => node.classList.contains('photo-reel'));
     const candidate = photoIndex >= 0 ? queue.splice(photoIndex, 1)[0] : null;
     const wordCount = queue.map(node => node.textContent).join(' ').trim().split(/\s+/).length;
-    const photo = wordCount < 100 || original.id === 'doi-ngu' ? candidate : null;
+    const photo = candidate?.dataset.curated || wordCount < 100 || original.id === 'doi-ngu' ? candidate : null;
     const pages = [];
     function createPage() {
       const page = original.cloneNode(false);
@@ -159,7 +165,7 @@ export function paginateReport(main, originals) {
       const text = document.createElement('div');
       text.className = 'slide-text';
       body.append(text);
-      if (photo && !pages.length && !narrow && innerHeight >= 550) {
+      if (photo && !pages.length) {
         page.classList.add('with-photo');
         const visual = document.createElement('div');
         visual.className = 'slide-visual';
@@ -195,6 +201,9 @@ export function paginateReport(main, originals) {
     }
     pages.forEach((page, i) => {
       const text = page.querySelector('.slide-text');
+      if (original.id === 'tot-nghiep' && text.children.length === 1 && text.firstElementChild.matches('.featured-metric')) {
+        page.classList.add('stat-spotlight');
+      }
       const heading = page.querySelector('.section-heading');
       const visual = page.querySelector('.slide-visual');
       // Enlarge short pages using their measured content, not stretched gaps.

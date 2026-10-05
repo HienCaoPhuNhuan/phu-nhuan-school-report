@@ -177,7 +177,57 @@ main > section, .section, .hero, .closing-section {
 .photo-stage .reel-viewport { flex: 1; min-height: 0; height: 0; aspect-ratio: auto; background: transparent; }
 .photo-stage figcaption { flex: none; font-size: 20px; padding-top: 8px; }
 .photo-stage figcaption > span { display: none; }
-.photo-stage .reel-frame img { object-fit: contain; }
+.photo-stage .reel-frame img, .photo-stage .reel-frame video { object-fit: contain; }
+.reel-frame video { width: 100%; height: 100%; object-fit: contain; }
+.photo-stage.video-stage { padding: 0; background: #000 !important; }
+.video-stage .reel-viewport { background: #000; }
+.hero > .section-media, .closing-content > .section-media {
+  position: absolute; bottom: 32px; right: 32px; width: 160px; height: 100px; z-index: 2;
+}
+.hero > .section-media .reel-viewport, .closing-content > .section-media .reel-viewport { height: 100%; }
+.award-stat { color: #a32c26; font-weight: 800; }
+.forest .award-stat { color: #f2d480; }
+.section-arriving .award-stat { animation: award-highlight 1400ms ease-out both; }
+.award-section .reveal { opacity: 1; transform: none; transition-delay: 0ms; }
+.award-section .featured-metric { border-top: 2px solid var(--line); padding-top: 24px; }
+.award-section .featured-metric strong { color: #a32c26; }
+@keyframes award-highlight {
+  0% { background-color: #f2d480; box-shadow: 0 5px 0 #b93730; }
+  45% { background-color: #f2d480; box-shadow: 0 5px 0 #b93730; }
+  100% { background-color: transparent; box-shadow: 0 3px 0 #b93730; }
+}
+@media (min-width: 1000px) and (min-height: 551px) {
+  .award-section .featured-metric strong { font-size: 168px; }
+  .award-section .featured-metric .suffix { font-size: 48px; }
+  .section.award-section .slide-text h3 { font-size: 48px; line-height: 1.2; }
+  .section.award-section .slide-text p { font-size: 44px; line-height: 1.45; color: var(--ink); }
+  [data-parent-id="tot-nghiep"] .score-comparison strong { font-size: 84px; }
+  [data-parent-id="tot-nghiep"] .score-comparison span { font-size: 32px; }
+  [data-parent-id="tot-nghiep"] .perfect-scores strong { font-size: 80px; }
+  .section[data-parent-id="tot-nghiep"] .slide-text .perfect-scores p { font-size: 30px; }
+  [data-parent-id="tot-nghiep"] .featured-metric strong { font-size: 136px; }
+  .stat-spotlight .featured-metric strong { font-size: 200px; }
+  .section.stat-spotlight .slide-text h3 { font-size: 56px; }
+  .section.stat-spotlight .slide-text p { font-size: 44px; }
+}
+@media (min-width: 1000px) and (min-height: 900px) {
+  .award-section .featured-metric strong { font-size: 220px; }
+  .award-section .featured-metric .suffix { font-size: 60px; }
+  .section.award-section .slide-text h3 { font-size: 60px; }
+  .section.award-section .slide-text p { font-size: 52px; }
+}
+@media (max-width: 699px), (max-height: 550px) {
+  .with-photo .slide-body { display: flex; }
+  .slide-visual { position: absolute; width: 1px; height: 1px; visibility: hidden; }
+  .photo-stage { padding-inline: 12px; }
+  .photo-stage .photo-reel { visibility: visible; }
+}
+@media (min-width: 1000px) and (min-height: 551px) and (max-height: 699px) {
+  .award-section .featured-metric strong { font-size: 112px; }
+  .award-section .featured-metric .suffix { font-size: 36px; }
+  .section.award-section .slide-text h3 { font-size: 36px; }
+  .section.award-section .slide-text p { font-size: 32px; }
+}
 @keyframes photo-stage-enter { from { opacity: 0; } to { opacity: 1; } }
 @media (min-width: 1000px) {
   .with-photo .note-list p, .with-photo .feature-row p { font-size: 30px; }

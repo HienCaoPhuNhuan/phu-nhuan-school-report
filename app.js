@@ -1,10 +1,14 @@
-import { format, renderReport } from './sections.js?v=20261004-6';
-import { paginateReport } from './pagination.js?v=20261004-8';
-import { createPhotoPresentation } from './photo-presentation.js?v=20261004-1';
+import { format, renderReport } from './sections.js?v=20261005-1';
+import { paginateReport } from './pagination.js?v=20261005-1';
+import { createPhotoPresentation } from './photo-presentation.js?v=20261005-1';
+import { installSectionMedia } from './section-media.js?v=20261005-1';
 
 const response = await fetch(new URL('./assets/photos/manifest.json', import.meta.url));
 if (!response.ok) throw new Error('Photo manifest could not be loaded');
 document.querySelector('#main').innerHTML = renderReport(await response.json());
+const mediaResponse = await fetch(new URL('./assets/media/manifest.json?v=20261005-1', import.meta.url));
+if (!mediaResponse.ok) throw new Error('Section media manifest could not be loaded');
+installSectionMedia(document.querySelector('#main'), await mediaResponse.json());
 function renderIcons() { window.lucide?.createIcons({ attrs: { 'stroke-width': 1.7 } }); }
 renderIcons();
 window.addEventListener('load', renderIcons, { once: true });
@@ -55,7 +59,7 @@ function animateCounter(node) {
   node.dataset.counted = 'true';
   const value = Number(node.dataset.value);
   const decimals = Number(node.dataset.decimals);
-  if (reducedMotion) { node.textContent = format(value, decimals); return; }
+  if (reducedMotion || node.closest('.award-stat, .award-section')) { node.textContent = format(value, decimals); return; }
   const start = performance.now();
   const tick = now => {
     const progress = Math.min((now - start) / 1500, 1);
@@ -98,6 +102,8 @@ function updateSectionTransition() {
   const next = nodes[nextIndex];
   next.dataset.direction = direction;
   next.classList.add('section-arriving');
+  next.querySelectorAll('.award-stat, .award-section .reveal').forEach(node => node.classList.add('visible'));
+  next.querySelectorAll('.award-stat .counter, .award-section .counter').forEach(animateCounter);
   presentedIndex = nextIndex;
   photoPresentation.setSection(next);
 }
