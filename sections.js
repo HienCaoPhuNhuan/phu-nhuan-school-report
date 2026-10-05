@@ -1,4 +1,4 @@
-import { report as r } from './content.js?v=20261005-1';
+import { report as r } from './content.js?v=20261006-1';
 
 // This outline follows the source Word report, including its subsection order.
 export const sections = [

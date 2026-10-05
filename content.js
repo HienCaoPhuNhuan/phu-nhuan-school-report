@@ -19,7 +19,7 @@ export const report = {
   overview: [
     { value: 2400, label: 'Học sinh', detail: '1.286 học sinh nữ', icon: 'users' },
     { value: 57, label: 'Lớp học', detail: 'Chương trình tích hợp: 2 lớp 10, 2 lớp 11, 2 lớp 12', icon: 'school' },
-    { value: 116, label: 'Giáo viên', detail: '46 thạc sĩ · 3 đang học cao học', icon: 'book-open' },
+    { value: 116, label: 'Giáo viên', icon: 'book-open' },
     { value: 22, label: 'Nhân viên', detail: 'Đồng hành cùng hoạt động nhà trường', icon: 'heart-handshake' }
   ],
   organization: [

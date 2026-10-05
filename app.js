@@ -1,14 +1,14 @@
-import { format, renderReport } from './sections.js?v=20261005-1';
-import { paginateReport } from './pagination.js?v=20261005-1';
-import { createPhotoPresentation } from './photo-presentation.js?v=20261005-1';
-import { installSectionMedia } from './section-media.js?v=20261005-1';
+import { format, renderReport } from './sections.js?v=20261006-1';
+import { paginateReport } from './pagination.js?v=20261006-1';
+import { createPhotoPresentation } from './photo-presentation.js?v=20261006-1';
+import { installSectionMedia } from './section-media.js?v=20261006-1';
 
 const response = await fetch(new URL('./assets/photos/manifest.json', import.meta.url));
 if (!response.ok) throw new Error('Photo manifest could not be loaded');
 document.querySelector('#main').innerHTML = renderReport(await response.json());
 const mediaResponse = await fetch(new URL('./assets/media/manifest.json?v=20261005-1', import.meta.url));
 if (!mediaResponse.ok) throw new Error('Section media manifest could not be loaded');
-installSectionMedia(document.querySelector('#main'), await mediaResponse.json());
+await installSectionMedia(document.querySelector('#main'), await mediaResponse.json());
 function renderIcons() { window.lucide?.createIcons({ attrs: { 'stroke-width': 1.7 } }); }
 renderIcons();
 window.addEventListener('load', renderIcons, { once: true });

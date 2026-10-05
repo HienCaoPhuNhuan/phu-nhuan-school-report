@@ -4,10 +4,14 @@ export function createPhotoPresentation(reducedMotion) {
   let stage;
   let reel;
   let home;
+  let anchor;
+  let thumbnailBounds;
   let animation;
   let playbackEvents;
   let generation = 0;
+  let galleryIndex = 0;
   const duration = 1000;
+  const galleries = () => [...(section?.querySelectorAll('.slide-visual [data-reel], .section-media[data-reel], .club-family [data-curated]') || [])];
 
   function schedule(callback, delay) {
     clearTimeout(timer);
@@ -20,13 +24,15 @@ export function createPhotoPresentation(reducedMotion) {
     animation = null;
     playbackEvents?.abort();
     reel?.querySelectorAll('video').forEach(video => { video.pause(); video.currentTime = 0; });
-    if (reel && home) home.append(reel);
+    if (reel && home) home.insertBefore(reel, anchor?.parentNode === home ? anchor : null);
     stage?.remove();
     stage = null;
     section?.classList.remove('photos-playing');
     if (section) section.dataset.photoPhase = 'reading';
     reel = null;
     home = null;
+    anchor = null;
+    thumbnailBounds = null;
   }
   function showFrame(index) {
     const frames = [...reel.querySelectorAll('.reel-frame')];
@@ -44,12 +50,15 @@ export function createPhotoPresentation(reducedMotion) {
   }
   async function expand() {
     const token = generation;
-    reel = section?.querySelector('.slide-visual [data-reel], .section-media[data-reel]');
+    const available = galleries();
+    reel = available[galleryIndex % available.length];
     if (!reel || document.hidden) return;
     home = reel.parentElement;
+    anchor = reel.nextSibling;
     const images = [...reel.querySelectorAll('img')];
     images.forEach(image => { image.loading = 'eager'; });
     const thumbnail = reel.getBoundingClientRect();
+    thumbnailBounds = thumbnail;
     const title = section.querySelector('.section-heading, .hero-content, .closing-content').getBoundingClientRect();
     stage = document.createElement('div');
     stage.className = 'photo-stage';
@@ -94,18 +103,20 @@ export function createPhotoPresentation(reducedMotion) {
     const token = generation;
     section.dataset.photoPhase = 'collapsing';
     const expanded = reel.getBoundingClientRect();
-    const thumbnail = home.getBoundingClientRect();
+    const thumbnail = thumbnailBounds;
     animation = reel.animate([{ transform: 'none' }, {
       transform: `translate(${thumbnail.left - expanded.left}px, ${thumbnail.top - expanded.top}px) scale(${thumbnail.width / expanded.width}, ${thumbnail.height / expanded.height})`
     }], { duration, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'forwards' });
     await animation.finished.catch(() => {});
     if (token !== generation) return;
     reset();
+    galleryIndex++;
     startReading();
   }
   function startReading() {
-    if (reducedMotion || document.hidden || !section?.querySelector('.slide-visual [data-reel], .section-media[data-reel]')) return;
-    const first = section.querySelector('[data-reel] .reel-frame');
+    const available = galleries();
+    if (reducedMotion || document.hidden || !available.length) return;
+    const first = available[galleryIndex % available.length].querySelector('.reel-frame');
     first?.querySelectorAll('img').forEach(image => { image.loading = 'eager'; });
     const video = first?.querySelector('video');
     if (video) { video.preload = 'auto'; video.load(); }
@@ -116,6 +127,7 @@ export function createPhotoPresentation(reducedMotion) {
     if (next === section) return;
     reset();
     section = next;
+    galleryIndex = 0;
     startReading();
   }
   document.addEventListener('visibilitychange', () => {

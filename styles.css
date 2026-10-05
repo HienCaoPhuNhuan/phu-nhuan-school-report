@@ -216,19 +216,19 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--coral); outline
 .section-arriving[data-direction="backward"] > .wrap { animation-name: section-backward; }
 .section-arriving > .hero-image, .section-arriving > .closing-image { animation: section-image-settle 1.4s ease-out both; }
 @keyframes section-forward {
-  from { opacity: .3; transform: translateY(48px) scale(.985); }
+  from { opacity: .3; transform: scale(.985); }
   to { opacity: 1; transform: none; }
 }
 @keyframes section-backward {
-  from { opacity: .3; transform: translateY(-48px) scale(.985); }
+  from { opacity: .3; transform: scale(1.015); }
   to { opacity: 1; transform: none; }
 }
 @keyframes section-image-settle {
   from { transform: scale(1.09); }
   to { transform: scale(1.04); }
 }
-@keyframes rise-in { from { opacity: .35; transform: translateY(26px); } to { opacity: 1; transform: none; } }
-@keyframes metric-in { from { opacity: .3; transform: translateY(30px) scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes rise-in { from { opacity: .35; transform: scale(.99); } to { opacity: 1; transform: none; } }
+@keyframes metric-in { from { opacity: .3; transform: scale(.96); } to { opacity: 1; transform: none; } }
 @keyframes photo-in { from { opacity: .3; clip-path: inset(0 8% 0 0); transform: translateX(20px); } to { opacity: 1; clip-path: inset(0); transform: none; } }
 @keyframes photo-drift { from { transform: scale(1); } to { transform: scale(1.025); } }
 @keyframes arrow-drift { 0%, 100% { transform: translateY(-4px); } 50% { transform: translateY(4px); } }

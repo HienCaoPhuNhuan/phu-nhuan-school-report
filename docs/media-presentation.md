@@ -20,6 +20,8 @@ section 32 videos are pn1, pn7 and pn8. A poster is exported for each video.
 Presentation behavior:
 
 - Each topic's first page retains its assigned media thumbnail.
+- Opening and closing pages use only their background photo, without an expanding thumbnail.
+- The club overview retains three poster columns; their galleries expand in rotation.
 - The expansion starts after 5 seconds; individual photos stay for 5 seconds.
 - Section 32 uses a full-viewport black stage without cropping the video.
 - Videos play muted, in source filename order, through their full durations.
@@ -35,3 +37,12 @@ hide browser chrome. Default animation is independent of the OS motion setting.
 Award counters are displayed at their final source values immediately. Their
 highlight is restarted on each section entry; competition names are checked
 against a baseline transcribed from the Word report.
+
+## Presentation monitors
+
+Layout is checked for the owner's two 1920x1080 monitors and one 2560x1440
+monitor, including 1920x960 and 2560x1320 browser viewports. Sections center their
+heading and body together. Single-statistic pages center their reading content
+independently of the small media thumbnail. Short pages use larger text rather
+than stretched spacing. Sections 19-25 use the bundled Noto Sans variable font
+under the accompanying OFL license to avoid reliance on local font substitutions.

@@ -33,7 +33,7 @@ const phrases = [
   'sâu sát', 'hiệu quả', 'hiện đại', 'tự chọn', 'hội nhập', 'chương trình',
   'phòng chống', 'bạo lực', 'thuốc lá', 'giao thông', 'cá nhân', 'quản lý',
   'đổi mới', 'tư duy', 'chuyển biến', 'mạnh mẽ', 'kết quả', 'thực chất',
-  'Kỹ thuật', 'cầm tay', 'Chú Ve con', 'máy tính'
+  'Kỹ thuật', 'cầm tay', 'Chú Ve con', 'máy tính', 'giải tiềm năng'
 ];
 const literal = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '\\s+');
 const terms = phrases.sort((a, b) => b.length - a.length).map(literal).join('|');
@@ -178,7 +178,7 @@ export function refineParagraphs(root) {
     const factors = [1, 1.02, 1.04, 1.06, 1.08, 1.1, 1.12, 1.14, 0.98, 0.96, 0.94, 0.92, 0.9, 0.88, 0.86];
     for (const factor of factors) {
       clearTail(p);
-      const size = Math.max(18, Math.min(60, base * factor));
+      const size = Math.max(18, Math.min(Math.max(60, base), base * factor));
       p.style.fontSize = size + 'px';
       let measured = measureLines(p);
       if (measured.lines.length > 1 && measured.lines.at(-1).meaningful === 1) {

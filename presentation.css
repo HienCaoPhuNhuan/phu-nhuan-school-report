@@ -4,6 +4,17 @@ main > section, .section, .hero, .closing-section {
   max-height: var(--page-height, 100dvh);
   overflow: clip;
 }
+@font-face {
+  font-family: 'Report Noto Sans';
+  src: url('assets/fonts/NotoSans-VF.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: block;
+}
+.award-section, #the-thao, #clb-noi-bat,
+[data-parent-id="the-thao"], [data-parent-id="clb-noi-bat"] {
+  font-family: 'Report Noto Sans', sans-serif;
+}
 .section { padding: 36px 0; }
 .section > .wrap {
   height: 100%;
@@ -337,6 +348,49 @@ main > section, .section, .hero, .closing-section {
   [data-parent-id="dinh-huong"] .motto { font-size: 26px; gap: 16px; }
 }
 .reduced-motion [data-parent-id="dinh-huong"] .motto > span { color: #f2d480; }
+
+.compact-page > .wrap { gap: 24px; }
+.single-stat-page .section-heading h2 { text-align: center; }
+.single-stat-page .eyebrow { justify-content: center; position: relative; }
+.single-stat-page .eyebrow .page-part { position: absolute; right: 0; }
+.single-stat-page .featured-metric strong, .single-stat-page .featured-metric h3 { text-align: center; }
+.single-stat-page .featured-metric p { width: fit-content; max-width: 100%; margin-inline: auto; }
+@media (min-width: 1000px) and (min-height: 700px) {
+  .single-stat-page.with-photo .slide-body { display: flex; position: relative; }
+  .single-stat-page.with-photo .slide-visual { position: absolute; right: 0; top: 0; width: 200px; }
+  .section[data-parent-id="qua-xuan"] .featured-metric strong { font-size: 170px; }
+  .section[data-parent-id="qua-xuan"] .featured-metric .suffix { font-size: 46px; }
+  [data-parent-id="cau-lac-bo"] .slide-text { gap: 20px; }
+  .section[data-parent-id="cau-lac-bo"] .note-list p { font-size: 28px; }
+  [data-parent-id="cau-lac-bo"] .club-family { max-width: none; }
+  [data-parent-id="cau-lac-bo"] .club-family .photo-reel { max-width: none; }
+  [data-parent-id="cau-lac-bo"] .poster-reel .reel-viewport { height: 240px; }
+  .section[data-parent-id="cau-lac-bo"] .slide-text p.report-highlight { font-size: 32px; padding-block: 14px; }
+}
+@media (min-width: 1000px) and (min-height: 900px) {
+  .section[data-parent-id="qua-xuan"] .featured-metric strong { font-size: 230px; }
+  .section[data-parent-id="qua-xuan"] .featured-metric .suffix { font-size: 56px; }
+}
+@media (min-width: 2100px) and (min-height: 1100px) {
+  .wrap { max-width: 2200px; width: calc(100% - 160px); }
+  .section-heading h2 { font-size: 80px; }
+  .section .slide-text p { font-size: 44px; }
+  .section .slide-text h3 { font-size: 48px; }
+  .projection-focus { --projection-font: 54px; }
+  .projection-focus .slide-text p, .projection-focus .slide-text h3 { font-size: var(--projection-font); }
+  .projection-focus .program-feature { grid-template-columns: 56px 360px 280px minmax(0, 1fr); }
+  .section.projection-focus .program-feature h3, .section.projection-focus .program-feature strong { font-size: 48px; }
+  .metric strong { font-size: 140px; }
+  .section.award-section .featured-metric strong { font-size: 280px; }
+  .section.award-section .slide-text h3 { font-size: 72px; }
+  .section.award-section .slide-text p { font-size: 60px; }
+  .section[data-parent-id="qua-xuan"] .featured-metric strong { font-size: 300px; }
+  .section[data-parent-id="cau-lac-bo"] .note-list p { font-size: 36px; }
+  .section[data-parent-id="cau-lac-bo"] .club-family h3 { font-size: 44px; }
+  .section[data-parent-id="cau-lac-bo"] .club-family > p { font-size: 32px; }
+  [data-parent-id="cau-lac-bo"] .poster-reel .reel-viewport { height: 320px; }
+  .section[data-parent-id="cau-lac-bo"] .slide-text p.report-highlight { font-size: 44px; }
+}
 
 @media print {
   .photo-stage { display: none; }

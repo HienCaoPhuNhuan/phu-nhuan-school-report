@@ -1,4 +1,4 @@
-import { protectPhrases, paragraphUnits, refineParagraphs } from './typography.js?v=20261004-8';
+import { protectPhrases, paragraphUnits, refineParagraphs } from './typography.js?v=20261006-1';
 
 const grouped = new Set(['metric-grid', 'note-list', 'feature-list', 'organization-grid',
   'perfect-scores', 'club-families', 'direction-list', 'program-grid', 'infrastructure',
@@ -13,7 +13,7 @@ const enlargedTopics = new Set(['ren-luyen', 'chuyen-mon', 'clb-noi-bat', 'ky-na
   'danh-gia', 'chuong-trinh', 'phat-trien', 'phat-trien-doi-ngu', 'to-chuc',
   'tri-an', 'nha-tinh-ban', 'nong-thon-moi', 'doan-thanh-nien',
   'dinh-huong-phat-trien', 'moi-truong-giao-duc', 'muc-tieu-hoc-sinh',
-  'muc-tieu-doi-ngu', 'dong-hanh', 'trai-nghiem', 'nguon-luc', 'chi-tieu-tap-the']);
+  'muc-tieu-doi-ngu', 'dong-hanh', 'trai-nghiem', 'nguon-luc', 'chi-tieu-tap-the', 'qua-xuan']);
 const highlightedTopics = new Map([
   ['cau-lac-bo', 'Nhà trường cấp giấy chứng nhận'],
   ['chi-tieu', 'Không có học sinh học lực Chưa đạt.'],
@@ -33,7 +33,7 @@ function curatePhotos(originals) {
       if (/giải|huy chương/.test(stat.textContent)) stat.classList.add('award-stat');
     });
     source.querySelectorAll('.keep-together').forEach(stat => {
-      if (/\d+\s+(giải|huy chương)/.test(stat.textContent)) stat.classList.add('award-stat');
+      if (/\d+\s+(giải|huy chương)|giải (Khuyến khích|Nhì)|giải tiềm năng/i.test(stat.textContent)) stat.classList.add('award-stat');
     });
     source.querySelectorAll('.photo-wall').forEach(wall => wall.remove());
     let selected = false;
@@ -208,8 +208,9 @@ export function paginateReport(main, originals) {
       const visual = page.querySelector('.slide-visual');
       // Enlarge short pages using their measured content, not stretched gaps.
       if (page.classList.contains('projection-focus') && innerWidth >= 1000 && innerHeight >= 600) {
-        const base = innerHeight >= 900 ? 44 : 40;
-        for (let size = base + 2; size <= 60; size += 2) {
+        const base = innerHeight >= 1200 ? 54 : innerHeight >= 900 ? 44 : 40;
+        const maximum = innerHeight >= 1200 ? 72 : 60;
+        for (let size = base + 2; size <= maximum; size += 2) {
           page.style.setProperty('--projection-font', size + 'px');
           refineParagraphs(text);
           const used = heading.offsetHeight + Math.max(text.offsetHeight, visual?.offsetHeight || 0) + 36;
@@ -221,10 +222,8 @@ export function paginateReport(main, originals) {
         }
       }
       refineParagraphs(text);
-      const height = heading.offsetHeight + Math.max(text.offsetHeight, visual?.offsetHeight || 0) + 24;
-      if (height < innerHeight * 0.75) {
-        page.classList.add('compact-page');
-      }
+      page.classList.add('compact-page');
+      if (text.children.length === 1 && text.firstElementChild.matches('.featured-metric')) page.classList.add('single-stat-page');
       page.querySelector('.page-part').textContent = pages.length > 1 ? (i + 1) + ' / ' + pages.length : '';
       page.dataset.part = String(i + 1);
       page.dataset.parts = String(pages.length);
