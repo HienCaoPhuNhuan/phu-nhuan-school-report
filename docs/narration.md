@@ -11,6 +11,11 @@ body word counts. Manual navigation to a subpage seeks to its boundary. Manual
 navigation to another topic stops the previous audio and starts the new track.
 Resize preserves the track position. Hidden tabs pause playback.
 
+During image playback a separate compact title moves to the top of a full-viewport
+media layer. Reading layouts remain unchanged. Images occupy the remaining space
+with `object-fit: contain` and top alignment; they are never cropped to fill it.
+The same compact-title layout applies to manual photo playback.
+
 Section 32 uses three separate silent, accelerated video copies. The original
 media is unchanged. Videos occupy the full browser viewport, synchronized to
 the narration clock; they do not request native browser fullscreen.

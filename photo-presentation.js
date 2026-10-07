@@ -1,3 +1,5 @@
+import { positionMediaStage } from './media-stage.js?v=20261007-3';
+
 export function createPhotoPresentation(reducedMotion) {
   let section;
   let timer;
@@ -59,15 +61,11 @@ export function createPhotoPresentation(reducedMotion) {
     images.forEach(image => { image.loading = 'eager'; });
     const thumbnail = reel.getBoundingClientRect();
     thumbnailBounds = thumbnail;
-    const title = section.querySelector('.section-heading, .hero-content, .closing-content').getBoundingClientRect();
     stage = document.createElement('div');
     stage.className = 'photo-stage';
-    const fullscreen = reel.dataset.fullscreen === 'true' || !section.classList.contains('section');
-    stage.classList.toggle('video-stage', reel.dataset.fullscreen === 'true');
-    stage.style.top = fullscreen ? '0px' : Math.max(16, title.bottom + 16) + 'px';
-    stage.style.backgroundColor = getComputedStyle(section).backgroundColor;
     stage.append(reel);
     document.body.append(stage);
+    positionMediaStage(stage, section, reel.dataset.fullscreen === 'true', reducedMotion);
     section.classList.add('photos-playing');
     section.dataset.photoPhase = 'expanding';
     reel.classList.add('in-view');

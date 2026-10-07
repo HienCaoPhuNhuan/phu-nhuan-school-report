@@ -209,6 +209,32 @@ main > section, .section, .hero, .closing-section {
 .reel-frame video { width: 100%; height: 100%; object-fit: contain; }
 .photo-stage.video-stage { padding: 0; background: #000 !important; }
 .video-stage .reel-viewport { background: #000; }
+.photo-stage.has-media-heading {
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 24px 16px;
+}
+.has-media-heading .media-heading { flex: none; min-width: 0; }
+.media-heading h2 {
+  margin: 0;
+  font-size: 44px;
+  line-height: 1.12;
+  font-weight: 750;
+  transform-origin: top left;
+}
+.media-heading h2 em { font-style: normal; }
+.has-media-heading > .photo-reel { flex: 1; height: 0; }
+.has-media-heading .reel-frame img { animation: none; object-position: center top; }
+@media (min-width: 2100px) {
+  .media-heading h2 { font-size: 48px; }
+}
+@media (max-width: 999px) {
+  .media-heading h2 { font-size: 32px; }
+}
+@media (max-width: 599px) {
+  .photo-stage.has-media-heading { gap: 8px; padding: 12px 12px 10px; }
+  .media-heading h2 { font-size: 24px; }
+}
 .hero > .section-media, .closing-content > .section-media {
   position: absolute; bottom: 32px; right: 32px; width: 160px; height: 100px; z-index: 2;
 }

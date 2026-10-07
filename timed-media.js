@@ -1,3 +1,5 @@
+import { positionMediaStage } from './media-stage.js?v=20261007-3';
+
 export function createTimedMedia(reducedMotion, videoCuts) {
   let stage, host;
   let frames = [];
@@ -51,10 +53,7 @@ export function createTimedMedia(reducedMotion, videoCuts) {
       host = page;
       host.classList.add('photos-playing');
       const video = frames.some(frame => frame.querySelector('video'));
-      stage.classList.toggle('video-stage', video);
-      const heading = page.querySelector('.section-heading, .hero-content, .closing-content');
-      stage.style.top = video ? '0px' : Math.max(16, heading.getBoundingClientRect().bottom + 16) + 'px';
-      stage.style.backgroundColor = getComputedStyle(page).backgroundColor;
+      positionMediaStage(stage, page, video, reducedMotion);
     }
     const slot = Math.max(.001, (duration - 4) / frames.length);
     const index = Math.min(frames.length - 1, Math.floor((elapsed - 4) / slot));

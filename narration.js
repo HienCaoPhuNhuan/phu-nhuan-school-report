@@ -1,4 +1,4 @@
-import { createTimedMedia } from './timed-media.js?v=20261007-1';
+import { createTimedMedia } from './timed-media.js?v=20261007-3';
 
 export function createNarration(manifest, reducedMotion, navigate) {
   const audio = new Audio();
