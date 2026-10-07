@@ -2,7 +2,7 @@ import { format, renderReport } from './sections.js?v=20261006-2';
 import { paginateReport } from './pagination.js?v=20261006-1';
 import { createPhotoPresentation } from './photo-presentation.js?v=20261006-1';
 import { installSectionMedia } from './section-media.js?v=20261006-1';
-import { createNarration } from './narration.js?v=20261007-1';
+import { createNarration } from './narration.js?v=20261007-2';
 
 const response = await fetch(new URL('./assets/photos/manifest.json', import.meta.url));
 if (!response.ok) throw new Error('Photo manifest could not be loaded');

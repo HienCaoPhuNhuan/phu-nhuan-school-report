@@ -1,5 +1,9 @@
 # Media for the presentation
 
+The default voice-driven mode now uses a four-second reading interval and splits
+the remaining narration time equally among media frames. See `narration.md`.
+The five-second timings below apply only to manual mode (`?autoplay=off`).
+
 The current source is `../Ảnh theo section - thứ tự Word`, the numbered review
 folders updated by the owner. All 48 folder assignments, including empty folders,
 are recorded in `assets/media/manifest.json`. Empty folders have no slideshow.

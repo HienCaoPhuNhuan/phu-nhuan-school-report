@@ -27,9 +27,11 @@ export function createNarration(manifest, reducedMotion, navigate) {
       blocked = document.createElement('button');
       blocked.type = 'button';
       blocked.className = 'narration-start';
-      blocked.textContent = error.name === 'NotAllowedError' ? '▶ Bật tiếng và tiếp tục' : '▶ Thử phát lời đọc lại';
+      const label = error.name === 'NotAllowedError' ? 'Bật tiếng và tiếp tục' : 'Thử phát lời đọc lại';
+      blocked.innerHTML = '<i data-lucide="volume-2" aria-hidden="true"></i><span>' + label + '</span>';
       blocked.addEventListener('click', play);
       document.body.append(blocked);
+      window.lucide?.createIcons();
     }
   }
   function buildBoundaries() {

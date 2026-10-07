@@ -165,6 +165,9 @@ main > section, .section, .hero, .closing-section {
 .slide-text { transition: opacity 650ms ease; }
 .photos-playing .slide-text { opacity: 0; }
 .narration-start {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
   position: fixed;
   inset: auto 24px 24px auto;
   z-index: 1000;
