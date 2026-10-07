@@ -1,0 +1,256 @@
+{
+  "sections": {
+    "doi-ngu": {
+      "src": "assets/voice/e2bf0d3c51c2478c1cd9.mp3",
+      "duration": 21.68,
+      "section": 1
+    },
+    "tong-quan": {
+      "src": "assets/voice/500b3a6225a3a93cc2a0.mp3",
+      "duration": 17.59,
+      "section": 2
+    },
+    "to-chuc": {
+      "src": "assets/voice/b5accbc6275f557f2ed2.mp3",
+      "duration": 43.3,
+      "section": 3
+    },
+    "ren-luyen": {
+      "src": "assets/voice/1b97a6128ebbf905a3f3.mp3",
+      "duration": 26.38,
+      "section": 4
+    },
+    "chuyen-mon": {
+      "src": "assets/voice/170222fb98cbe11e563c.mp3",
+      "duration": 36.28,
+      "section": 5
+    },
+    "huong-nghiep": {
+      "src": "assets/voice/1f5d72901ab00cabcf9c.mp3",
+      "duration": 19.34,
+      "section": 6
+    },
+    "cau-lac-bo": {
+      "src": "assets/voice/4b1763192abf64444171.mp3",
+      "duration": 21.29,
+      "section": 7
+    },
+    "ky-nang": {
+      "src": "assets/voice/a6d216c65f474707baf4.mp3",
+      "duration": 17.5,
+      "section": 8
+    },
+    "ngoai-khoa": {
+      "src": "assets/voice/80367e6f74516a8770c9.mp3",
+      "duration": 28.01,
+      "section": 9
+    },
+    "cong-dong": {
+      "src": "assets/voice/d1dbdf7eb6c4f21a8751.mp3",
+      "duration": 28.91,
+      "section": 10
+    },
+    "hoc-bong": {
+      "src": "assets/voice/e8a2f8dde14afc903a94.mp3",
+      "duration": 15.33,
+      "section": 11
+    },
+    "se-chia": {
+      "src": "assets/voice/4d0ec2879a5162bc7922.mp3",
+      "duration": 10.43,
+      "section": 12
+    },
+    "tri-an": {
+      "src": "assets/voice/f4b2c67666c772cb46bf.mp3",
+      "duration": 10.19,
+      "section": 13
+    },
+    "nha-tinh-ban": {
+      "src": "assets/voice/fef9c6029e105601748a.mp3",
+      "duration": 19.67,
+      "section": 14
+    },
+    "nong-thon-moi": {
+      "src": "assets/voice/d577f08a61ce28d8bd05.mp3",
+      "duration": 15.39,
+      "section": 15
+    },
+    "qua-xuan": {
+      "src": "assets/voice/1d0275090f7d74d7b493.mp3",
+      "duration": 7.54,
+      "section": 16
+    },
+    "ket-qua": {
+      "src": "assets/voice/f3530d807e37d992c8fa.mp3",
+      "duration": 20.85,
+      "section": 17
+    },
+    "tot-nghiep": {
+      "src": "assets/voice/f5f6ac7305d373d31584.mp3",
+      "duration": 30.64,
+      "section": 18
+    },
+    "toan-may-tinh": {
+      "src": "assets/voice/27e4012a57630d945161.mp3",
+      "duration": 8.81,
+      "section": 19
+    },
+    "thanh-tich": {
+      "src": "assets/voice/92be5f523d61aa198cc1.mp3",
+      "duration": 8.32,
+      "section": 20
+    },
+    "khoa-hoc": {
+      "src": "assets/voice/a92beabd64700c2dd234.mp3",
+      "duration": 8.68,
+      "section": 21
+    },
+    "olympic-30-4": {
+      "src": "assets/voice/6e419ca3c15a550f5179.mp3",
+      "duration": 9.83,
+      "section": 22
+    },
+    "olympic-thanh-pho": {
+      "src": "assets/voice/11bb553e09ae17bc7bd9.mp3",
+      "duration": 9.47,
+      "section": 23
+    },
+    "the-thao": {
+      "src": "assets/voice/a778c5a578d26eebd794.mp3",
+      "duration": 32.4,
+      "section": 24
+    },
+    "clb-noi-bat": {
+      "src": "assets/voice/a8bf2f10602eecf702c1.mp3",
+      "duration": 38.84,
+      "section": 25
+    },
+    "doan-thanh-nien": {
+      "src": "assets/voice/f48732da6bb1642d50b3.mp3",
+      "duration": 38.24,
+      "section": 26
+    },
+    "thi-dua": {
+      "src": "assets/voice/4555af9d3d5efbc92eb4.mp3",
+      "duration": 33.35,
+      "section": 27
+    },
+    "dinh-huong": {
+      "src": "assets/voice/726878193ad188574786.mp3",
+      "duration": 17.99,
+      "section": 28
+    },
+    "doi-moi": {
+      "src": "assets/voice/4eab73f0867d2730811b.mp3",
+      "duration": 22.42,
+      "section": 29
+    },
+    "de-an": {
+      "src": "assets/voice/0231e839ba11d90e4e81.mp3",
+      "duration": 39.91,
+      "section": 30
+    },
+    "dinh-huong-phat-trien": {
+      "src": "assets/voice/f27c3911edb8f9acf662.mp3",
+      "duration": 43.09,
+      "section": 31
+    },
+    "co-so-vat-chat": {
+      "src": "assets/voice/fcf703430e53839dcd93.mp3",
+      "duration": 36.12,
+      "section": 32
+    },
+    "moi-truong-giao-duc": {
+      "src": "assets/voice/8efb41c1786f8fbe75a0.mp3",
+      "duration": 39.31,
+      "section": 33
+    },
+    "muc-tieu-hoc-sinh": {
+      "src": "assets/voice/72796a5e02b74341b341.mp3",
+      "duration": 29.55,
+      "section": 34
+    },
+    "muc-tieu-doi-ngu": {
+      "src": "assets/voice/a59e0f77ac674edc053e.mp3",
+      "duration": 28.17,
+      "section": 35
+    },
+    "dong-hanh": {
+      "src": "assets/voice/9c0ca9af67f8ac65535c.mp3",
+      "duration": 22.92,
+      "section": 36
+    },
+    "chuyen-doi-so": {
+      "src": "assets/voice/cba8adb4ca4d8fdc2890.mp3",
+      "duration": 36.55,
+      "section": 37
+    },
+    "danh-gia": {
+      "src": "assets/voice/9c579460e5997c7c5712.mp3",
+      "duration": 12.06,
+      "section": 38
+    },
+    "trai-nghiem": {
+      "src": "assets/voice/f532083b4d8468544a7b.mp3",
+      "duration": 26.49,
+      "section": 39
+    },
+    "chuong-trinh": {
+      "src": "assets/voice/e5be9dc63ea595af3732.mp3",
+      "duration": 21.7,
+      "section": 40
+    },
+    "phat-trien": {
+      "src": "assets/voice/ed6544d268c78ee8e938.mp3",
+      "duration": 15.84,
+      "section": 41
+    },
+    "phat-trien-doi-ngu": {
+      "src": "assets/voice/6aa41c23cef504e27c1b.mp3",
+      "duration": 28.56,
+      "section": 42
+    },
+    "nguon-luc": {
+      "src": "assets/voice/e303fe83a80c65d6c24e.mp3",
+      "duration": 9.58,
+      "section": 43
+    },
+    "chi-tieu-tap-the": {
+      "src": "assets/voice/d6edbbbf537a16ae57dd.mp3",
+      "duration": 11.57,
+      "section": 44
+    },
+    "chi-tieu-thi-dua": {
+      "src": "assets/voice/c42ad7f555f8c4cf84e3.mp3",
+      "duration": 13.09,
+      "section": 45
+    },
+    "chi-tieu": {
+      "src": "assets/voice/a76c1bf000e4a9793ed0.mp3",
+      "duration": 30.95,
+      "section": 46
+    },
+    "cam-on": {
+      "src": "assets/voice/7f10a876f54eb81d240f.mp3",
+      "duration": 14.84,
+      "section": 47
+    }
+  },
+  "videos": {
+    "assets/media/b7335f8006d99c0add90.mp4": {
+      "src": "assets/voice/e17a6dc90123a0b9f18e.mp4",
+      "speed": 1.544,
+      "duration": 10.7067
+    },
+    "assets/media/92c01ef745dde4de085b.mp4": {
+      "src": "assets/voice/0a4a4b175e628d69dc2b.mp4",
+      "speed": 3.892,
+      "duration": 10.7067
+    },
+    "assets/media/91d59bb96018065c4ac0.mp4": {
+      "src": "assets/voice/191505903fcd8a89021d.mp4",
+      "speed": 2.068,
+      "duration": 10.7067
+    }
+  }
+}

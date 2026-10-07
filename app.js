@@ -2,6 +2,7 @@ import { format, renderReport } from './sections.js?v=20261006-2';
 import { paginateReport } from './pagination.js?v=20261006-1';
 import { createPhotoPresentation } from './photo-presentation.js?v=20261006-1';
 import { installSectionMedia } from './section-media.js?v=20261006-1';
+import { createNarration } from './narration.js?v=20261007-1';
 
 const response = await fetch(new URL('./assets/photos/manifest.json', import.meta.url));
 if (!response.ok) throw new Error('Photo manifest could not be loaded');
@@ -19,6 +20,9 @@ let nodes = paginateReport(main, originals);
 // Presentation motion stays enabled unless the viewer explicitly opts out.
 const reducedMotion = new URLSearchParams(location.search).get('motion') === 'reduced';
 const photoPresentation = createPhotoPresentation(reducedMotion);
+const autoplay = new URLSearchParams(location.search).get('autoplay') !== 'off';
+const voiceResponse = autoplay ? await fetch('./assets/voice/manifest.json?v=20261007-1') : null;
+const narration = voiceResponse?.ok ? createNarration(await voiceResponse.json(), reducedMotion, goTo) : null;
 const numberAnimations = new Map();
 const visibleReels = new Set();
 let reelInterval;
@@ -31,7 +35,7 @@ function finishCounters() {
   numberAnimations.clear();
 }
 function advanceReels() {
-  if (reducedMotion || document.hidden) return;
+  if (reducedMotion || document.hidden || narration) return;
   visibleReels.forEach(reel => {
     if (reel.closest('.slide-visual, .photo-stage')) return;
     const frames = [...reel.querySelectorAll('.reel-frame')];
@@ -90,13 +94,22 @@ const reelObserver = new IntersectionObserver(entries => {
 document.querySelectorAll('[data-reel]').forEach(node => reelObserver.observe(node));
 
 let presentedIndex = -1;
+let navigationTarget = -1;
 let transitionScheduled = false;
 function updateSectionTransition() {
   transitionScheduled = false;
+  if (navigationTarget >= 0) {
+    if (Math.abs(nodes[navigationTarget].getBoundingClientRect().top) > 2) return;
+    navigationTarget = -1;
+  }
   const marker = innerHeight * 0.4;
   let nextIndex = 0;
   nodes.forEach((node, i) => { if (node.getBoundingClientRect().top <= marker) nextIndex = i; });
-  if (nextIndex === presentedIndex) { photoPresentation.setSection(nodes[nextIndex]); return; }
+  if (nextIndex === presentedIndex) {
+    if (narration) narration.setPage(nodes[nextIndex], nodes);
+    else photoPresentation.setSection(nodes[nextIndex]);
+    return;
+  }
   const direction = nextIndex < presentedIndex ? 'backward' : 'forward';
   if (presentedIndex >= 0) nodes[presentedIndex]?.classList.remove('section-arriving');
   const next = nodes[nextIndex];
@@ -105,7 +118,8 @@ function updateSectionTransition() {
   next.querySelectorAll('.award-stat, .award-section .reveal').forEach(node => node.classList.add('visible'));
   next.querySelectorAll('.award-stat .counter, .award-section .counter').forEach(animateCounter);
   presentedIndex = nextIndex;
-  photoPresentation.setSection(next);
+  if (narration) narration.setPage(next, nodes);
+  else photoPresentation.setSection(next);
 }
 window.addEventListener('scroll', () => {
   if (transitionScheduled) return;
@@ -120,6 +134,7 @@ window.addEventListener('resize', () => {
     const parent = current.dataset.parentId;
     const part = Number(current.dataset.part || 1);
     photoPresentation.stop();
+    narration?.stopMedia();
     revealObserver.disconnect();
     reelObserver.disconnect();
     visibleReels.clear();
@@ -147,6 +162,8 @@ function sectionIndex() {
 function goTo(index, instant = false) {
   photoPresentation.stop();
   const targetIndex = Math.max(0, Math.min(index, nodes.length - 1));
+  navigationTarget = targetIndex;
+  if (targetIndex !== presentedIndex) narration?.prepareNavigation(nodes[targetIndex]);
   const top = nodes[targetIndex].getBoundingClientRect().top + scrollY;
   window.scrollTo({ top, behavior: reducedMotion || instant ? 'instant' : 'smooth' });
   navigationUntil = performance.now() + (reducedMotion || instant ? 0 : 900);

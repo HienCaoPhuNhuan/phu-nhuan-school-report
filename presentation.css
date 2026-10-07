@@ -164,6 +164,20 @@ main > section, .section, .hero, .closing-section {
 .keep-together { display: inline-block; white-space: nowrap; overflow-wrap: normal; word-break: normal; }
 .slide-text { transition: opacity 650ms ease; }
 .photos-playing .slide-text { opacity: 0; }
+.narration-start {
+  position: fixed;
+  inset: auto 24px 24px auto;
+  z-index: 1000;
+  padding: 18px 24px;
+  border: 2px solid #fff;
+  border-radius: 6px;
+  background: #155b48;
+  color: #fff;
+  font: 700 24px Arial, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 4px 20px #0004;
+  max-width: calc(100% - 48px);
+}
 .photo-stage {
   position: fixed;
   z-index: 20;

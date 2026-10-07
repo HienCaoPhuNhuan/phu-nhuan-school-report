@@ -18,12 +18,12 @@ const server = http.createServer(async (req, res) => {
     }
     const info = await stat(target);
     if (!info.isFile()) { res.writeHead(404).end(); return; }
-    if (path.extname(target) === '.mp4') {
+    if (['.mp4', '.mp3'].includes(path.extname(target))) {
       const match = req.headers.range?.match(/^bytes=(\d+)-(\d*)$/);
       const start = match ? Number(match[1]) : 0;
       const end = match && match[2] ? Math.min(Number(match[2]), info.size - 1) : info.size - 1;
       if (start > end || start >= info.size) { res.writeHead(416, { 'Content-Range': `bytes */${info.size}` }).end(); return; }
-      const headers = { 'Content-Type': 'video/mp4', 'Accept-Ranges': 'bytes', 'Content-Length': end - start + 1 };
+      const headers = { 'Content-Type': path.extname(target) === '.mp3' ? 'audio/mpeg' : 'video/mp4', 'Accept-Ranges': 'bytes', 'Content-Length': end - start + 1 };
       if (match) headers['Content-Range'] = `bytes ${start}-${end}/${info.size}`;
       res.writeHead(match ? 206 : 200, headers);
       if (req.method === 'HEAD') res.end();

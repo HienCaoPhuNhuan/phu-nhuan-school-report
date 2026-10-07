@@ -20,6 +20,9 @@ jobs:
       - run: node --check typography.js
       - run: node --check photo-presentation.js
       - run: node --check section-media.js
+      - run: node --check narration.js
+      - run: node --check timed-media.js
+      - run: node scripts/check-voice.mjs
       - run: node scripts/check-typography.mjs
       - run: node scripts/check-motion.mjs
       - run: node scripts/check-source-order.mjs
