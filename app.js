@@ -2,12 +2,12 @@ import { format, renderReport } from './sections.js?v=20261006-2';
 import { paginateReport } from './pagination.js?v=20261006-1';
 import { createPhotoPresentation } from './photo-presentation.js?v=20261007-3';
 import { installSectionMedia } from './section-media.js?v=20261006-1';
-import { createNarration } from './narration.js?v=20261007-3';
+import { createNarration } from './narration.js?v=20261008-1';
 
 const response = await fetch(new URL('./assets/photos/manifest.json', import.meta.url));
 if (!response.ok) throw new Error('Photo manifest could not be loaded');
 document.querySelector('#main').innerHTML = renderReport(await response.json());
-const mediaResponse = await fetch(new URL('./assets/media/manifest.json?v=20261005-1', import.meta.url));
+const mediaResponse = await fetch(new URL('./assets/media/manifest.json?v=20261008-1', import.meta.url));
 if (!mediaResponse.ok) throw new Error('Section media manifest could not be loaded');
 await installSectionMedia(document.querySelector('#main'), await mediaResponse.json());
 function renderIcons() { window.lucide?.createIcons({ attrs: { 'stroke-width': 1.7 } }); }
@@ -21,7 +21,7 @@ let nodes = paginateReport(main, originals);
 const reducedMotion = new URLSearchParams(location.search).get('motion') === 'reduced';
 const photoPresentation = createPhotoPresentation(reducedMotion);
 const autoplay = new URLSearchParams(location.search).get('autoplay') !== 'off';
-const voiceResponse = autoplay ? await fetch('./assets/voice/manifest.json?v=20261007-1') : null;
+const voiceResponse = autoplay ? await fetch('./assets/voice/manifest.json?v=20261008-1') : null;
 const narration = voiceResponse?.ok ? createNarration(await voiceResponse.json(), reducedMotion, goTo) : null;
 const numberAnimations = new Map();
 const visibleReels = new Set();

@@ -12,6 +12,9 @@ for (const [id] of sections.slice(1)) {
   assert((await stat(new URL('../' + item.src, import.meta.url))).size > 0);
 }
 assert.equal(Object.keys(manifest.videos).length, 3);
+const media = JSON.parse(await readFile(new URL('../assets/media/manifest.json', import.meta.url), 'utf8'));
+assert(manifest.sections['doi-ngu'].presentationDuration >= 4 + media['01'].length * 4);
+assert(media['01'].at(-1).source.endsWith('/14-DSC06133.jpg'));
 const slot = (manifest.sections['co-so-vat-chat'].duration - 4) / 3;
 for (const cut of Object.values(manifest.videos)) {
   assert(Math.abs(cut.duration - slot) < .01);

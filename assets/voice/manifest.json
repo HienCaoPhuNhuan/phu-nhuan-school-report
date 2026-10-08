@@ -3,7 +3,8 @@
     "doi-ngu": {
       "src": "assets/voice/e2bf0d3c51c2478c1cd9.mp3",
       "duration": 21.68,
-      "section": 1
+      "section": 1,
+      "presentationDuration": 52
     },
     "tong-quan": {
       "src": "assets/voice/500b3a6225a3a93cc2a0.mp3",
@@ -196,8 +197,8 @@
       "section": 39
     },
     "chuong-trinh": {
-      "src": "assets/voice/e5be9dc63ea595af3732.mp3",
-      "duration": 21.7,
+      "src": "assets/voice/76dbfa7d04266324ac70.mp3",
+      "duration": 21.21,
       "section": 40
     },
     "phat-trien": {

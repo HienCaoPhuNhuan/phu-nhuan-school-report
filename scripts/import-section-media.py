@@ -3,7 +3,7 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
-import sys
+import argparse
 
 from PIL import Image, ImageOps
 import pillow_heif
@@ -11,14 +11,20 @@ import imageio_ffmpeg
 
 pillow_heif.register_heif_opener()
 root = Path(__file__).resolve().parents[1]
-source = Path(sys.argv[1])
+parser = argparse.ArgumentParser()
+parser.add_argument('source')
+parser.add_argument('--section', help='Only refresh this numbered section')
+args = parser.parse_args()
+source = Path(args.source)
 output = root / 'assets' / 'media'
 output.mkdir(parents=True, exist_ok=True)
-manifest = {}
+manifest = json.loads((output / 'manifest.json').read_text(encoding='utf-8')) if args.section else {}
 known = {}
 ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()
 for folder in sorted(source.iterdir()):
     if not folder.is_dir() or not folder.name[:2].isdigit():
+        continue
+    if args.section and folder.name[:2] != args.section.zfill(2):
         continue
     items = []
     for file in sorted(folder.iterdir(), key=lambda f: f.name.casefold()):
@@ -56,5 +62,12 @@ for folder in sorted(source.iterdir()):
         items.append({**known[digest], 'source': folder.name + '/' + file.name})
         print(folder.name[:2], file.name, flush=True)
     manifest[folder.name[:2]] = items
+    if folder.name[:2] == '01':
+        def staff_order(item):
+            name = Path(item['source']).name
+            prefix = name.split('-', 1)[0]
+            return (Path(name).stem.casefold() == '14-dsc06133',
+                    int(prefix) if prefix.isdigit() else 0, name.casefold())
+        items.sort(key=staff_order)
 (output / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding='utf-8')
 print('Imported', sum(map(len, manifest.values())), 'media assignments;', len(known), 'unique files.', flush=True)

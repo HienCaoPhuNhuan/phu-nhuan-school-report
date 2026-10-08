@@ -4,6 +4,11 @@ The opening page has no voice and advances after five seconds. All subsequent
 topics play the corresponding narration in `assets/voice/manifest.json` and
 advance on the audio element's `ended` event. The closing page stays visible.
 
+The staff topic is an exception: each photo receives at least four seconds after
+the four-second reading interval. Narration plays at its normal speed. If it ends
+before the photos, the silent photo timeline continues, then advances. This tail
+pauses in hidden tabs, survives resizing, and stops on manual topic navigation.
+
 The audio playback position is the shared clock: text appears for four seconds,
 then the remaining duration is divided equally among all assigned media frames.
 Topic subpages share one audio track; their time boundaries are proportional to

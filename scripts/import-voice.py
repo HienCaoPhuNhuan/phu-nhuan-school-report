@@ -26,7 +26,9 @@ for item in original['sections'].values():
                        check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     manifest[item['id']] = {'src': target.relative_to(root).as_posix(),
                             'duration': round(duration, 4), 'section': item['section']}
-videos = json.loads((root / 'assets/media/manifest.json').read_text(encoding='utf-8'))['32']
+media = json.loads((root / 'assets/media/manifest.json').read_text(encoding='utf-8'))
+manifest['doi-ngu']['presentationDuration'] = max(manifest['doi-ngu']['duration'], 4 + len(media['01']) * 4)
+videos = media['32']
 slot = (manifest['co-so-vat-chat']['duration'] - 4) / len(videos)
 cuts = {}
 for item in videos:
